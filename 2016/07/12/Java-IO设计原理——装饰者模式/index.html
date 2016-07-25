@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Java IO设计原理——装饰者模式 | 惠友</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
+装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java IO设计原理——装饰者模式">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/index.html">
+<meta property="og:site_name" content="惠友">
+<meta property="og:description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
+装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/java%E8%A3%85%E9%A5%B0.png">
+<meta property="og:updated_time" content="2016-07-25T10:47:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java IO设计原理——装饰者模式">
+<meta name="twitter:description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
+装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png">
+  
+    <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">惠友</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">记录成长的点滴</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>About</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/Java-SE-Java-IO-设计模式/" style="font-size: 10px;">Java SE, Java IO,设计模式</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">惠友</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">惠友</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">记录成长的点滴</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Java-IO设计原理——装饰者模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/Java-IO设计原理——装饰者模式/" class="article-date">
+  	<time datetime="2016-07-12T14:32:11.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java IO设计原理——装饰者模式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE-Java-IO-设计模式/">Java SE, Java IO,设计模式</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
+<p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。</p>
+<p>装饰者模式经典的类的设计结构如下</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png" alt="类图"></p>
+<p>下面结合JAVA IO来说明，这是面向字节输入流InputStream相关类的层次图。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/java%E8%A3%85%E9%A5%B0.png" alt="层次图"></p>
+<p>对比上面装饰者模式经典设计图可以发现，InputStream是所有类的超类，我们暂且把它成为超级父类，FilterInputStream就是抽象装饰类，其子类DataInputStream,BufferedInputStream都是具体装饰类用来实现某项特定功能的，而FileInputStream等都是被装饰的类。</p>
+<p>那么这些类的内部又是如何灵活组合功能的呢？装饰者模式的核心原理在于每个装饰类都有一个超级父类的引用，该装饰类的构造器会将传来某个功能类的对象赋值给超级父类引用，这样该装饰类就可以调用构造器中传来那个类中的方法，叠加其功能。这么说有些抽象，下面结合JAVA IO的部分源码说明。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">volatile</span> InputStream in; <span class="comment">//重要！！！超级父类的引用</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">FilterInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.in = in;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(in, DEFAULT_BUFFER_SIZE);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in, <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Buffer size &lt;= 0"</span>);</div><div class="line">        &#125;</div><div class="line">        buf = <span class="keyword">new</span> <span class="keyword">byte</span>[size];</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//BufferedInputStream特有缓冲功能的实现方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> <span class="keyword">implements</span> <span class="title">DataInput</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DataInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[])</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, <span class="number">0</span>, b.length);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, off, len);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//格式化数据输入方法的实现</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</div><div class="line">        <span class="keyword">this</span>(name != <span class="keyword">null</span> ? <span class="keyword">new</span> File(name) : <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//从文件输入流相关方法实现</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过上面几个类，我们就可以实现带有缓冲功能和格式化输入功能的文件流输入，我们通常的做法就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DataInputStream in = <span class="keyword">new</span> DataInputStream(</div><div class="line">    <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"temp.txt"</span>))</div><div class="line">);<span class="comment">//层层装饰</span></div><div class="line">in.readChar();<span class="comment">//调用的是DataInputStream本身实例的方法</span></div><div class="line">in.read(); <span class="comment">//其实调用的是BufferedInputStream实例的read方法</span></div></pre></td></tr></table></figure>
+<p>代码第一句用BufferedInputStream装饰FileInputStream，而DataInputStream又装饰了BufferedInputStream，位于最外层DataInputStream的对象既可以调用属于本身的方法，也可以调用BufferedInputStream和FileInputStream的方法，就是通过FilterInputStream中超级父类的引用来找到被装饰类的对象。</p>
+<p>这样JAVA IO可以通过带有不同装饰类的组合，来构造出带有不同功能组合的IO对象，大大增加了灵活性。希望我的讲解会对大家理解Java IO有一定帮助！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/20/设计模式系列（一）——-观察者模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式系列（一）—— 观察者模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/12/java中对象的初始化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java中对象的初始化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java-IO设计原理——装饰者模式" data-title="Java IO设计原理——装饰者模式" data-url="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 惠友
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
