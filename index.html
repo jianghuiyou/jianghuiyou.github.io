@@ -79,7 +79,7 @@
 						<li>Links</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 10px;">Java SE</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a>
 					</div>
 				</section>
 				
@@ -201,6 +201,160 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-设计模式系列（一）——-观察者模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/20/设计模式系列（一）——-观察者模式/" class="article-date">
+  	<time datetime="2016-07-20T09:23:08.000Z" itemprop="datePublished">2016-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/设计模式系列（一）——-观察者模式/">设计模式系列（一）—— 观察者模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前为了更好地理解Java IO好好学习了装饰者模式，现在在看Junit4的时候发现太多的设计模式都需要了解，于是打算开始好好地学习下各种常用的设计模式。</p>
+<p>只掌握继承、接口、多态这些基础的面向对象知识已经不足以设计出优雅、健壮的代码。其实设计模式，说白了就是面向对象的工程师前辈们总结出来的代码组织方式，所有的设计模式都主要为了达到以下三条目的或在三者之间更好地权衡：</p>
+<ol>
+<li>可复用性（相同结构的代码最大化地共用）</li>
+<li>可扩展性（便于增加新需求）</li>
+<li>易维护性（修改某一个模块尽量不牵动或者少牵动其他模块，也成为松耦合）</li>
+</ol>
+<p>观察者模式在JDK源码中大量地应用，尤其是在图形界面方面，实现了数据模型和显示界面的松耦合，也就是MVC模式中的Model和View。观察者模式其实很好理解，我们可以类比生活中订阅报纸的例子，当我们对报纸内容感兴趣的时候，向报社订阅报纸服务，当报纸更新的时候报社便会及时通知到所有订阅者。</p>
+<blockquote>
+<p>观察者模式定义了对象之间一对多的依赖，当一个对象状态改变时，它的所有依赖者便会得到通知并更新。</p>
+</blockquote>
+<p>观察者模式的类图如下：<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png" alt="类图"></p>
+<p>Subject类比抽象出来的报社，没有具体的实例，而其子类ConcreteSubject就好比人民日报，当然也可以有其他报社。Observer仿佛是对阅读报纸感兴趣这个特性的接口，ConcreteSubject就是一类实现了该接口的人群，例如对报纸感兴趣的学生类。这样有学生订阅报纸并有新的报纸更新的时候，报社会通知所有订阅者。</p>
+<p>而能进行主动通知的原因在于抽象类Subject中有所有订阅者对象的引用，在状态发生改变的时候自然可以通过该引用调用Observer类的update函数。下面是我实现的一个最基础的观察者模式代码，强烈建议自己实现一个，回头再理解。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    List&lt;Observer&gt; observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer observer)</span> </span>&#123;</div><div class="line">        observers.add(observer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>&#123;</div><div class="line">        observers.remove(observer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> data;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</div><div class="line">            observer.update(getData());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setData</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.data = data;</div><div class="line">        notifyObserver();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getData</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> data)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyObserver</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"MyObserver is updating"</span>);</div><div class="line">        System.out.println(<span class="string">"the latest data is "</span>+ data);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        ConcreteSubject subject = <span class="keyword">new</span> ConcreteSubject();</div><div class="line">        MyObserver observer1 = <span class="keyword">new</span> MyObserver();</div><div class="line">        subject.addObserver(observer1);</div><div class="line">        subject.setData(<span class="number">2</span>);</div><div class="line">        subject.removeObserver(observer1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>观察者模式其实有两种工作模式，分别是推和拉。推模式是假定主题对象知道观察者需要的数据，直接在update函数参数中传入观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，于是把自己的引用传递给观察者，让观察者自己去按需要取值。JDK中已经将其实现更加完善的推拉模式兼并的观察者模式架构，在java.util包中的Observer和Observable，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</div><div class="line">            obs.addElement(o);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        obs.removeElement(o);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        notifyObservers(<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</div><div class="line">        Object[] arrLocal;</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (!changed)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            arrLocal = obs.toArray();</div><div class="line">            clearChanged();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</div><div class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs.removeAllElements();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> changed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> obs.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>我们看到Observer中update函数参数中既有被观察者的引用又有数据参数，当继承Observable子类中仅仅调用的是不带参数的notifyObservers函数，说明采用的是拉模式，因为只将Observable的引用传递给了观察者。而如果Observable的子类重载了notifyObservers函数，并传递了Object org参数，说明采用的是推模式，直接将观察者需要的数据传递过去。</li>
+<li>Observable 类中存在一个布尔类型的属性changed，它的意义在于适当地通知观察者，因为数据状态频繁地变化，而观察者只想当变化达到某个阈值时才得到通知，此时changed就是决定是否通知观察者的标志位，我们可以在变化达到阈值地时候才将changed置位。</li>
+</ol>
+<p>到这里，你一定对观察者模式有了比较清楚的理解，那么一定要自己code去实现一个属于自己的观察者模式吧，这样才算真正的掌握它。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-设计模式/">Java 设计模式</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-java中对象的初始化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/java中对象的初始化/" class="article-date">
+  	<time datetime="2016-07-12T09:19:50.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/12/java中对象的初始化/">java中对象的初始化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。</p>
+<ul>
+<li><p>不管是基本类型还是对象，如果没有进行初始化或者赋值，编译器会对其进行默认赋值（置空）,比如下面简单代码事例中，新建一个dog对象后speed默认为0，而四条leg默认都为NULL</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span>  <span class="title">leg</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> speed;</div><div class="line">    leg l1,l2,l3,l4;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类中的静态成员为类的所有对象共有，只占用着一块内存，在初始化的时候也只初始化一次。</p>
+</li>
+<li>类中初始化代码块分为静态和非静态的，静态代码块与静态成员一样，只在第一次新建对象的时候执行，可以对静态成员进行初始化，而非静态代码块每次新建对象初始化的时候都会被执行，通常在内部类中使用。</li>
+<li>类中初始化顺序是：静态成员 &gt; 非静态成员 &gt; 类自身构造器<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">doghome</span> </span>&#123;</div><div class="line">    dog dog1;</div><div class="line">    <span class="keyword">static</span> dog dog2;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        dog1 = <span class="keyword">new</span> dog(<span class="number">1</span>);</div><div class="line">        dog3 = <span class="keyword">new</span> dog(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        dog2 = <span class="keyword">new</span> dog(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    doghome() &#123;</div><div class="line">        System.out.println(<span class="string">"doghome init\n"</span>);</div><div class="line">    &#125;</div><div class="line">    dog dog3;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;</div><div class="line">        doghome home1 = <span class="keyword">new</span> doghome();</div><div class="line">        doghome home2 = <span class="keyword">new</span> doghome();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码的输出结果是：<br>dog2<br>dog1<br>dog3<br>doghome init</p>
+<p>dog1<br>dog3<br>doghome init</p>
+<p>我们看到静态成员dog2虽然在代码中位于dog1之后，但是最先进行初始化，而且只在第一次新建对象home1的时候初始化。dog1和dog3在每次新建doghome对象的时候都会初始化。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
   

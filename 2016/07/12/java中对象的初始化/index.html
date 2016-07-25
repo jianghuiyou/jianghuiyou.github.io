@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>java中对象的初始化 | 惠友</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中对象的初始化">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/12/java中对象的初始化/index.html">
+<meta property="og:site_name" content="惠友">
+<meta property="og:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
+<meta property="og:updated_time" content="2016-07-25T09:22:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java中对象的初始化">
+<meta name="twitter:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
+  
+    <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="null" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">惠友</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">记录成长的点滴</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>About</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/Java-设计模式/" style="font-size: 10px;">Java 设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">惠友</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="null" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">惠友</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">记录成长的点滴</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-java中对象的初始化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/java中对象的初始化/" class="article-date">
+  	<time datetime="2016-07-12T09:19:50.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java中对象的初始化
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。</p>
+<ul>
+<li><p>不管是基本类型还是对象，如果没有进行初始化或者赋值，编译器会对其进行默认赋值（置空）,比如下面简单代码事例中，新建一个dog对象后speed默认为0，而四条leg默认都为NULL</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span>  <span class="title">leg</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> speed;</div><div class="line">    leg l1,l2,l3,l4;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类中的静态成员为类的所有对象共有，只占用着一块内存，在初始化的时候也只初始化一次。</p>
+</li>
+<li>类中初始化代码块分为静态和非静态的，静态代码块与静态成员一样，只在第一次新建对象的时候执行，可以对静态成员进行初始化，而非静态代码块每次新建对象初始化的时候都会被执行，通常在内部类中使用。</li>
+<li>类中初始化顺序是：静态成员 &gt; 非静态成员 &gt; 类自身构造器<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">doghome</span> </span>&#123;</div><div class="line">    dog dog1;</div><div class="line">    <span class="keyword">static</span> dog dog2;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        dog1 = <span class="keyword">new</span> dog(<span class="number">1</span>);</div><div class="line">        dog3 = <span class="keyword">new</span> dog(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        dog2 = <span class="keyword">new</span> dog(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    doghome() &#123;</div><div class="line">        System.out.println(<span class="string">"doghome init\n"</span>);</div><div class="line">    &#125;</div><div class="line">    dog dog3;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;</div><div class="line">        doghome home1 = <span class="keyword">new</span> doghome();</div><div class="line">        doghome home2 = <span class="keyword">new</span> doghome();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码的输出结果是：<br>dog2<br>dog1<br>dog3<br>doghome init</p>
+<p>dog1<br>dog3<br>doghome init</p>
+<p>我们看到静态成员dog2虽然在代码中位于dog1之后，但是最先进行初始化，而且只在第一次新建对象home1的时候初始化。dog1和dog3在每次新建doghome对象的时候都会初始化。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/20/设计模式系列（一）——-观察者模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式系列（一）—— 观察者模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/06/浅谈java-反射机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈java反射机制</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java中对象的初始化" data-title="java中对象的初始化" data-url="http://www.jianghuiyou.com/2016/07/12/java中对象的初始化/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 惠友
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
