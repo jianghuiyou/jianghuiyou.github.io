@@ -4,23 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>浅谈java反射机制 | 惠友</title>
+  <title>java中对象的初始化 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
-有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
+  <meta name="description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈java反射机制">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/index.html">
+<meta property="og:title" content="java中对象的初始化">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/01/java中对象的初始化/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
-有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
-<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/Dog.png">
-<meta property="og:updated_time" content="2016-07-25T09:16:22.000Z">
+<meta property="og:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
+<meta property="og:updated_time" content="2016-07-25T11:37:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈java反射机制">
-<meta name="twitter:description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
-有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
-<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/Dog.png">
+<meta name="twitter:title" content="java中对象的初始化">
+<meta name="twitter:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -206,11 +201,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-java中对象的初始化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/06/浅谈java-反射机制/" class="article-date">
-  	<time datetime="2016-07-06T07:08:32.000Z" itemprop="datePublished">2016-07-06</time>
+      <a href="/2016/07/01/java中对象的初始化/" class="article-date">
+  	<time datetime="2016-07-01T09:19:50.000Z" itemprop="datePublished">2016-07-01</time>
 </a>
     </div>
   
@@ -223,7 +218,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      浅谈java反射机制
+      java中对象的初始化
     </h1>
   
 
@@ -247,14 +242,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
-<p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/Dog.png" alt="加载图"><br>获得class对象的方法以下三种：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Class c1 = Class.forName(<span class="string">"Dog"</span>); <span class="comment">//need handle ClassNotFoundException</span></div><div class="line">Class c2 = Dog.class;</div><div class="line">Dog dog;</div><div class="line">Class c3 = dog.getClass();</div></pre></td></tr></table></figure></p>
-<p>三种方法均获得的是Dog类的class对象的引用，这样可以根据class对象的引用来获得很多有关该类的信息，比如获得类名字，超类名字，是否是接口，甚至是域、方法、构造器等等<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String cname = c2.getName();</div><div class="line">String supername = c2.getSuperclass().toString();</div><div class="line"><span class="keyword">boolean</span> isinterface = c2.isInterface();</div></pre></td></tr></table></figure></p>
-<p>说到这儿，也许会产生疑惑。反射做的工作不也是这样嘛？去洞察一个类的各种内部信息。然而，反射最大的特点就是在程序运行时获得类型信息，即使是在编译的时候对该类一无所知，编译器根本不知道这些类。比如说网络中传来了一系列字节，告诉你这代表一个未知类的信息，通过反射一样去可以了解并调用该类内部所有的结构信息，包括域、方法、构造器，甚至是私有域或方法。</p>
-<p>下面代码应用反射去打印出主函数参数传递类名对应的类方法和构造器信息。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">1</span>) &#123;</div><div class="line">            System.out.print(<span class="string">"no para"</span>);</div><div class="line">            System.exit(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(args[<span class="number">0</span>]);</div><div class="line">            Method[] methods = c.getMethods();</div><div class="line">            Constructor[] constructors = c.getConstructors();</div><div class="line">            <span class="keyword">if</span> (args.length == <span class="number">1</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (Method method : methods)</div><div class="line">                    System.out.print(method.toString()+<span class="string">'\n'</span> );</div><div class="line">                <span class="keyword">for</span> (Constructor constructor : constructors)</div><div class="line">                    System.out.print(constructor.toString() + <span class="string">'\n'</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.print(<span class="string">"too many paras"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面代码运行结果如下，显示了test类所有的方法以及最后一个默认构造器：</p>
-<p>public static void test.main(java.lang.String[])<br>public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException<br>public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException<br>public final void java.lang.Object.wait() throws java.lang.InterruptedException<br>public boolean java.lang.Object.equals(java.lang.Object)<br>public java.lang.String java.lang.Object.toString()<br>public native int java.lang.Object.hashCode()<br>public final native java.lang.Class java.lang.Object.getClass()<br>public final native void java.lang.Object.notify()<br>public final native void java.lang.Object.notifyAll()<br>public test()</p>
+        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。</p>
+<ul>
+<li><p>不管是基本类型还是对象，如果没有进行初始化或者赋值，编译器会对其进行默认赋值（置空）,比如下面简单代码事例中，新建一个dog对象后speed默认为0，而四条leg默认都为NULL</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span>  <span class="title">leg</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> speed;</div><div class="line">    leg l1,l2,l3,l4;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类中的静态成员为类的所有对象共有，只占用着一块内存，在初始化的时候也只初始化一次。</p>
+</li>
+<li>类中初始化代码块分为静态和非静态的，静态代码块与静态成员一样，只在第一次新建对象的时候执行，可以对静态成员进行初始化，而非静态代码块每次新建对象初始化的时候都会被执行，通常在内部类中使用。</li>
+<li>类中初始化顺序是：静态成员 &gt; 非静态成员 &gt; 类自身构造器<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">doghome</span> </span>&#123;</div><div class="line">    dog dog1;</div><div class="line">    <span class="keyword">static</span> dog dog2;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        dog1 = <span class="keyword">new</span> dog(<span class="number">1</span>);</div><div class="line">        dog3 = <span class="keyword">new</span> dog(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        dog2 = <span class="keyword">new</span> dog(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    doghome() &#123;</div><div class="line">        System.out.println(<span class="string">"doghome init\n"</span>);</div><div class="line">    &#125;</div><div class="line">    dog dog3;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;</div><div class="line">        doghome home1 = <span class="keyword">new</span> doghome();</div><div class="line">        doghome home2 = <span class="keyword">new</span> doghome();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码的输出结果是：<br>dog2<br>dog1<br>dog3<br>doghome init</p>
+<p>dog1<br>dog3<br>doghome init</p>
+<p>我们看到静态成员dog2虽然在代码中位于dog1之后，但是最先进行初始化，而且只在第一次新建对象home1的时候初始化。dog1和dog3在每次新建doghome对象的时候都会初始化。</p>
 
       
     </div>
@@ -264,18 +265,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/12/Java-IO设计原理——装饰者模式/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/07/06/浅谈java-反射机制/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Java IO设计原理——装饰者模式
+          浅谈java反射机制
         
       </div>
     </a>
   
   
-    <a href="/2016/07/01/java中对象的初始化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java中对象的初始化</div>
+    <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C语言提升代码复用性的一点思考 —— void*和回调函数</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -310,7 +311,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="浅谈java-反射机制" data-title="浅谈java反射机制" data-url="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/"></div>
+	<div class="ds-thread" data-thread-key="java中对象的初始化" data-title="java中对象的初始化" data-url="http://www.jianghuiyou.com/2016/07/01/java中对象的初始化/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
