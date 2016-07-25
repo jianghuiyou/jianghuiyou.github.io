@@ -4,17 +4,23 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>惠友</title>
+  <title>浅谈java反射机制 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="姜惠友">
-<meta property="og:type" content="website">
-<meta property="og:title" content="惠友">
-<meta property="og:url" content="http://www.jianghuiyou.com/index.html">
+  <meta name="description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
+有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈java反射机制">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="姜惠友">
+<meta property="og:description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
+有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/Dog.png">
+<meta property="og:updated_time" content="2016-07-25T09:16:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="惠友">
-<meta name="twitter:description" content="姜惠友">
+<meta name="twitter:title" content="浅谈java反射机制">
+<meta name="twitter:description" content="在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。
+有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/Dog.png">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -200,9 +206,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/07/06/浅谈java-反射机制/" class="article-date">
@@ -218,12 +222,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/06/浅谈java-反射机制/">浅谈java反射机制</a>
+    <h1 class="article-title" itemprop="name">
+      浅谈java反射机制
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -240,111 +259,68 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C语言提升代码复用性的一点思考 —— void*和回调函数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-
-
-  
-    <article id="post-C语言提升代码复用性的一点思考-——-void-和回调函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" class="article-date">
-  	<time datetime="2016-06-24T03:05:53.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/">C语言提升代码复用性的一点思考 —— void*和回调函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> *pa;</div><div class="line">pa= &amp;a;</div><div class="line">*pa = <span class="number">2</span>;</div></pre></td></tr></table></figure>
-<p>这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"><span class="keyword">int</span> (* phello)(<span class="keyword">char</span>*);</div><div class="line">phello = hello;</div><div class="line">(*phello)(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
-<p>上面先声明了一个函数hello，然后又声明了一个函数指针，指向的函数具有“返回值是整形变量，形参是字符指针”的特点。最后将hello这段函数二进制代码的首地址（可以直接用hello表示）赋给phello函数指针，这样就可以通过phello来间接调用hello函数。</p>
-<p><strong>注意</strong>：函数指针声明中函数名前的 <em> 必须用小括号与函数名结合， 否则如果写成int</em>phello(char<em>),编译器就会认为声明的是一个返回类型是int</em> 的函数而不是一个函数指针。</p>
-<p>为了看起来简洁，C语言中会用typedef语法来声明函数指针，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(phello)</span><span class="params">(<span class="keyword">char</span>)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>这样其他函数的形参中含有该函数指针的话，就可以直接写成phello而不用int(phello)(char)一长串。</p>
-<p>函数指针这种较为复杂的语法在C语言中通常被用于实现回调函数，实现方式就是将函数指针作为形参，这样某个函数调用的时候，就可以通过函数指针找到回调函数的开始地址，从而执行回调函数。最经典的例子就是C语言标准库中qsort函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void qsort(void *base, size_t nelem, size_t width, int (_USERENTRY *fcmp)(const void *, const void *));</div></pre></td></tr></table></figure></p>
-<p>最后一个形参就是函数指针，指向的是一个返回类型是int、形参是两个const void*的函数，_USERENTRY是告知编译器的平台相关信息，咱完全当它不存在。而我们使用qsort时候一定会自己编写一个比较大小依据的回调函数，在进行快排的时候系统会根据咱自定义的比较大小依据来进行排序。代码示例如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp_function</span><span class="params">( <span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> *(<span class="keyword">int</span>*)a-*(<span class="keyword">int</span>*)b;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">int</span> <span class="built_in">list</span>[<span class="number">5</span>] = &#123; <span class="number">54</span>, <span class="number">21</span>, <span class="number">11</span>, <span class="number">67</span>, <span class="number">22</span> &#125;;</div><div class="line">    qsort((<span class="keyword">void</span> *)<span class="built_in">list</span>, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="built_in">list</span>[<span class="number">0</span>]), cmp_function);</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; <span class="number">5</span>; x++)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%i\n"</span>, <span class="built_in">list</span>[x]);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>qsort调用语句中其实就进行了 fcmp = cmp_function ，这样qsort函数中自然可以调用我们写得cmp_function函数。</p>
-<p>此外，回调函数往往可以不止一个，回调机制的魅力也在于可以在运行时候动态的决定需要调用什么方法，也就是哪一个回调函数。这样通用的接口便可通过传入不同的回调函数进行不同的功能，一定程度上实现了C语言的代码复用。在用C语言设计数据库接口的时候就可以应用回调函数。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">typedef struct struct_a &#123;</div><div class="line">    int id;</div><div class="line">    int a;</div><div class="line">&#125;struct_a;</div><div class="line"></div><div class="line">typedef struct struct_b&#123;</div><div class="line">    int id;</div><div class="line">    int b;</div><div class="line">&#125;struct_b;</div><div class="line"></div><div class="line">int callback_a(void* temp)&#123;</div><div class="line">    struct_a* st = temp;</div><div class="line">    st-&gt;a = 1;</div><div class="line">    st-&gt;id = 1;</div><div class="line">    printf("callback_a");</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int callback_b(void* temp)&#123;</div><div class="line">    struct_b* st = temp;</div><div class="line">    st-&gt;id = 2;</div><div class="line">    st-&gt;b = 2;</div><div class="line">    printf("callback_b");</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int common_sql_operation(void* st,int (*callback)(void*))</div><div class="line">&#123;</div><div class="line">    //do some common sql thing</div><div class="line">    callback(st);</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int table_b_op(struct_b* st)</div><div class="line">&#123;</div><div class="line">    return common_sql_operation(st, callback_b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int table_a_op(struct_a* st)</div><div class="line">&#123;</div><div class="line">    return common_sql_operation(st, callback_a);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>数据库中两个table a和b 在代码中对应结构体struct_a和struct_b，因为不同table肯定具有不同结构的属性，所以可以用独自的回调函数代表其对应的操作，大家共用一个通用的数据库底层函数common_sql_operation，在设计对外接口（table_a_op和table_b_op）的时候只需要将对应表格的回调函数传入到通用接口即可。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C语言/">C语言</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="浅谈java-反射机制" data-title="浅谈java反射机制" data-url="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-  
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -368,8 +344,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

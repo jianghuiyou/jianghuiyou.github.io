@@ -4,17 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>惠友</title>
+  <title>C语言提升代码复用性的一点思考 —— void*和回调函数 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="姜惠友">
-<meta property="og:type" content="website">
-<meta property="og:title" content="惠友">
-<meta property="og:url" content="http://www.jianghuiyou.com/index.html">
+  <meta name="description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
+1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
+这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
+1234int hello(char">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="姜惠友">
+<meta property="og:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
+1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
+这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
+1234int hello(char">
+<meta property="og:updated_time" content="2016-07-25T09:07:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="惠友">
-<meta name="twitter:description" content="姜惠友">
+<meta name="twitter:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
+<meta name="twitter:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
+1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
+这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
+1234int hello(char">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -200,77 +210,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/06/浅谈java-反射机制/" class="article-date">
-  	<time datetime="2016-07-06T07:08:32.000Z" itemprop="datePublished">2016-07-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/06/浅谈java-反射机制/">浅谈java反射机制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
-<p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/Dog.png" alt="加载图"><br>获得class对象的方法以下三种：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Class c1 = Class.forName(<span class="string">"Dog"</span>); <span class="comment">//need handle ClassNotFoundException</span></div><div class="line">Class c2 = Dog.class;</div><div class="line">Dog dog;</div><div class="line">Class c3 = dog.getClass();</div></pre></td></tr></table></figure></p>
-<p>三种方法均获得的是Dog类的class对象的引用，这样可以根据class对象的引用来获得很多有关该类的信息，比如获得类名字，超类名字，是否是接口，甚至是域、方法、构造器等等<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String cname = c2.getName();</div><div class="line">String supername = c2.getSuperclass().toString();</div><div class="line"><span class="keyword">boolean</span> isinterface = c2.isInterface();</div></pre></td></tr></table></figure></p>
-<p>说到这儿，也许会产生疑惑。反射做的工作不也是这样嘛？去洞察一个类的各种内部信息。然而，反射最大的特点就是在程序运行时获得类型信息，即使是在编译的时候对该类一无所知，编译器根本不知道这些类。比如说网络中传来了一系列字节，告诉你这代表一个未知类的信息，通过反射一样去可以了解并调用该类内部所有的结构信息，包括域、方法、构造器，甚至是私有域或方法。</p>
-<p>下面代码应用反射去打印出主函数参数传递类名对应的类方法和构造器信息。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">1</span>) &#123;</div><div class="line">            System.out.print(<span class="string">"no para"</span>);</div><div class="line">            System.exit(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(args[<span class="number">0</span>]);</div><div class="line">            Method[] methods = c.getMethods();</div><div class="line">            Constructor[] constructors = c.getConstructors();</div><div class="line">            <span class="keyword">if</span> (args.length == <span class="number">1</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (Method method : methods)</div><div class="line">                    System.out.print(method.toString()+<span class="string">'\n'</span> );</div><div class="line">                <span class="keyword">for</span> (Constructor constructor : constructors)</div><div class="line">                    System.out.print(constructor.toString() + <span class="string">'\n'</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.print(<span class="string">"too many paras"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面代码运行结果如下，显示了test类所有的方法以及最后一个默认构造器：</p>
-<p>public static void test.main(java.lang.String[])<br>public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException<br>public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException<br>public final void java.lang.Object.wait() throws java.lang.InterruptedException<br>public boolean java.lang.Object.equals(java.lang.Object)<br>public java.lang.String java.lang.Object.toString()<br>public native int java.lang.Object.hashCode()<br>public final native java.lang.Class java.lang.Object.getClass()<br>public final native void java.lang.Object.notify()<br>public final native void java.lang.Object.notifyAll()<br>public test()</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Java-SE/">Java SE</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C语言提升代码复用性的一点思考-——-void-和回调函数" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-C语言提升代码复用性的一点思考-——-void-和回调函数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" class="article-date">
@@ -286,12 +226,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/">C语言提升代码复用性的一点思考 —— void*和回调函数</a>
+    <h1 class="article-title" itemprop="name">
+      C语言提升代码复用性的一点思考 —— void*和回调函数
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/C语言/">C语言</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -314,37 +269,72 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C语言/">C语言</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/06/浅谈java-反射机制/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          浅谈java反射机制
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="C语言提升代码复用性的一点思考-——-void-和回调函数" data-title="C语言提升代码复用性的一点思考 —— void*和回调函数" data-url="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-  
-  
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -368,8 +358,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
