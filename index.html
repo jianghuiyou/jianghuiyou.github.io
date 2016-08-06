@@ -72,7 +72,7 @@
 						<li>Tags</li>
 						
 						
-						<li>About</li>
+						<li>A propos</li>
 						
 					</ul>
 				</div>
@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
 					</div>
 				</section>
 				
@@ -172,6 +172,73 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-浅谈java内部类在迭代器设计中的应用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/" class="article-date">
+  	<time datetime="2016-08-01T15:27:32.000Z" itemprop="datePublished">2016-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/">浅谈java内部类在迭代器设计中的应用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里，B就是内部类而A就称为外围类。</p>
+<blockquote>
+<p>当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外围类对象的引用，并且可以直接访问外围类的所有成员，包括私有成员。</p>
+</blockquote>
+<p>这说起来有点抽象，下面我们举一个都熟悉的迭代器的例子，来讲解这点，我们都知道可以通过一个容器对象生成一个该容器对象的迭代器对象，从而实现通用的访问操作接口。常见的操作如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">Iterator iterator = arrayList.iterator();</div></pre></td></tr></table></figure></p>
+<p>这其中iterator的设计就应用了内部类，而在ArrayList就存在这么一个内部类，它实现了Iterator接口。下面是我自己实现的一个简易版本的ArrayList，只为了说明内部类和迭代器所以功能并不全。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Interator</span>&lt;<span class="title">E</span>&gt; </span>&#123;<span class="comment">//自定义的简化版迭代器接口</span></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span>  <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HYArrayList</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> DEFAULTCAPACITY = <span class="number">10</span>;<span class="comment">//默认容量大小，并没有自动扩容功能</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> Object[] elementData;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cur = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    HYArrayList()&#123;</div><div class="line">        elementData = <span class="keyword">new</span> Object[DEFAULTCAPACITY];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">        elementData[cur++] = e;</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//以下是内部类重点</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">HYInterator</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Interator</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> cursor = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> pre = -<span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> cursor != size;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">if</span> (pre &lt; <span class="number">0</span>) &#123;</div><div class="line">                System.out.println(<span class="string">"error,no element to remove!"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">int</span> numMoved = size - pre - <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">                System.arraycopy(elementData, pre+<span class="number">1</span>, elementData, pre,numMoved);</div><div class="line">            elementData[--size] = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">if</span> (!hasNext()) &#123;</div><div class="line">                System.out.println(<span class="string">"interator has reached the end"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">            pre++;</div><div class="line">            cursor++;</div><div class="line">            <span class="keyword">return</span> (E)elementData[pre];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//创建迭代器对象公用接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> HYInterator&lt;E&gt; <span class="title">hyInterator</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HYInterator&lt;E&gt;();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>HYArrayList中的内部类HYInterator实现了Interator的接口，并定义了最基本的hasNext,next,remove等函数。</p>
+<p>我们注意到在内部类HYInterator中的三个函数中都能直接访问外围类中的私有成员size和elementData,直接对其进行读甚至是写操作，而将内部类实例化的函数接口在外围类中定义。这就是经典的迭代器设计，它就应用了内部类与外围类的通信，并将内部类向上转型实现一个抽象接口。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-设计模式系列（二）——单例模式" class="article article-type-post" itemscope itemprop="blogPost">
   
