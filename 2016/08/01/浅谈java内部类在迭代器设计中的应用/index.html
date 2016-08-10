@@ -7,24 +7,18 @@
   <title>浅谈java内部类在迭代器设计中的应用 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。123public class A &amp;#123;    class B&amp;#123;&amp;#125;&amp;#125;
-在这里，B就是内部类而A就称为外围类。
-
-当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外">
+在这里，B就是内部类而A就称为外围类。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈java内部类在迭代器设计中的应用">
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/08/01/浅谈java内部类在迭代器设计中的应用/index.html">
 <meta property="og:site_name" content="惠友">
 <meta property="og:description" content="通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。123public class A &amp;#123;    class B&amp;#123;&amp;#125;&amp;#125;
-在这里，B就是内部类而A就称为外围类。
-
-当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外">
-<meta property="og:updated_time" content="2016-08-06T15:28:51.000Z">
+在这里，B就是内部类而A就称为外围类。">
+<meta property="og:updated_time" content="2016-08-10T04:18:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈java内部类在迭代器设计中的应用">
 <meta name="twitter:description" content="通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。123public class A &amp;#123;    class B&amp;#123;&amp;#125;&amp;#125;
-在这里，B就是内部类而A就称为外围类。
-
-当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外">
+在这里，B就是内部类而A就称为外围类。">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -219,7 +213,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在这里，B就是内部类而A就称为外围类。</p>
+<p>在这里，B就是内部类而A就称为外围类。<br><a id="more"></a></p>
 <blockquote>
 <p>当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外围类对象的引用，并且可以直接访问外围类的所有成员，包括私有成员。</p>
 </blockquote>
@@ -236,9 +230,18 @@
     
 <nav id="article-nav">
   
+    <a href="/2016/08/10/设计模式系列（三）————工厂方法模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式系列（三）———工厂方法模式
+        
+      </div>
+    </a>
+  
   
     <a href="/2016/07/25/设计模式系列（二）——单例模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式系列（二）——单例模式</div>
+      <div class="article-nav-title">设计模式系列（二）————单例模式</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

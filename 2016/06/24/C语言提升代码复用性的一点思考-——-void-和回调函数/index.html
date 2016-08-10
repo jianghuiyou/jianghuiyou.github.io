@@ -6,25 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>C语言提升代码复用性的一点思考 —— void*和回调函数 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
-1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
-这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
-1234int hello(char">
+  <meta name="description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
-1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
-这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
-1234int hello(char">
-<meta property="og:updated_time" content="2016-07-26T01:03:23.000Z">
+<meta property="og:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
+<meta property="og:updated_time" content="2016-08-10T04:20:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
-<meta name="twitter:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。
-1234int a = 1;int *pa;pa= &amp;amp;a;*pa = 2;
-这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。
-1234int hello(char">
+<meta name="twitter:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -222,8 +213,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> *pa;</div><div class="line">pa= &amp;a;</div><div class="line">*pa = <span class="number">2</span>;</div></pre></td></tr></table></figure>
+        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。<br><a id="more"></a><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> *pa;</div><div class="line">pa= &amp;a;</div><div class="line">*pa = <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
 <p>这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"><span class="keyword">int</span> (* phello)(<span class="keyword">char</span>*);</div><div class="line">phello = &amp;hello;<span class="comment">//常用phello = hello，因为hello本身就是函数地址，相当于&amp;hello</span></div><div class="line">(*phello)(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
 <p>上面先声明了一个函数hello，然后又声明了一个函数指针，指向的函数具有“返回值是整形变量，形参是字符指针”的特点。最后将hello这段函数二进制代码的首地址（可以直接用hello表示）赋给phello函数指针，这样就可以通过phello来间接调用hello函数。</p>

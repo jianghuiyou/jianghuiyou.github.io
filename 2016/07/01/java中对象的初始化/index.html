@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/07/01/java中对象的初始化/index.html">
 <meta property="og:site_name" content="惠友">
 <meta property="og:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
-<meta property="og:updated_time" content="2016-07-27T05:06:55.000Z">
+<meta property="og:updated_time" content="2016-08-10T04:18:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中对象的初始化">
 <meta name="twitter:description" content="java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自">
@@ -213,7 +213,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。</p>
+        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。<br><a id="more"></a></p>
 <ul>
 <li>不管是基本类型还是对象，如果没有进行初始化或者赋值，编译器会对其进行默认赋值（置空）,比如下面简单代码事例中，新建一个dog对象后speed默认为0，而四条leg默认都为NULL</li>
 </ul>

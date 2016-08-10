@@ -173,6 +173,69 @@
 
       <div class="body-wrap">
   
+    <article id="post-设计模式系列（三）————工厂方法模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/10/设计模式系列（三）————工厂方法模式/" class="article-date">
+  	<time datetime="2016-08-10T03:18:04.000Z" itemprop="datePublished">2016-08-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/10/设计模式系列（三）————工厂方法模式/">设计模式系列（三）———工厂方法模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现，比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Person a = <span class="keyword">new</span> Custom();</div></pre></td></tr></table></figure></p>
+<p>可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的工作抽象出来，而工厂方法模式有着自己的特色，下面我们举个生活实际例子来说明。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/10/设计模式系列（三）————工厂方法模式/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-浅谈java内部类在迭代器设计中的应用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -200,15 +263,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在这里，B就是内部类而A就称为外围类。</p>
-<blockquote>
-<p>当通过一个外围类对象创建了一个内部类对象，其实内部类对象会自动拥有一个外围类对象的引用，并且可以直接访问外围类的所有成员，包括私有成员。</p>
-</blockquote>
-<p>这说起来有点抽象，下面我们举一个都熟悉的迭代器的例子，来讲解这点，我们都知道可以通过一个容器对象生成一个该容器对象的迭代器对象，从而实现通用的访问操作接口。常见的操作如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">Iterator iterator = arrayList.iterator();</div></pre></td></tr></table></figure></p>
-<p>这其中iterator的设计就应用了内部类，而在ArrayList就存在这么一个内部类，它实现了Iterator接口。下面是我自己实现的一个简易版本的ArrayList，只为了说明内部类和迭代器所以功能并不全。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Interator</span>&lt;<span class="title">E</span>&gt; </span>&#123;<span class="comment">//自定义的简化版迭代器接口</span></div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span>  <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HYArrayList</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> DEFAULTCAPACITY = <span class="number">10</span>;<span class="comment">//默认容量大小，并没有自动扩容功能</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> Object[] elementData;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cur = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    HYArrayList()&#123;</div><div class="line">        elementData = <span class="keyword">new</span> Object[DEFAULTCAPACITY];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">        elementData[cur++] = e;</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//以下是内部类重点</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">HYInterator</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Interator</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> cursor = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> pre = -<span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">return</span> cursor != size;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">if</span> (pre &lt; <span class="number">0</span>) &#123;</div><div class="line">                System.out.println(<span class="string">"error,no element to remove!"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">int</span> numMoved = size - pre - <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</div><div class="line">                System.arraycopy(elementData, pre+<span class="number">1</span>, elementData, pre,numMoved);</div><div class="line">            elementData[--size] = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">if</span> (!hasNext()) &#123;</div><div class="line">                System.out.println(<span class="string">"interator has reached the end"</span>);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">            pre++;</div><div class="line">            cursor++;</div><div class="line">            <span class="keyword">return</span> (E)elementData[pre];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//创建迭代器对象公用接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> HYInterator&lt;E&gt; <span class="title">hyInterator</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HYInterator&lt;E&gt;();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>HYArrayList中的内部类HYInterator实现了Interator的接口，并定义了最基本的hasNext,next,remove等函数。</p>
-<p>我们注意到在内部类HYInterator中的三个函数中都能直接访问外围类中的私有成员size和elementData,直接对其进行读甚至是写操作，而将内部类实例化的函数接口在外围类中定义。这就是经典的迭代器设计，它就应用了内部类与外围类的通信，并将内部类向上转型实现一个抽象接口。</p>
-
+<p>在这里，B就是内部类而A就称为外围类。<br>
       
     </div>
     
@@ -221,6 +276,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -257,7 +316,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/设计模式系列（二）——单例模式/">设计模式系列（二）——单例模式</a>
+      <a class="article-title" href="/2016/07/25/设计模式系列（二）——单例模式/">设计模式系列（二）————单例模式</a>
     </h1>
   
 
@@ -267,24 +326,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>单例模式应该算是所有设计模式里类图最简单、实现起来代码最短的模式，所以也是各大互联网公司面试的热点。比如，实现一个线程安全的单例模式，单例模式和全局变量的区别。其实，写出一个漂亮的单例模式并非很容易，希望看完这篇文章的人都能立马自己去实现一个漂亮的单例模式。</p>
-<p>单例模式，顾名思义也就是一个类只能有一个实例化对象。这在资源类型中常常被应用，为了减少不必要的性能损坏以及避免多个对象的不同步问题，比如线程池、数据库连接池、windows中的垃圾回收站、任务管理器、注册表等等。</p>
-<p>通过将构造函数私有化，并建立一个静态实例化函数，我们就可以实现一个最简单版本的单例模式，如下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueSingleton;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (uniqueSingleton == <span class="keyword">null</span>)</div><div class="line">            uniqueSingleton = <span class="keyword">new</span> Singleton();</div><div class="line">        <span class="keyword">return</span> uniqueSingleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是因为 uniqueSingleton = new Singleton() 在JVM是一个非原子操作，便会在多线程模式下存在线程安全问题。将getInstance方法用synchronized修饰就可以搞定，于是有了下面这个线程安全版本。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueSingleton;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span>  Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (uniqueSingleton == <span class="keyword">null</span>)</div><div class="line">            uniqueSingleton = <span class="keyword">new</span> Singleton();</div><div class="line">        <span class="keyword">return</span> uniqueSingleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然而，同步锁机制最大的弊端就是性能问题，通常要比无锁情况效率低数十倍。而上面这种在每次调用getInstance方法时候必然会上锁，这在getInstance频繁调用时候会带来效率地大大降低。所以我们只需要对new Singleton()上锁即可，当uniqueSingleton已经被实例化后就没必要再进入锁。改进版本的线程安全代码如下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueSingleton;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (uniqueSingleton == <span class="keyword">null</span>) </div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (uniqueSingleton == <span class="keyword">null</span>)</div><div class="line">                uniqueSingleton = <span class="keyword">new</span> Singleton();</div><div class="line">            &#125;</div><div class="line">        <span class="keyword">return</span> uniqueSingleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>注意一</strong>，uniqueSingleton变量前面多了一个<strong>volatile</strong>修饰，它的作用主要是为了防止编译器优化，保证其可视性（因为编译器优化通常会将多线程操作的变量拷贝到各个CPU的缓冲cache中，操作过后只是改变了各个CPU缓冲中变量的值，并非是内存中的值，这也会带来不同步的问题）。</p>
-<p><strong>注意二</strong>，if (uniqueSingleton == null)需要进行两次判断，因为进入synchronized之前执行完第一个判断语句之后线程刚好被打断，而在另外一个线程中进行了实例化，这样依然会造成不同步的问题。这里就是所谓的双重检查加锁（double-check locking）</p>
-<blockquote>
-<p>单例模式确保一个类只有一个实例，并提供一个全局访问点。</p>
-</blockquote>
-<p>然而单例模式与全局变量又有什么区别呢？</p>
-<p>首先，在java中本没有全局变量的说法，只是通过设置static变量可以达到全局访问的效果。单例模式相比之下的优势在于：</p>
-<ol>
-<li>全局static变量在类第一次加载的时候便被初始化，而单例模式可以延迟化加载，节省资源。</li>
-<li>单例模式的灵活性，它可以extends，也可以实现一个interface，这样可以作为正常的object参数传递到其他函数中。</li>
-</ol>
-
+<p>单例模式，顾名思义也就是一个类只能有一个实例化对象。这在资源类型中常常被应用，为了减少不必要的性能损坏以及避免多个对象的不同步问题，比如线程池、数据库连接池、windows中的垃圾回收站、任务管理器、注册表等等。<br>
       
     </div>
     
@@ -301,6 +343,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/25/设计模式系列（二）——单例模式/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -347,18 +393,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>毕业之后利用闲暇时间拜读这本罗斯.特里尔写的《毛泽东传》，自己虽然暂时还不是党员，但是对毛主席的崇敬从小就存在，更何况本科期间每天上课路上都会看到向我们挥手的毛爷爷。</p>
-<p>读人物传记其实还是挺轻松，很重要的一点感触是能够穿梭到那个年代、那个地方与当事人共同经历那段历史，这种感觉真的美妙。当然更重要的是，自己能够对这个历史人物的性格特点有自己的理解，并取其精髓。当经历类似的事情的时候不妨静下心想想，这位伟人会怎么处理？</p>
-<p>整本传记其实内容量很大，从毛主席出生到闹革命到抗日到建国到文化大革命再到仙逝。下面我仅仅记录下我最记忆深刻并深受启发的点，这个点既可以是毛主席某点性格特征，又可以是毛爷爷在某方面某件事情上的作为，也可以是某段难忘的历史。</p>
-<p><strong>1. 为全局考虑，不被个人感情冲昏头脑</strong></p>
-<p>印象最深的事情就是西安事变之后，蒋介石被张学良囚禁，当时毛主席身边大部分人以及全国人们都高呼处决蒋，但是毛主席放下个人恩怨，注意这可不是仅仅用嫌隙矛盾能形容的，毛前前后后有十多个亲人被蒋害死，包括第一任正式妻子杨开慧。换做是我这等一般人，恨不得将其五马分尸。可毛主席出于各种大局的原因，包括担心蒋死后国民党内部的暴乱，兼顾中国抗日的大局等等经中共高层协商周把蒋直接释放了。所以情绪管理依然是我今后注意的重点，当别人让自己不爽甚至怨恨的时候，先控制一下负面情绪，从全局分析事情不同后果，再做出决策。</p>
-<p> <strong>2. 敢于质疑，敢于抗争</strong></p>
-<p>毛主席从小就喜欢《水浒传》《西游记》这种带有反叛精神的小说，儿时敢于反抗家中的独裁者父亲，和其斗智斗勇；在旧中国星星之火之下，又敢于挺身而出反抗旧中国的制度和军阀的残暴；马克思引入中国的时候，在取其精华的同时敢于质疑其不适合中国的地方，与王明、李德等全盘接受布尔什维克的左倾人士形成鲜明对比；在和外宾、同事沟通时候都喜欢为自己内心的真理而辩驳。当然，这个特征在当下社会环境并不能完全学习。而应该做到有自己的主见追求，不随波逐流。比如，学习计算机语言，今天听说java好找工作，明天听说python精巧处理数据能力强，后天听说JavaScript要火，没有自己的打定就不断变更方向，到头来仅仅是helloworld大师。在学习中也要对大家习以为常的东西产生质疑，在应用开源框架的时候想想为什么要这样，如果用其他方式实现会不会更好？</p>
-<p> <strong>3. 位置越高的人都有自己的苦衷，玩政治真的是苦</strong></p>
-<p>前不久马云的一句话引起了轩然大波，“我这辈子最大的错误就是创建了阿里巴巴”，大多人都觉着这逼装得飞起啊。其实，为什么社会永远是金字塔顶尖的人极少极少呢，一个是很难往上爬，再者便是维持自己的地位和权利真的太费心啊。毛主席真正成为国家一把手之后，也不会像是秦始皇一样说一不二，一心想要的大跃进遭到彭德怀国防部长的强烈反对，搞掉彭之后，又和苏联老大哥关系闹崩，遭到国家高层一众人的反对。总会想想刘少奇这位二把手地位不断提升，会不会盖过自己？林彪对自己过度奉承是否别有用心？国家整体是要亲近苏联还是亲近美国？国家的接班人到底选谁最合适？自己去世之后国家会不会暴乱？这些问题都需要深思熟虑，而且每一个决策都会影响整个国家，也能让自己从国家元首到跌落深渊甚至命丧黄泉。其实想想，马云身在商界顶峰也一定有自己每天的烦恼，而又无法抽身、常人难以理解的苦衷。</p>
-<p> <strong>4. 重视人民的地位，关怀底层员工</strong></p>
-<p>“水能载舟亦能覆舟”来自唐太宗的一句话在毛主席身上更加精彩地发挥。从日本入侵中国伊始，毛主席就坚决主张抗日，以收买民心；到抗日战争和解放战争期间，让军队和人民群众搞好关系，不拿群众一分一毫，这才有了人民战争的辉煌；到建国初期，不断尝试土地改革，让农民翻身可以有自己的土地。他一直心系底层群众，民心所向也是他走向历史巅峰的重要原因。如今社会，一些公司、领导为了个人利益践踏手下员工利益，沸沸扬扬的电子科大的邵振海事件不就是完全漠视手下学生利益的后果嘛。回到并不是什么领导的自己，重视身边的合作伙伴，重视人际关系也是能助我更好成长的关键。</p>
-<p>其实整本书的内容绝不仅仅这些，还有毛主席如何高瞻远瞩写下《论持久战》，遵义会议前后又如何在政治受挫后再度崛起，在文化大革命错误开始后一心想补救的心情等等等等。每个人看完之后想必都会有自己的感受。最后，还是向毛主席致敬，向这位伟人、这位在当时那个年代救了中国和中国人民的伟人致敬。</p>
-
+<p>读人物传记其实还是挺轻松，很重要的一点感触是能够穿梭到那个年代、那个地方与当事人共同经历那段历史，这种感觉真的美妙。当然更重要的是，自己能够对这个历史人物的性格特点有自己的理解，并取其精髓。当经历类似的事情的时候不妨静下心想想，这位伟人会怎么处理？<br>
       
     </div>
     
@@ -375,6 +410,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/23/读《毛泽东传》有感/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -427,20 +466,6 @@
 <li>可扩展性（便于增加新需求）</li>
 <li>易维护性（修改某一个模块尽量不牵动或者少牵动其他模块，也成为松耦合）</li>
 </ol>
-<p>观察者模式在JDK源码中大量地应用，尤其是在图形界面方面，实现了数据模型和显示界面的松耦合，也就是MVC模式中的Model和View。观察者模式其实很好理解，我们可以类比生活中订阅报纸的例子，当我们对报纸内容感兴趣的时候，向报社订阅报纸服务，当报纸更新的时候报社便会及时通知到所有订阅者。</p>
-<blockquote>
-<p>观察者模式定义了对象之间一对多的依赖，当一个对象状态改变时，它的所有依赖者便会得到通知并更新。</p>
-</blockquote>
-<p>观察者模式的类图如下：<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png" alt="类图"></p>
-<p>Subject类比抽象出来的报社，没有具体的实例，而其子类ConcreteSubject就好比人民日报，当然也可以有其他报社。Observer仿佛是对阅读报纸感兴趣这个特性的接口，ConcreteSubject就是一类实现了该接口的人群，例如对报纸感兴趣的学生类。这样有学生订阅报纸并有新的报纸更新的时候，报社会通知所有订阅者。</p>
-<p>而能进行主动通知的原因在于抽象类Subject中有所有订阅者对象的引用，在状态发生改变的时候自然可以通过该引用调用Observer类的update函数。下面是我实现的一个最基础的观察者模式代码，强烈建议自己实现一个，回头再理解。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    List&lt;Observer&gt; observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer observer)</span> </span>&#123;</div><div class="line">        observers.add(observer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>&#123;</div><div class="line">        observers.remove(observer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> data;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</div><div class="line">            observer.update(getData());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setData</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.data = data;</div><div class="line">        notifyObserver();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getData</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> data;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> data)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyObserver</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"MyObserver is updating"</span>);</div><div class="line">        System.out.println(<span class="string">"the latest data is "</span>+ data);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        ConcreteSubject subject = <span class="keyword">new</span> ConcreteSubject();</div><div class="line">        MyObserver observer1 = <span class="keyword">new</span> MyObserver();</div><div class="line">        subject.addObserver(observer1);</div><div class="line">        subject.setData(<span class="number">2</span>);</div><div class="line">        subject.removeObserver(observer1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>观察者模式其实有两种工作模式，分别是推和拉。推模式是假定主题对象知道观察者需要的数据，直接在update函数参数中传入观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，于是把自己的引用传递给观察者，让观察者自己去按需要取值。JDK中已经将其实现更加完善的推拉模式兼并的观察者模式架构，在java.util包中的Observer和Observable，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</div><div class="line">            obs.addElement(o);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer o)</span> </span>&#123;</div><div class="line">        obs.removeElement(o);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        notifyObservers(<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</div><div class="line">        Object[] arrLocal;</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (!changed)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            arrLocal = obs.toArray();</div><div class="line">            clearChanged();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</div><div class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        obs.removeAllElements();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        changed = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> changed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> obs.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ol>
-<li>我们看到Observer中update函数参数中既有被观察者的引用又有数据参数，当继承Observable子类中仅仅调用的是不带参数的notifyObservers函数，说明采用的是拉模式，因为只将Observable的引用传递给了观察者。而如果Observable的子类重载了notifyObservers函数，并传递了Object org参数，说明采用的是推模式，直接将观察者需要的数据传递过去。</li>
-<li>Observable 类中存在一个布尔类型的属性changed，它的意义在于适当地通知观察者，因为数据状态频繁地变化，而观察者只想当变化达到某个阈值时才得到通知，此时changed就是决定是否通知观察者的标志位，我们可以在变化达到阈值地时候才将changed置位。</li>
-</ol>
-<p>到这里，你一定对观察者模式有了比较清楚的理解，那么一定要自己code去实现一个属于自己的观察者模式吧，这样才算真正的掌握它。</p>
-
       
     </div>
     
@@ -457,6 +482,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/20/设计模式系列（一）——-观察者模式/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -503,19 +532,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
-<p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。</p>
-<p>装饰者模式经典的类的设计结构如下</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png" alt="类图"></p>
-<p>下面结合JAVA IO来说明，这是面向字节输入流InputStream相关类的层次图。</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/java%E8%A3%85%E9%A5%B0.png" alt="层次图"></p>
-<p>对比上面装饰者模式经典设计图可以发现，InputStream是所有类的超类，我们暂且把它成为超级父类，FilterInputStream就是抽象装饰类，其子类DataInputStream,BufferedInputStream都是具体装饰类用来实现某项特定功能的，而FileInputStream等都是被装饰的类。</p>
-<p>那么这些类的内部又是如何灵活组合功能的呢？装饰者模式的核心原理在于每个装饰类都有一个超级父类的引用，该装饰类的构造器会将传来某个功能类的对象赋值给超级父类引用，这样该装饰类就可以调用构造器中传来那个类中的方法，叠加其功能。这么说有些抽象，下面结合JAVA IO的部分源码说明。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">volatile</span> InputStream in; <span class="comment">//重要！！！超级父类的引用</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">FilterInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.in = in;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(in, DEFAULT_BUFFER_SIZE);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in, <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Buffer size &lt;= 0"</span>);</div><div class="line">        &#125;</div><div class="line">        buf = <span class="keyword">new</span> <span class="keyword">byte</span>[size];</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//BufferedInputStream特有缓冲功能的实现方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> <span class="keyword">implements</span> <span class="title">DataInput</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DataInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[])</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, <span class="number">0</span>, b.length);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, off, len);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//格式化数据输入方法的实现</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</div><div class="line">        <span class="keyword">this</span>(name != <span class="keyword">null</span> ? <span class="keyword">new</span> File(name) : <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//从文件输入流相关方法实现</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过上面几个类，我们就可以实现带有缓冲功能和格式化输入功能的文件流输入，我们通常的做法就是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DataInputStream in = <span class="keyword">new</span> DataInputStream(</div><div class="line">    <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"temp.txt"</span>))</div><div class="line">);<span class="comment">//层层装饰</span></div><div class="line">in.readChar();<span class="comment">//调用的是DataInputStream本身实例的方法</span></div><div class="line">in.read(); <span class="comment">//其实调用的是BufferedInputStream实例的read方法</span></div></pre></td></tr></table></figure>
-<p>代码第一句用BufferedInputStream装饰FileInputStream，而DataInputStream又装饰了BufferedInputStream，位于最外层DataInputStream的对象既可以调用属于本身的方法，也可以调用BufferedInputStream和FileInputStream的方法，就是通过FilterInputStream中超级父类的引用来找到被装饰类的对象。</p>
-<p>这样JAVA IO可以通过带有不同装饰类的组合，来构造出带有不同功能组合的IO对象，大大增加了灵活性。希望我的讲解会对大家理解Java IO有一定帮助！</p>
-
+<p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。<br>
       
     </div>
     
@@ -523,7 +540,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 	</div>
 
       
@@ -532,6 +549,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/12/Java-IO设计原理——装饰者模式/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -578,14 +599,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
-<p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/Dog.png" alt="加载图"><br>获得class对象的方法以下三种：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Class c1 = Class.forName(<span class="string">"Dog"</span>); <span class="comment">//need handle ClassNotFoundException</span></div><div class="line">Class c2 = Dog.class;</div><div class="line">Dog dog;</div><div class="line">Class c3 = dog.getClass();</div></pre></td></tr></table></figure></p>
-<p>三种方法均获得的是Dog类的class对象的引用，这样可以根据class对象的引用来获得很多有关该类的信息，比如获得类名字，超类名字，是否是接口，甚至是域、方法、构造器等等<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String cname = c2.getName();</div><div class="line">String supername = c2.getSuperclass().toString();</div><div class="line"><span class="keyword">boolean</span> isinterface = c2.isInterface();</div></pre></td></tr></table></figure></p>
-<p>说到这儿，也许会产生疑惑。反射做的工作不也是这样嘛？去洞察一个类的各种内部信息。然而，反射最大的特点就是在程序运行时获得类型信息，即使是在编译的时候对该类一无所知，编译器根本不知道这些类。比如说网络中传来了一系列字节，告诉你这代表一个未知类的信息，通过反射一样去可以了解并调用该类内部所有的结构信息，包括域、方法、构造器，甚至是私有域或方法。</p>
-<p>下面代码应用反射去打印出主函数参数传递类名对应的类方法和构造器信息。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">1</span>) &#123;</div><div class="line">            System.out.print(<span class="string">"no para"</span>);</div><div class="line">            System.exit(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class c = Class.forName(args[<span class="number">0</span>]);</div><div class="line">            Method[] methods = c.getMethods();</div><div class="line">            Constructor[] constructors = c.getConstructors();</div><div class="line">            <span class="keyword">if</span> (args.length == <span class="number">1</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (Method method : methods)</div><div class="line">                    System.out.print(method.toString()+<span class="string">'\n'</span> );</div><div class="line">                <span class="keyword">for</span> (Constructor constructor : constructors)</div><div class="line">                    System.out.print(constructor.toString() + <span class="string">'\n'</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.print(<span class="string">"too many paras"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面代码运行结果如下，显示了test类所有的方法以及最后一个默认构造器：</p>
-<p>public static void test.main(java.lang.String[])<br>public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException<br>public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException<br>public final void java.lang.Object.wait() throws java.lang.InterruptedException<br>public boolean java.lang.Object.equals(java.lang.Object)<br>public java.lang.String java.lang.Object.toString()<br>public native int java.lang.Object.hashCode()<br>public final native java.lang.Class java.lang.Object.getClass()<br>public final native void java.lang.Object.notify()<br>public final native void java.lang.Object.notifyAll()<br>public test()</p>
-
+<p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。<br>
       
     </div>
     
@@ -602,6 +616,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/06/浅谈java-反射机制/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -647,33 +665,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。</p>
-<ul>
-<li>不管是基本类型还是对象，如果没有进行初始化或者赋值，编译器会对其进行默认赋值（置空）,比如下面简单代码事例中，新建一个dog对象后speed默认为0，而四条leg默认都为NULL</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span>  <span class="title">leg</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> speed;</div><div class="line">    leg l1,l2,l3,l4;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>类中的静态成员为类的所有对象共有，只占用着一块内存，在初始化的时候也只初始化一次。</p>
-</li>
-<li><p>类中初始化代码块分为静态和非静态的，静态代码块与静态成员一样，只在第一次新建对象的时候执行，可以对静态成员进行初始化，而非静态代码块每次新建对象初始化的时候都会被执行，通常在内部类中使用。</p>
-</li>
-<li><p>静态初始化的工作只有在发生以下事情下才会进行,而且是按照程序书写的顺序。</p>
-</li>
-</ul>
-<ol>
-<li>第一次创建一个类的对象</li>
-<li>调用的类的静态方法</li>
-<li>访问类的静态域</li>
-<li>调用Class.forName(String)，string为该类的名称，这会强制让JVM去加载类并进行静态初始化</li>
-</ol>
-<ul>
-<li>类中初始化顺序是：静态成员 &gt; 非静态成员 &gt; 类自身构造器，下面代码作为对上面的几点进行示例。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span> </span>&#123;</div><div class="line">    dog(<span class="keyword">int</span> i) &#123;</div><div class="line">        System.out.printf(<span class="string">"dog%d\n"</span>, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">doghome</span> </span>&#123;</div><div class="line">    dog dog1;</div><div class="line">    <span class="keyword">static</span> dog dog2;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        dog1 = <span class="keyword">new</span> dog(<span class="number">1</span>);</div><div class="line">        dog3 = <span class="keyword">new</span> dog(<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        dog2 = <span class="keyword">new</span> dog(<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    doghome() &#123;</div><div class="line">        System.out.println(<span class="string">"doghome init\n"</span>);</div><div class="line">    &#125;</div><div class="line">    dog dog3;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;</div><div class="line">        doghome home1 = <span class="keyword">new</span> doghome();</div><div class="line">        doghome home2 = <span class="keyword">new</span> doghome();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码的输出结果是：<br>dog2<br>dog1<br>dog3<br>doghome init</p>
-<p>dog1<br>dog3<br>doghome init</p>
-<p>我们看到静态成员dog2虽然在代码中位于dog1之后，但是最先进行初始化，而且只在第一次新建对象home1的时候初始化。dog1和dog3在每次新建doghome对象的时候都会初始化。</p>
-
+        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。<br>
       
     </div>
     
@@ -690,6 +682,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/01/java中对象的初始化/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -735,21 +731,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> *pa;</div><div class="line">pa= &amp;a;</div><div class="line">*pa = <span class="number">2</span>;</div></pre></td></tr></table></figure>
-<p>这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"><span class="keyword">int</span> (* phello)(<span class="keyword">char</span>*);</div><div class="line">phello = &amp;hello;<span class="comment">//常用phello = hello，因为hello本身就是函数地址，相当于&amp;hello</span></div><div class="line">(*phello)(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
-<p>上面先声明了一个函数hello，然后又声明了一个函数指针，指向的函数具有“返回值是整形变量，形参是字符指针”的特点。最后将hello这段函数二进制代码的首地址（可以直接用hello表示）赋给phello函数指针，这样就可以通过phello来间接调用hello函数。</p>
-<p><strong>注意</strong>：函数指针声明中函数名前的 <em> 必须用小括号与函数名结合， 否则如果写成int</em>phello(char<em>),编译器就会认为声明的是一个返回类型是int</em> 的函数而不是一个函数指针。</p>
-<p>为了看起来简洁，C语言中会用typedef语法来声明函数指针，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*phello)</span><span class="params">(<span class="keyword">char</span>)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>这样其他函数的形参中含有该函数指针的话，就可以直接写成phello而不用int(*phello)(char)一长串。</p>
-<p>函数指针这种较为复杂的语法在C语言中通常被用于实现回调函数，实现方式就是将函数指针作为形参，这样某个函数调用的时候，就可以通过函数指针找到回调函数的开始地址，从而执行回调函数。最经典的例子就是C语言标准库中qsort函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void qsort(void *base, size_t nelem, size_t width, int (_USERENTRY *fcmp)(const void *, const void *));</div></pre></td></tr></table></figure></p>
-<p>最后一个形参就是函数指针，指向的是一个返回类型是int、形参是两个const void*的函数，_USERENTRY是告知编译器的平台相关信息，咱完全当它不存在。而我们使用qsort时候一定会自己编写一个比较大小依据的回调函数，在进行快排的时候系统会根据咱自定义的比较大小依据来进行排序。代码示例如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp_function</span><span class="params">( <span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> *(<span class="keyword">int</span>*)a-*(<span class="keyword">int</span>*)b;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">int</span> <span class="built_in">list</span>[<span class="number">5</span>] = &#123; <span class="number">54</span>, <span class="number">21</span>, <span class="number">11</span>, <span class="number">67</span>, <span class="number">22</span> &#125;;</div><div class="line">    qsort((<span class="keyword">void</span> *)<span class="built_in">list</span>, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="built_in">list</span>[<span class="number">0</span>]), cmp_function);</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; <span class="number">5</span>; x++)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%i\n"</span>, <span class="built_in">list</span>[x]);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>qsort调用语句中其实就进行了 fcmp = cmp_function ，这样qsort函数中自然可以调用我们写得cmp_function函数。</p>
-<p>此外，回调函数往往可以不止一个，回调机制的魅力也在于可以在运行时候动态的决定需要调用什么方法，也就是哪一个回调函数。这样通用的接口便可通过传入不同的回调函数进行不同的功能，一定程度上实现了C语言的代码复用。在用C语言设计数据库接口的时候就可以应用回调函数。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">typedef struct struct_a &#123;</div><div class="line">    int id;</div><div class="line">    int a;</div><div class="line">&#125;struct_a;</div><div class="line"></div><div class="line">typedef struct struct_b&#123;</div><div class="line">    int id;</div><div class="line">    int b;</div><div class="line">&#125;struct_b;</div><div class="line"></div><div class="line">int callback_a(void* temp)&#123;</div><div class="line">    struct_a* st = temp;</div><div class="line">    st-&gt;a = 1;</div><div class="line">    st-&gt;id = 1;</div><div class="line">    printf("callback_a");</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int callback_b(void* temp)&#123;</div><div class="line">    struct_b* st = temp;</div><div class="line">    st-&gt;id = 2;</div><div class="line">    st-&gt;b = 2;</div><div class="line">    printf("callback_b");</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int common_sql_operation(void* st,int (*callback)(void*))</div><div class="line">&#123;</div><div class="line">    //do some common sql thing</div><div class="line">    callback(st);</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int table_b_op(struct_b* st)</div><div class="line">&#123;</div><div class="line">    return common_sql_operation(st, callback_b);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int table_a_op(struct_a* st)</div><div class="line">&#123;</div><div class="line">    return common_sql_operation(st, callback_a);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>数据库中两个table a和b 在代码中对应结构体struct_a和struct_b，因为不同table肯定具有不同结构的属性，所以可以用独自的回调函数代表其对应的操作，大家共用一个通用的数据库底层函数common_sql_operation，在设计对外接口（table_a_op和table_b_op）的时候只需要将对应表格的回调函数传入到通用接口即可。</p>
-
+        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。<br>
       
     </div>
     
@@ -766,6 +748,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
