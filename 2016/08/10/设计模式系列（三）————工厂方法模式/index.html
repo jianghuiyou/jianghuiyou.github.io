@@ -6,20 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>设计模式系列（三）———工厂方法模式 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现，比如1Person a = new Custom();
-可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的">
+  <meta name="description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现。
+可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的工作抽象出来，而工厂方法模式有着自己的特色，下面我们举">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式系列（三）———工厂方法模式">
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/08/10/设计模式系列（三）————工厂方法模式/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现，比如1Person a = new Custom();
-可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的">
+<meta property="og:description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现。
+可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的工作抽象出来，而工厂方法模式有着自己的特色，下面我们举">
 <meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png">
-<meta property="og:updated_time" content="2016-08-10T03:57:45.000Z">
+<meta property="og:updated_time" content="2016-08-11T08:41:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式系列（三）———工厂方法模式">
-<meta name="twitter:description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现，比如1Person a = new Custom();
-可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的">
+<meta name="twitter:description" content="工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现。
+可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的工作抽象出来，而工厂方法模式有着自己的特色，下面我们举">
 <meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
 					</div>
 				</section>
 				
@@ -214,7 +214,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现，比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Person a = <span class="keyword">new</span> Custom();</div></pre></td></tr></table></figure></p>
+        <p>工厂模式包括工厂方法模式和抽象工厂模式，这次我们只介绍工厂方法模式。不管哪一种，工厂模式的目的都是将对象实例化与对象操作进行解耦，更好达到开闭原则。对象实例化常见的方法是通过new来实现。</p>
 <p>可如果要实例化一个可变类型的对象，我们常常会用if-else语句来完成，但一旦需求再变就会不断地修改这块实例化的代码。所以工厂模式做的任务就是将对象实例化的工作抽象出来，而工厂方法模式有着自己的特色，下面我们举个生活实际例子来说明。<br><a id="more"></a><br>奔驰汽车公司除了在德国总部有工厂，在北京也有工厂，生产适合国人口味的北京奔驰。这时候，奔驰总部既要严格把控北京这边生产环节各个操作细节，又要生产出独特的适合国人品味的车型，例如GLK、国产C系等等。下面我们通过工厂方法模式完成上述需求，首先我们需求抽象的工厂类和抽象的产品类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BenzFactory</span></span>&#123; <span class="comment">//抽象的工厂方法</span></div><div class="line"></div><div class="line">    <span class="function">BenzCar <span class="title">carOrder</span><span class="params">(String type)</span> </span>&#123;</div><div class="line"></div><div class="line">        BenzCar car = createBenz(type);</div><div class="line"></div><div class="line">        car.assemble();</div><div class="line">        car.paint();  <span class="comment">//这些操作为德国奔驰总部严格把控的环节</span></div><div class="line">        car.test();</div><div class="line"></div><div class="line">        <span class="keyword">return</span> car;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">abstract</span> BenzCar <span class="title">createBenz</span><span class="params">(String type)</span></span>;<span class="comment">//此处抽象方法，将创建具体特点的车型（实例化工作）留给子类工厂类完成</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BenzCar</span></span>&#123;<span class="comment">//抽象的产品类</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> speed;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">assemble</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>然后是各种具体的生产工厂类和具体的产品类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BeijingBenzFactory</span> <span class="keyword">extends</span> <span class="title">BenzFactory</span></span>&#123;<span class="comment">//北京奔驰工厂</span></div><div class="line"></div><div class="line">    <span class="function">BenzCar <span class="title">createBenz</span><span class="params">(String type)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (type.equals(<span class="string">"GLK"</span>))</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> GLKBenzCar();</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">"C"</span>))</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> CBenzCar();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GermanyBenzFactory</span> <span class="keyword">extends</span> <span class="title">BenzFactory</span> </span>&#123;<span class="comment">//德国原装工厂</span></div><div class="line">    <span class="function">BenzCar <span class="title">createBenz</span><span class="params">(String type)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (type.equals(<span class="string">"Mercedes"</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MercedesBenzCar();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">"S"</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SBenzCar();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GLKBenzCar</span> <span class="keyword">extends</span> <span class="title">BenzCar</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBenzCar</span>  <span class="keyword">extends</span> <span class="title">BenzCar</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MercedesBenzCar</span> <span class="keyword">extends</span> <span class="title">BenzCar</span></span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SBenzCar</span> <span class="keyword">extends</span> <span class="title">BenzCar</span></span>&#123;&#125;</div></pre></td></tr></table></figure></p>
 <p>这样就通过工厂方法来完成德国工厂和北京工厂各司其职的需求，即使在添加福建工厂、美国工厂也都是类似的。</p>
@@ -238,6 +238,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/08/28/认知观念决定我们的成长速度/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          认知观念决定我们的成长速度
+        
+      </div>
+    </a>
   
   
     <a href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/" id="article-nav-older" class="article-nav-link-wrap">
