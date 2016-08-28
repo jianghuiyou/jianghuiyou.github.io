@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/index.html">
 <meta property="og:site_name" content="惠友">
 <meta property="og:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
-<meta property="og:updated_time" content="2016-08-10T04:20:11.000Z">
+<meta property="og:updated_time" content="2016-08-28T14:47:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
 <meta name="twitter:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
@@ -33,7 +33,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="null" class="js-avatar">
+			<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
 			
 		</a>
 
@@ -138,7 +138,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 			
-				<img lazy-src="null" class="js-avatar">
+				<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
 			
 			</div>
 			<hgroup>
@@ -217,7 +217,7 @@
 <p>这里声明一个指向整形数据的指针，pa里存放的是整形变量a的地址，可以通过指针pa间接调用a，与此类似。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hello</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"><span class="keyword">int</span> (* phello)(<span class="keyword">char</span>*);</div><div class="line">phello = &amp;hello;<span class="comment">//常用phello = hello，因为hello本身就是函数地址，相当于&amp;hello</span></div><div class="line">(*phello)(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
 <p>上面先声明了一个函数hello，然后又声明了一个函数指针，指向的函数具有“返回值是整形变量，形参是字符指针”的特点。最后将hello这段函数二进制代码的首地址（可以直接用hello表示）赋给phello函数指针，这样就可以通过phello来间接调用hello函数。</p>
-<p><strong>注意</strong>：函数指针声明中函数名前的 <em> 必须用小括号与函数名结合， 否则如果写成int</em>phello(char<em>),编译器就会认为声明的是一个返回类型是int</em> 的函数而不是一个函数指针。</p>
+<p><strong>注意</strong>：函数指针声明中函数名前的*必须用小括号与函数名结合， 否则如果写成int*phello(char*),编译器就会认为声明的是一个返回类型是int* 的函数而不是一个函数指针。</p>
 <p>为了看起来简洁，C语言中会用typedef语法来声明函数指针，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*phello)</span><span class="params">(<span class="keyword">char</span>)</span></span>;</div></pre></td></tr></table></figure></p>
 <p>这样其他函数的形参中含有该函数指针的话，就可以直接写成phello而不用int(*phello)(char)一长串。</p>
 <p>函数指针这种较为复杂的语法在C语言中通常被用于实现回调函数，实现方式就是将函数指针作为形参，这样某个函数调用的时候，就可以通过函数指针找到回调函数的开始地址，从而执行回调函数。最经典的例子就是C语言标准库中qsort函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void qsort(void *base, size_t nelem, size_t width, int (_USERENTRY *fcmp)(const void *, const void *));</div></pre></td></tr></table></figure></p>
