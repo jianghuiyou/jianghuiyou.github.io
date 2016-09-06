@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
 					</div>
 				</section>
 				
@@ -173,6 +173,73 @@
 
       <div class="body-wrap">
   
+    <article id="post-Guava库学习记录（一）———String" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/06/Guava库学习记录（一）———String/" class="article-date">
+  	<time datetime="2016-09-06T02:50:18.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/Guava库学习记录（一）———String/">Guava库学习记录（一）———String</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。</p>
+<h4 id="Joiner-字符串拼接工具"><a href="#Joiner-字符串拼接工具" class="headerlink" title="Joiner 字符串拼接工具"></a>Joiner 字符串拼接工具</h4><ul>
+<li>可以设置跳过null选项，否则抛出异常。</li>
+<li>接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。</li>
+<li>链式语法，Joiner对象是不可变的。</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Guava/">Guava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/09/06/Guava库学习记录（一）———String/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-认知观念决定我们的成长速度" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -200,12 +267,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！</p>
-<p>谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！</p>
-<p>互联网，一个充满各种金钱诱惑的行业，多少人为了月薪多那么几千大洋奋不顾身地跳槽，又有多少应届毕业生为了每个月多两三千或者户口而放弃一个更加喜欢的工作。当然，我们尊重每个人的观念和想法，有些人就喜欢在安逸区中享受人生的点滴幸福并优哉游哉，有的人就喜欢折腾、不断挑战自己并梦想成为一个强人，这没有是非之分。</p>
-<p>可如果我们都是想不断突破自己成为一个强人，就不能被眼前的金钱和短期利益所桎梏。正好今天看到北邮人论坛上一个十大帖子《关于工作》的许多评论深感痛心，自己作为北邮人，内心真的希望学校的风气能沉下来，不要那么浮躁，不要面向工资编程，一个月多那么几千块照样买不起房，生活质量也不可能得到提高。</p>
-<p>作为一个准互联网人，曾经的我本向往着毕业后入职互联网巨头公司，收割高薪的Special Offer，骄傲地往那儿一站感觉自己高人一等～现在的我，只想通过这两三年的折腾与学习找到这样一家公司：对自己职场发展帮助最大，内部鼓励员工尝试转型、直系Boss与自己很看对眼的有一定规模的大公司。即使它不给我户口，即使它不是special，即使它的薪水离我梦想的薪水有一点点差距。我愿意在此以此博客为证，待两年后的我看到这篇文章的时候可以问心无愧。</p>
-<p>最后说一句，上面这些早已经陈词滥调，但是这杯鸡汤我愿意永远将其保鲜，时不时拿来尝一尝，以警醒自己不能轻易迷失方向！</p>
-
+<p>谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！<br>
       
     </div>
     
@@ -218,6 +280,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/28/认知观念决定我们的成长速度/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -402,10 +468,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/design-pattern/">设计模式</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -465,14 +527,10 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/reading/">读书笔记</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -541,10 +599,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/design-pattern/">设计模式</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -608,10 +662,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java-se/">Java SE</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -675,10 +725,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java-se/">Java SE</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -741,10 +787,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java-se/">Java SE</a>
-	</div>
-
 
       
         <p class="article-more-link">
@@ -769,72 +811,10 @@
 
 
   
-    <article id="post-C语言提升代码复用性的一点思考-——-void-和回调函数" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" class="article-date">
-  	<time datetime="2016-06-24T03:05:53.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/">C语言提升代码复用性的一点思考 —— void*和回调函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c-language/">C语言</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

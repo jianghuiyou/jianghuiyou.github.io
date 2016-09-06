@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/index.html">
 <meta property="og:site_name" content="惠友">
 <meta property="og:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
-<meta property="og:updated_time" content="2016-08-28T14:47:19.000Z">
+<meta property="og:updated_time" content="2016-09-06T02:56:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言提升代码复用性的一点思考 —— void*和回调函数">
 <meta name="twitter:description" content="函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。">
@@ -108,7 +108,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java-SE/" style="font-size: 15px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
 					</div>
 				</section>
 				
@@ -202,10 +202,6 @@
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/c-language/">C语言</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -220,7 +216,7 @@
 <p><strong>注意</strong>：函数指针声明中函数名前的*必须用小括号与函数名结合， 否则如果写成int*phello(char*),编译器就会认为声明的是一个返回类型是int* 的函数而不是一个函数指针。</p>
 <p>为了看起来简洁，C语言中会用typedef语法来声明函数指针，例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span><span class="params">(*phello)</span><span class="params">(<span class="keyword">char</span>)</span></span>;</div></pre></td></tr></table></figure></p>
 <p>这样其他函数的形参中含有该函数指针的话，就可以直接写成phello而不用int(*phello)(char)一长串。</p>
-<p>函数指针这种较为复杂的语法在C语言中通常被用于实现回调函数，实现方式就是将函数指针作为形参，这样某个函数调用的时候，就可以通过函数指针找到回调函数的开始地址，从而执行回调函数。最经典的例子就是C语言标准库中qsort函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void qsort(void *base, size_t nelem, size_t width, int (_USERENTRY *fcmp)(const void *, const void *));</div></pre></td></tr></table></figure></p>
+<p>函数指针这种较为复杂的语法在C语言中通常被用于实现回调函数，实现方式就是将函数指针作为形参，这样某个函数调用的时候，就可以通过函数指针找到回调函数的开始地址，从而执行回调函数。最经典的例子就是C语言标准库中qsort函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">void qsort(void *base, size_t nelem, size_t width, int (_USERENTRY *fcmp)\</div><div class="line">(const void *, const void *));</div></pre></td></tr></table></figure></p>
 <p>最后一个形参就是函数指针，指向的是一个返回类型是int、形参是两个const void*的函数，_USERENTRY是告知编译器的平台相关信息，咱完全当它不存在。而我们使用qsort时候一定会自己编写一个比较大小依据的回调函数，在进行快排的时候系统会根据咱自定义的比较大小依据来进行排序。代码示例如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp_function</span><span class="params">( <span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> *(<span class="keyword">int</span>*)a-*(<span class="keyword">int</span>*)b;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">int</span> <span class="built_in">list</span>[<span class="number">5</span>] = &#123; <span class="number">54</span>, <span class="number">21</span>, <span class="number">11</span>, <span class="number">67</span>, <span class="number">22</span> &#125;;</div><div class="line">    qsort((<span class="keyword">void</span> *)<span class="built_in">list</span>, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="built_in">list</span>[<span class="number">0</span>]), cmp_function);</div><div class="line">    <span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; <span class="number">5</span>; x++)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%i\n"</span>, <span class="built_in">list</span>[x]);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>qsort调用语句中其实就进行了 fcmp = cmp_function ，这样qsort函数中自然可以调用我们写得cmp_function函数。</p>
 <p>此外，回调函数往往可以不止一个，回调机制的魅力也在于可以在运行时候动态的决定需要调用什么方法，也就是哪一个回调函数。这样通用的接口便可通过传入不同的回调函数进行不同的功能，一定程度上实现了C语言的代码复用。在用C语言设计数据库接口的时候就可以应用回调函数。</p>

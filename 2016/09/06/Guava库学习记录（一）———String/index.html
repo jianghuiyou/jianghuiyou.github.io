@@ -4,21 +4,30 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>认知观念决定我们的成长速度 | 惠友</title>
+  <title>Guava库学习记录（一）———String | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
+  <meta name="description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
+Joiner 字符串拼接工具
+可以设置跳过null选项，否则抛出异常。
+接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
+链式语法，Joiner对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="认知观念决定我们的成长速度">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/08/28/认知观念决定我们的成长速度/index.html">
+<meta property="og:title" content="Guava库学习记录（一）———String">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
-<meta property="og:updated_time" content="2016-09-06T02:55:14.000Z">
+<meta property="og:description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
+Joiner 字符串拼接工具
+可以设置跳过null选项，否则抛出异常。
+接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
+链式语法，Joiner对">
+<meta property="og:updated_time" content="2016-09-06T02:54:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="认知观念决定我们的成长速度">
-<meta name="twitter:description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
+<meta name="twitter:title" content="Guava库学习记录（一）———String">
+<meta name="twitter:description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
+Joiner 字符串拼接工具
+可以设置跳过null选项，否则抛出异常。
+接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
+链式语法，Joiner对">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -175,11 +184,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-认知观念决定我们的成长速度" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Guava库学习记录（一）———String" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/28/认知观念决定我们的成长速度/" class="article-date">
-  	<time datetime="2016-08-28T12:35:21.000Z" itemprop="datePublished">2016-08-28</time>
+      <a href="/2016/09/06/Guava库学习记录（一）———String/" class="article-date">
+  	<time datetime="2016-09-06T02:50:18.000Z" itemprop="datePublished">2016-09-06</time>
 </a>
     </div>
   
@@ -192,7 +201,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      认知观念决定我们的成长速度
+      Guava库学习记录（一）———String
     </h1>
   
 
@@ -201,7 +210,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活感悟/">生活感悟</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Guava/">Guava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
 	</div>
 
         
@@ -212,11 +221,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！</p>
-<p>谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！<br><a id="more"></a><br>互联网，一个充满各种金钱诱惑的行业，多少人为了月薪多那么几千大洋奋不顾身地跳槽，又有多少应届毕业生为了每个月多两三千或者户口而放弃一个更加喜欢的工作。当然，我们尊重每个人的观念和想法，有些人就喜欢在安逸区中享受人生的点滴幸福并优哉游哉，有的人就喜欢折腾、不断挑战自己并梦想成为一个强人，这没有是非之分。</p>
-<p>可如果我们都是想不断突破自己成为一个强人，就不能被眼前的金钱和短期利益所桎梏。正好今天看到北邮人论坛上一个十大帖子《关于工作》的许多评论深感痛心，自己作为北邮人，内心真的希望学校的风气能沉下来，不要那么浮躁，不要面向工资编程，一个月多那么几千块照样买不起房，生活质量也不可能得到提高。</p>
-<p>作为一个准互联网人，曾经的我本向往着毕业后入职互联网巨头公司，收割高薪的Special Offer，骄傲地往那儿一站感觉自己高人一等～现在的我，只想通过这两三年的折腾与学习找到这样一家公司：对自己职场发展帮助最大，内部鼓励员工尝试转型、直系Boss与自己很看对眼的有一定规模的大公司。即使它不给我户口，即使它不是special，即使它的薪水离我梦想的薪水有一点点差距。我愿意在此以此博客为证，待两年后的我看到这篇文章的时候可以问心无愧。</p>
-<p>最后说一句，上面这些早已经陈词滥调，但是这杯鸡汤我愿意永远将其保鲜，时不时拿来尝一尝，以警醒自己不能轻易迷失方向！</p>
+        <p>Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。</p>
+<h4 id="Joiner-字符串拼接工具"><a href="#Joiner-字符串拼接工具" class="headerlink" title="Joiner 字符串拼接工具"></a>Joiner 字符串拼接工具</h4><ul>
+<li>可以设置跳过null选项，否则抛出异常。</li>
+<li>接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。</li>
+<li>链式语法，Joiner对象是不可变的。</li>
+</ul>
+<a id="more"></a>
+<p>代码示例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Joiner joiner = Joiner.on(<span class="string">"; "</span>).skipNulls();</div><div class="line">String joinRes = joiner.join(<span class="string">"Marry"</span>, <span class="string">"Sam"</span>, <span class="keyword">null</span>, <span class="string">"John"</span>);</div><div class="line">System.out.println(joinRes);<span class="comment">//输出 Marry; Sam; John</span></div></pre></td></tr></table></figure></p>
+<h4 id="Splitter-字符串分割工具"><a href="#Splitter-字符串分割工具" class="headerlink" title="Splitter 字符串分割工具"></a>Splitter 字符串分割工具</h4><ul>
+<li>灵活配置，功能强大。on方法调用可以按照单个字符、字符模式CharMatcher(后面会讲到)，正则表达式、字符串、固定长度进行分割，还可以对分割结果进行针对性的trim，例如裁剪掉空格、裁剪某类字符等等。</li>
+<li>返回结果可以是List<string>（调用方法splitToList），也可以是Iterable<string>（调用方法split）</string></string></li>
+<li>可以忽略结果集中的空选项（调用omitEmptyStrings方法）<br>代码示例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Iterable&lt;String&gt; iterable = Splitter.on(<span class="string">","</span>).omitEmptyStrings().trimResults().split(<span class="string">"foo,bar,,   qux"</span>);</div><div class="line"><span class="comment">//Iterable&lt;String&gt; iterable = Splitter.on(",").omitEmptyStrings().trimResults(CharMatcher.is('_')).split("foo_,bar_,,_qux");与上结果相同</span></div><div class="line">Iterator&lt;String&gt; it = iterable.iterator();</div><div class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">    String s = it.next();</div><div class="line">    System.out.println(s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="CharMatcher-选定某种特种的字符集，并可进行操作"><a href="#CharMatcher-选定某种特种的字符集，并可进行操作" class="headerlink" title="CharMatcher 选定某种特种的字符集，并可进行操作"></a>CharMatcher 选定某种特种的字符集，并可进行操作</h4><ul>
+<li>CharMatcher代表某类字符，比如空白字符、大写字符、数字字符、或者字符串中的任意一种（anyof(“aeiou”)代表元音字符）、某一种固定字符(is方法)。这是选定特征字符过程</li>
+<li>在选定之后通常要进行某些操作，例如上面提到的按此特征分割字符串（Splitter）、替换replaceFrom、保留retainFrom、裁边trimFrom、移除removeFrom等等。<br>代码示例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String string = <span class="string">"  231f+12`43d31"</span>;</div><div class="line">String theDigits = CharMatcher.DIGIT.retainFrom(string); <span class="comment">//仅仅保留数字</span></div><div class="line">String spaced = CharMatcher.WHITESPACE.trimFrom(string);<span class="comment">// 裁掉首尾空格</span></div><div class="line">String noDigits = CharMatcher.JAVA_DIGIT.replaceFrom(string, <span class="string">"*"</span>); <span class="comment">// 把所有数字替换成*</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此外，还有<strong>Charsets</strong>类内部有常见的编码格式，<strong>CaseFormat</strong>类可以变换不同的代码命名风格。由于并不常用此处不赘述。</p>
 
       
     </div>
@@ -226,18 +250,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/09/06/Guava库学习记录（一）———String/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Guava库学习记录（一）———String
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/10/设计模式系列（三）————工厂方法模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式系列（三）———工厂方法模式</div>
+    <a href="/2016/08/28/认知观念决定我们的成长速度/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">认知观念决定我们的成长速度</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -272,7 +287,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="认知观念决定我们的成长速度" data-title="认知观念决定我们的成长速度" data-url="http://www.jianghuiyou.com/2016/08/28/认知观念决定我们的成长速度/"></div>
+	<div class="ds-thread" data-thread-key="Guava库学习记录（一）———String" data-title="Guava库学习记录（一）———String" data-url="http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
