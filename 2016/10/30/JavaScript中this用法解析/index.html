@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>JavaScript中this用法解析 | 惠友</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="this在其他面向对象语言（java、c#）中经常见到，但在js里有些不同。this通常是出现在函数中，当一个函数被调用的时候，该函数的执行环境中会自动产生一个this变量～注意：this是运行时根据函数调用模式的不同而动态绑定的，而非编译期静态定义的。this有以下四种不同的函数调用模式。
+1.方法调用模式当函数作为一个对象的属性而存在时，也可称之为方法。当此方法被调用的时候，this绑定的就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中this用法解析">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/10/30/JavaScript中this用法解析/index.html">
+<meta property="og:site_name" content="惠友">
+<meta property="og:description" content="this在其他面向对象语言（java、c#）中经常见到，但在js里有些不同。this通常是出现在函数中，当一个函数被调用的时候，该函数的执行环境中会自动产生一个this变量～注意：this是运行时根据函数调用模式的不同而动态绑定的，而非编译期静态定义的。this有以下四种不同的函数调用模式。
+1.方法调用模式当函数作为一个对象的属性而存在时，也可称之为方法。当此方法被调用的时候，this绑定的就是">
+<meta property="og:updated_time" content="2016-10-30T09:29:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中this用法解析">
+<meta name="twitter:description" content="this在其他面向对象语言（java、c#）中经常见到，但在js里有些不同。this通常是出现在函数中，当一个函数被调用的时候，该函数的执行环境中会自动产生一个this变量～注意：this是运行时根据函数调用模式的不同而动态绑定的，而非编译期静态定义的。this有以下四种不同的函数调用模式。
+1.方法调用模式当函数作为一个对象的属性而存在时，也可称之为方法。当此方法被调用的时候，this绑定的就是">
+  
+    <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">惠友</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">记录成长的点滴</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/jianghuiyou" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiang-hui-you" title="zhihu">zhihu</a>
+					        
+								<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E6%83%A0%E5%8F%8B-%E5%A7%9C-3b3631105?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/前端技术/" style="font-size: 10px;">前端技术</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">惠友</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">惠友</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">记录成长的点滴</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/jianghuiyou" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiang-hui-you" title="zhihu">zhihu</a>
+			        
+						<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E6%83%A0%E5%8F%8B-%E5%A7%9C-3b3631105?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-JavaScript中this用法解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/30/JavaScript中this用法解析/" class="article-date">
+  	<time datetime="2016-10-30T09:22:15.000Z" itemprop="datePublished">2016-10-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中this用法解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>this在其他面向对象语言（java、c#）中经常见到，但在js里有些不同。this通常是出现在函数中，当一个函数被调用的时候，该函数的执行环境中会自动产生一个this变量～注意：<strong>this是运行时根据函数调用模式的不同而动态绑定的</strong>，而非编译期静态定义的。this有以下四种不同的函数调用模式。</p>
+<h4 id="1-方法调用模式"><a href="#1-方法调用模式" class="headerlink" title="1.方法调用模式"></a>1.方法调用模式</h4><p>当函数作为一个对象的属性而存在时，也可称之为方法。当此方法被调用的时候，this绑定的就是拥有该方法的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> object = &#123;</div><div class="line">    x: <span class="number">1</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">let</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line">object.m = func;</div><div class="line">object.m(); <span class="comment">//函数func作为object对象的一个方法</span></div></pre></td></tr></table></figure></p>
+<h4 id="2-函数调用模式（重点-）"><a href="#2-函数调用模式（重点-）" class="headerlink" title="2.函数调用模式（重点!）"></a>2.函数调用模式（重点!）</h4><a id="more"></a>
+<p>当函数并非作为一个对象的属性而被调用的时候，该函数执行环境中的this会绑定到全局变量上（在浏览器中就是window）。这算是js语言设计上的一个失误，也常常导致初学者犯一些错误。例如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> component = &#123;</div><div class="line">    x:<span class="number">1</span>,</div><div class="line">    autoAlert:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            alert(<span class="keyword">this</span>.x);</div><div class="line">        &#125;,<span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">component.autoAlert();</div></pre></td></tr></table></figure></p>
+<p>以上代码在autoAlert方法中想定时一秒后显示x的值，但是输出确实undefined。这时因为对于autoAlert函数属于方法调用模式，其执行环境中this绑定到component对象，而在setTimeout中回调函数不属于任何对象，所以它是函数调用模式。this.x 相当于 window.x，自然找不到x变量！解决方式有两种：</p>
+<h5 id="解决方式一"><a href="#解决方式一" class="headerlink" title="解决方式一"></a>解决方式一</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> component = &#123;</div><div class="line">    x:<span class="number">1</span>,</div><div class="line">    autoAlert:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">let</span> that = <span class="keyword">this</span>; <span class="comment">//将this绑定的对象存到that变量中</span></div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            alert(that.x);</div><div class="line">        &#125;,<span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">component.autoAlert();</div></pre></td></tr></table></figure>
+<h5 id="解决方式二"><a href="#解决方式二" class="headerlink" title="解决方式二"></a>解决方式二</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> component = &#123;</div><div class="line">    x:<span class="number">1</span>,</div><div class="line">    autoAlert:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        setTimeout(() =&gt; &#123; <span class="comment">//用箭头函数代替原来的函数声明</span></div><div class="line">            alert(that.x);</div><div class="line">        &#125;,<span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">component.autoAlert();</div></pre></td></tr></table></figure>
+<p>在es6中的箭头函数中的this固定绑定到定义时所在的对象（即上述代码中的component对象），大大降低了this动态绑定犯错的概率。<br>在函数调用模式下，我们应该对<strong>map、filter、setTimeout等这些需要回调函数的方法尤其注意this的用法</strong>，以免产生bug。</p>
+<h4 id="3-构造器调用模式"><a href="#3-构造器调用模式" class="headerlink" title="3.构造器调用模式"></a>3.构造器调用模式</h4><p>js时基于原型继承的，在传统js语言中存在的构造器函数。而该函数中的this以及原型对象中方法的this都会在调用时候绑定到由构造器产生的实例对象上。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Quo = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.status = string; <span class="comment">//构造器函数中的this</span></div><div class="line">&#125;;</div><div class="line">Quo.prototype.get_status = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.status;  <span class="comment">//原型对象中的this</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> myQuo = <span class="keyword">new</span> Quo(<span class="string">'a'</span>); <span class="comment">//在调用时候上面函数中的this均绑定到myQuo对象</span></div><div class="line">alert(myQuo.get_status());<span class="comment">//输出 a</span></div></pre></td></tr></table></figure></p>
+<h4 id="4-Apply调用模式"><a href="#4-Apply调用模式" class="headerlink" title="4.Apply调用模式"></a>4.Apply调用模式</h4><p>apply函数时所有函数对象都有的方法，它的作用是改变函数的调用对象，它的第一个参数就表示this应该绑定到的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Quo = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.status = string; </div><div class="line">&#125;;</div><div class="line">Quo.prototype.get_status = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.status; </div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> yourQuo = &#123;</div><div class="line">    status: <span class="string">'b'</span></div><div class="line">&#125;; <span class="comment">//注意yourQuo并没有继承自Quo</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> your_status = Quo.prototype.get_status.apply(yourQuo);<span class="comment">//get_status中的this绑定到yourQuo上</span></div><div class="line">alert(your_status);<span class="comment">//输出 b</span></div></pre></td></tr></table></figure></p>
+<p>通过apply方法可以让本没有继承自Quo的对象，使用Quo原型对象中的方法。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/28/前端技术以及工具总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端技术以及工具总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JavaScript中this用法解析" data-title="JavaScript中this用法解析" data-url="http://www.jianghuiyou.com/2016/10/30/JavaScript中this用法解析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>     
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 惠友
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
