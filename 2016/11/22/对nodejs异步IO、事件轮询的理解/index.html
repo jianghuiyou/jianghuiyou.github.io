@@ -4,21 +4,23 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>认知观念决定我们的成长速度 | 惠友</title>
+  <title>对nodejs异步IO、事件轮询的理解 | 惠友</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
+  <meta name="description" content="nodejs是JavaScript这门编程语言在服务器端运行的平台，将chrome浏览器中的js引擎V8移植到服务端后，这使js俨然成为一种全栈语言。在实践中自己已经开始编写node异步读写数据库IO的操作，并应用了promise特性。而异步IO、事件轮询作为nodejs最突出的特点，也可以算是最大亮点，不得不好好理解一下。
+IO操作通常指网络IO、磁盘文件读写、各种数据库读写以及定时器操作等等，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="认知观念决定我们的成长速度">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/08/28/认知观念决定我们的成长速度/index.html">
+<meta property="og:title" content="对nodejs异步IO、事件轮询的理解">
+<meta property="og:url" content="http://www.jianghuiyou.com/2016/11/22/对nodejs异步IO、事件轮询的理解/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
-<meta property="og:updated_time" content="2016-09-06T02:55:14.000Z">
+<meta property="og:description" content="nodejs是JavaScript这门编程语言在服务器端运行的平台，将chrome浏览器中的js引擎V8移植到服务端后，这使js俨然成为一种全栈语言。在实践中自己已经开始编写node异步读写数据库IO的操作，并应用了promise特性。而异步IO、事件轮询作为nodejs最突出的特点，也可以算是最大亮点，不得不好好理解一下。
+IO操作通常指网络IO、磁盘文件读写、各种数据库读写以及定时器操作等等，">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/nodejs%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.png">
+<meta property="og:updated_time" content="2016-12-02T00:46:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="认知观念决定我们的成长速度">
-<meta name="twitter:description" content="先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！
-谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！">
+<meta name="twitter:title" content="对nodejs异步IO、事件轮询的理解">
+<meta name="twitter:description" content="nodejs是JavaScript这门编程语言在服务器端运行的平台，将chrome浏览器中的js引擎V8移植到服务端后，这使js俨然成为一种全栈语言。在实践中自己已经开始编写node异步读写数据库IO的操作，并应用了promise特性。而异步IO、事件轮询作为nodejs最突出的特点，也可以算是最大亮点，不得不好好理解一下。
+IO操作通常指网络IO、磁盘文件读写、各种数据库读写以及定时器操作等等，">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/nodejs%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.png">
   
     <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
   
@@ -175,11 +177,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-认知观念决定我们的成长速度" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-对nodejs异步IO、事件轮询的理解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/28/认知观念决定我们的成长速度/" class="article-date">
-  	<time datetime="2016-08-28T12:35:21.000Z" itemprop="datePublished">2016-08-28</time>
+      <a href="/2016/11/22/对nodejs异步IO、事件轮询的理解/" class="article-date">
+  	<time datetime="2016-11-22T00:39:51.000Z" itemprop="datePublished">2016-11-22</time>
 </a>
     </div>
   
@@ -192,7 +194,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      认知观念决定我们的成长速度
+      对nodejs异步IO、事件轮询的理解
     </h1>
   
 
@@ -201,7 +203,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活感悟/">生活感悟</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步编程/">异步编程</a></li></ul>
 	</div>
 
         
@@ -212,11 +214,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！</p>
-<p>谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！<br><a id="more"></a><br>互联网，一个充满各种金钱诱惑的行业，多少人为了月薪多那么几千大洋奋不顾身地跳槽，又有多少应届毕业生为了每个月多两三千或者户口而放弃一个更加喜欢的工作。当然，我们尊重每个人的观念和想法，有些人就喜欢在安逸区中享受人生的点滴幸福并优哉游哉，有的人就喜欢折腾、不断挑战自己并梦想成为一个强人，这没有是非之分。</p>
-<p>可如果我们都是想不断突破自己成为一个强人，就不能被眼前的金钱和短期利益所桎梏。正好今天看到北邮人论坛上一个十大帖子《关于工作》的许多评论深感痛心，自己作为北邮人，内心真的希望学校的风气能沉下来，不要那么浮躁，不要面向工资编程，一个月多那么几千块照样买不起房，生活质量也不可能得到提高。</p>
-<p>作为一个准互联网人，曾经的我本向往着毕业后入职互联网巨头公司，收割高薪的Special Offer，骄傲地往那儿一站感觉自己高人一等～现在的我，只想通过这两三年的折腾与学习找到这样一家公司：对自己职场发展帮助最大，内部鼓励员工尝试转型、直系Boss与自己很看对眼的有一定规模的大公司。即使它不给我户口，即使它不是special，即使它的薪水离我梦想的薪水有一点点差距。我愿意在此以此博客为证，待两年后的我看到这篇文章的时候可以问心无愧。</p>
-<p>最后说一句，上面这些早已经陈词滥调，但是这杯鸡汤我愿意永远将其保鲜，时不时拿来尝一尝，以警醒自己不能轻易迷失方向！</p>
+        <p>nodejs是JavaScript这门编程语言在服务器端运行的平台，将chrome浏览器中的js引擎V8移植到服务端后，这使js俨然成为一种全栈语言。在实践中自己已经开始编写node异步读写数据库IO的操作，并应用了promise特性。而异步IO、事件轮询作为nodejs最突出的特点，也可以算是最大亮点，不得不好好理解一下。</p>
+<p>IO操作通常指网络IO、磁盘文件读写、各种数据库读写以及定时器操作等等，而这种操作相对于CPU的运算速度相当耗时。而<strong>异步IO</strong>就是在发生上述IO操作的时候，原来的程序不等待返回结果直接继续运行，完全不鸟这个IO操作的过程。这种机制的好处就是大大提升CPU的利用率，让CPU可以尽可能马不停蹄地工作，不需要等待慢腾腾的IO操作，尤其适合<strong>IO密集型应用</strong>。这也是一个很简单的node服务器可以支撑上千并发访问量的原因。</p>
+<a id="more"></a>
+<p>可是完全不鸟IO操作也不行啊，毕竟还得知道这货是死是活。这时候<strong>事件轮询</strong>便闪亮登场，cpu也一直对IO操作是否成功完成念念不忘，有事没事定期地去询问哪个IO操作成功结束啦。如果发现了在CPU执行完当前代码段之后立马去执行此IO操作的回调。如下图<br><img src="http://oa576fej8.bkt.clouddn.com/nodejs%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.png" alt="nodejs原理图"><br>我们看到事件轮询主要是基于libuv实现的，某个IO操作被调用时，它的回调会被放入event queue当中，而IO操作会放入worker threads的队列中进行排队，worker threads维护一个线程池，主要是去完成那些耗时的IO操作。中间的event loop一直运行着，并检查是否有IO操作以及结束，一旦结束便会触发其对应的回调函数。<br>libuv是node实现异步IO的核心库，它为了实现跨平台，封装了*nix平台的libev库和window平台的IOCP，具体详细内容，大家可以去查看libuv代码及文档。</p>
+<ol>
+<li><a href="http://docs.libuv.org/en/v1.x/" target="_blank" rel="external">http://docs.libuv.org/en/v1.x/</a></li>
+<li><a href="https://github.com/libuv/libuv" target="_blank" rel="external">https://github.com/libuv/libuv</a><br>在上面我们也会看到nodejs所谓的单线程，是针对该程序执行的代码是单线程的，而对于IO操作其实是多线程的。</li>
+</ol>
+<p>然而，nodejs这种异步IO、事件机制并不是万能的，尤其是对于CPU密集型的操作，代码依然会被阻塞在耗费CPU的代码段中，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">setTimeout(() =&gt; <span class="built_in">console</span>.log(<span class="string">'yeah'</span>), <span class="number">1000</span>);</div><div class="line"><span class="keyword">while</span>(<span class="number">1</span>);<span class="comment">//cpu密集型操作</span></div></pre></td></tr></table></figure></p>
+<p>while死循环就是类似CPU密集型运算的极限，导致程序阻塞在这里定时器的回调函数永远无法执行，这也告诉我们：js中设定的定时器并没有严格的时间保证。<br>同时，正是因为node对于代码执行是单线程的，在不借助第三方库的情况下根本无法利用现代计算机多CPU的优势，使得其在多核并行计算上无法跟多线程编程相媲美。</p>
 
       
     </div>
@@ -226,18 +233,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/09/06/Guava库学习记录（一）———String/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Guava库学习记录（一）———String
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/10/设计模式系列（三）————工厂方法模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式系列（三）———工厂方法模式</div>
+    <a href="/2016/10/30/JavaScript中this用法解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript中this用法解析</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -272,7 +270,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="认知观念决定我们的成长速度" data-title="认知观念决定我们的成长速度" data-url="http://www.jianghuiyou.com/2016/08/28/认知观念决定我们的成长速度/"></div>
+	<div class="ds-thread" data-thread-key="对nodejs异步IO、事件轮询的理解" data-title="对nodejs异步IO、事件轮询的理解" data-url="http://www.jianghuiyou.com/2016/11/22/对nodejs异步IO、事件轮询的理解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

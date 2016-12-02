@@ -72,7 +72,7 @@
 						<li>Tags</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/前端技术/" style="font-size: 10px;">前端技术</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/前端技术/" style="font-size: 10px;">前端技术</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/生活感悟/" style="font-size: 10px;">生活感悟</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
 					</div>
 				</section>
 				
@@ -172,6 +172,69 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-Java-IO设计原理——装饰者模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/Java-IO设计原理——装饰者模式/" class="article-date">
+  	<time datetime="2016-07-12T14:32:11.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/12/Java-IO设计原理——装饰者模式/">Java IO设计原理——装饰者模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
+<p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/12/Java-IO设计原理——装饰者模式/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
   
