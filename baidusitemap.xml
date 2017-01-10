@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://www.jianghuiyou.com/2016/12/31/%E5%9B%9E%E7%9C%8B2016%EF%BC%8C%E5%B1%95%E6%9C%9B2017/</loc>
+    <lastmod>2017-01-10T02:41:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>回看2016，展望2017</title>
+        <pubTime>2016-12-31T02:33:04.000Z</pubTime>
+        
+        <tag>生活感悟</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.jianghuiyou.com/2016/11/22/%E5%AF%B9nodejs%E5%BC%82%E6%AD%A5IO%E3%80%81%E4%BA%8B%E4%BB%B6%E8%BD%AE%E8%AF%A2%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
     <lastmod>2016-12-02T00:46:58.000Z</lastmod>
     <data>
@@ -168,9 +185,9 @@
         <title>Java IO设计原理——装饰者模式</title>
         <pubTime>2016-07-12T14:32:11.000Z</pubTime>
         
-        <tag>Java SE</tag>
-         
         <tag>设计模式</tag>
+         
+        <tag>Java SE</tag>
          
          
            
