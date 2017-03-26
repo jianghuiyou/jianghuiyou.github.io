@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/Java-SE/" style="font-size: 20px;">Java SE</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/前端技术/" style="font-size: 10px;">前端技术</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/生活感悟/" style="font-size: 15px;">生活感悟</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/后端/" style="font-size: 10px;">后端</a> <a href="/tags/生活感悟/" style="font-size: 13.33px;">生活感悟</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/设计模式/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
 					</div>
 				</section>
 				
@@ -172,6 +172,68 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-经典排序算法分析（上）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/26/经典排序算法分析（上）/" class="article-date">
+  	<time datetime="2017-03-26T13:00:21.000Z" itemprop="datePublished">2017-03-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/26/经典排序算法分析（上）/">经典排序算法分析（上）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。<br>这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。这类排序算法的渐进下确界是 \(\Omega(nlgn)\)，可以使用决策树模型来进行证明，决策树是一个完全二叉树，\(n\)个数共有\(n!\)个排列方式，对应的叶子结点也至少要有\(n!\)个，而最坏的比较次数对应这个决策树的高度 \(l\) ，由此可得 \(n!\le l<br>\le 2^h\)。两边取对数之后可得\(h \ge log(n!) = \Omega(nlgn)\)。更加详细的证明过程以及各种渐进界的介绍请参考算法导论。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/03/26/经典排序算法分析（上）/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-nDPI源码解析" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -333,7 +395,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步编程/">异步编程</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后端/">后端</a></li></ul>
 	</div>
 
       
@@ -397,7 +459,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 	</div>
 
       
@@ -465,7 +527,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端技术/">前端技术</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
 	</div>
 
       
@@ -532,7 +594,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Guava/">Guava</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-SE/">Java SE</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 	</div>
 
       
@@ -721,7 +783,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 	</div>
 
       
@@ -729,69 +791,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-设计模式系列（二）——单例模式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/25/设计模式系列（二）——单例模式/" class="article-date">
-  	<time datetime="2016-07-25T10:54:53.000Z" itemprop="datePublished">2016-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/设计模式系列（二）——单例模式/">设计模式系列（二）————单例模式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>单例模式应该算是所有设计模式里类图最简单、实现起来代码最短的模式，所以也是各大互联网公司面试的热点。比如，实现一个线程安全的单例模式，单例模式和全局变量的区别。其实，写出一个漂亮的单例模式并非很容易，希望看完这篇文章的人都能立马自己去实现一个漂亮的单例模式。</p>
-<p>单例模式，顾名思义也就是一个类只能有一个实例化对象。这在资源类型中常常被应用，为了减少不必要的性能损坏以及避免多个对象的不同步问题，比如线程池、数据库连接池、windows中的垃圾回收站、任务管理器、注册表等等。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/25/设计模式系列（二）——单例模式/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
