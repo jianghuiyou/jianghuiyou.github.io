@@ -1,687 +1,1852 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>惠友</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="姜惠友">
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
 <meta property="og:type" content="website">
 <meta property="og:title" content="惠友">
 <meta property="og:url" content="http://www.jianghuiyou.com/page/2/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="姜惠友">
+<meta property="og:description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="惠友">
-<meta name="twitter:description" content="姜惠友">
-  
-    <link rel="alternative" href="/atom.xml" title="惠友" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.jianghuiyou.com/page/2/"/>
+
+
+
+
+
+  <title>惠友</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
-			
-		</a>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">惠友</a></h1>
-		</hgroup>
+  
 
-		
-		<p class="header-subtitle">记录成长的点滴</p>
-		
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						
-						<li>Über</li>
-						
-					</ul>
-				</div>
-			</div>
-		
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/jianghuiyou" title="github">github</a>
-					        
-								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiang-hui-you" title="zhihu">zhihu</a>
-					        
-								<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E6%83%A0%E5%8F%8B-%E5%A7%9C-3b3631105?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/后端/" style="font-size: 10px;">后端</a> <a href="/tags/生活感悟/" style="font-size: 13.33px;">生活感悟</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/计算机网络/" style="font-size: 10px;">计算机网络</a> <a href="/tags/设计模式/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
-					</div>
-				</section>
-				
-				
-				
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">惠友</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">记录成长的点滴</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">惠友</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-			
-				<img lazy-src="http://oa576fej8.bkt.clouddn.com/me.jpg" class="js-avatar">
-			
-			</div>
-			<hgroup>
-			  <h1 class="header-author">惠友</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">记录成长的点滴</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/jianghuiyou" title="github">github</a>
-			        
-						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiang-hui-you" title="zhihu">zhihu</a>
-			        
-						<a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%E6%83%A0%E5%8F%8B-%E5%A7%9C-3b3631105?trk=nav_responsive_tab_profile_pic" title="linkedin">linkedin</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/随笔/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read">
+          <a href="/categories/阅读/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech">
+          <a href="/categories/技术/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-设计模式系列（二）——单例模式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/25/设计模式系列（二）——单例模式/" class="article-date">
-  	<time datetime="2016-07-25T10:54:53.000Z" itemprop="datePublished">2016-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/设计模式系列（二）——单例模式/">设计模式系列（二）————单例模式</a>
-    </h1>
+      
+
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/08/01/浅谈java内部类在迭代器设计中的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-    <div class="article-entry" itemprop="articleBody">
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/" itemprop="url">
+                  浅谈java内部类在迭代器设计中的应用
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-01T23:27:32+08:00">
+                2016-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/01/浅谈java内部类在迭代器设计中的应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>单例模式应该算是所有设计模式里类图最简单、实现起来代码最短的模式，所以也是各大互联网公司面试的热点。比如，实现一个线程安全的单例模式，单例模式和全局变量的区别。其实，写出一个漂亮的单例模式并非很容易，希望看完这篇文章的人都能立马自己去实现一个漂亮的单例模式。</p>
+      
+
+      
+        
+          <p>通常我们认为Java内部类是作为一种代码隐藏机制存在，因为内部类对外部代码是不可知的（其实通过反射机制还是可知的）。但内部类的精髓远远不止这点，更加关键的是内部类与外围类的通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里，B就是内部类而A就称为外围类。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/01/浅谈java内部类在迭代器设计中的应用/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/25/设计模式系列（二）——单例模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/25/设计模式系列（二）——单例模式/" itemprop="url">
+                  设计模式系列（二）————单例模式
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T18:54:53+08:00">
+                2016-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/25/设计模式系列（二）——单例模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/25/设计模式系列（二）——单例模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>单例模式应该算是所有设计模式里类图最简单、实现起来代码最短的模式，所以也是各大互联网公司面试的热点。比如，实现一个线程安全的单例模式，单例模式和全局变量的区别。其实，写出一个漂亮的单例模式并非很容易，希望看完这篇文章的人都能立马自己去实现一个漂亮的单例模式。</p>
 <p>单例模式，顾名思义也就是一个类只能有一个实例化对象。这在资源类型中常常被应用，为了减少不必要的性能损坏以及避免多个对象的不同步问题，比如线程池、数据库连接池、windows中的垃圾回收站、任务管理器、注册表等等。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/25/设计模式系列（二）——单例模式/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-读《毛泽东传》有感" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/23/读《毛泽东传》有感/" class="article-date">
-  	<time datetime="2016-07-23T14:58:50.000Z" itemprop="datePublished">2016-07-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/25/设计模式系列（二）——单例模式/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/23/读《毛泽东传》有感/">读《毛泽东传》有感</a>
-    </h1>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/23/读《毛泽东传》有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-    <div class="article-entry" itemprop="articleBody">
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/23/读《毛泽东传》有感/" itemprop="url">
+                  读《毛泽东传》有感
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-23T22:58:50+08:00">
+                2016-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/23/读《毛泽东传》有感/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/23/读《毛泽东传》有感/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>毕业之后利用闲暇时间拜读这本罗斯.特里尔写的《毛泽东传》，自己虽然暂时还不是党员，但是对毛主席的崇敬从小就存在，更何况本科期间每天上课路上都会看到向我们挥手的毛爷爷。</p>
+      
+
+      
+        
+          <p>毕业之后利用闲暇时间拜读这本罗斯.特里尔写的《毛泽东传》，自己虽然暂时还不是党员，但是对毛主席的崇敬从小就存在，更何况本科期间每天上课路上都会看到向我们挥手的毛爷爷。</p>
 <p>读人物传记其实还是挺轻松，很重要的一点感触是能够穿梭到那个年代、那个地方与当事人共同经历那段历史，这种感觉真的美妙。当然更重要的是，自己能够对这个历史人物的性格特点有自己的理解，并取其精髓。当经历类似的事情的时候不妨静下心想想，这位伟人会怎么处理？<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/23/读《毛泽东传》有感/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-设计模式系列（一）——-观察者模式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/20/设计模式系列（一）——-观察者模式/" class="article-date">
-  	<time datetime="2016-07-20T09:23:08.000Z" itemprop="datePublished">2016-07-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/23/读《毛泽东传》有感/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/设计模式系列（一）——-观察者模式/">设计模式系列（一）—— 观察者模式</a>
-    </h1>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/20/设计模式系列（一）——-观察者模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-    <div class="article-entry" itemprop="articleBody">
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/20/设计模式系列（一）——-观察者模式/" itemprop="url">
+                  设计模式系列（一）—— 观察者模式
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-20T17:23:08+08:00">
+                2016-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/20/设计模式系列（一）——-观察者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/20/设计模式系列（一）——-观察者模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>之前为了更好地理解Java IO好好学习了装饰者模式，现在在看Junit4的时候发现太多的设计模式都需要了解，于是打算开始好好地学习下各种常用的设计模式。</p>
+      
+
+      
+        
+          <p>之前为了更好地理解Java IO好好学习了装饰者模式，现在在看Junit4的时候发现太多的设计模式都需要了解，于是打算开始好好地学习下各种常用的设计模式。</p>
 <p>只掌握继承、接口、多态这些基础的面向对象知识已经不足以设计出优雅、健壮的代码。其实设计模式，说白了就是面向对象的工程师前辈们总结出来的代码组织方式，所有的设计模式都主要为了达到以下三条目的或在三者之间更好地权衡：</p>
 <ol>
 <li>可复用性（相同结构的代码最大化地共用）</li>
 <li>可扩展性（便于增加新需求）</li>
 <li>易维护性（修改某一个模块尽量不牵动或者少牵动其他模块，也成为松耦合）</li>
 </ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/20/设计模式系列（一）——-观察者模式/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java-IO设计原理——装饰者模式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/12/Java-IO设计原理——装饰者模式/" class="article-date">
-  	<time datetime="2016-07-12T14:32:11.000Z" itemprop="datePublished">2016-07-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/20/设计模式系列（一）——-观察者模式/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/12/Java-IO设计原理——装饰者模式/">Java IO设计原理——装饰者模式</a>
-    </h1>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-    <div class="article-entry" itemprop="articleBody">
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/12/Java-IO设计原理——装饰者模式/" itemprop="url">
+                  Java IO设计原理——装饰者模式
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T22:32:11+08:00">
+                2016-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/12/Java-IO设计原理——装饰者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/12/Java-IO设计原理——装饰者模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
+      
+
+      
+        
+          <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
 <p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/12/Java-IO设计原理——装饰者模式/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-浅谈java-反射机制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/06/浅谈java-反射机制/" class="article-date">
-  	<time datetime="2016-07-06T07:08:32.000Z" itemprop="datePublished">2016-07-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/12/Java-IO设计原理——装饰者模式/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/06/浅谈java-反射机制/">浅谈java反射机制</a>
-    </h1>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-    <div class="article-entry" itemprop="articleBody">
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/06/浅谈java-反射机制/" itemprop="url">
+                  浅谈java反射机制
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-06T15:08:32+08:00">
+                2016-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/06/浅谈java-反射机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/06/浅谈java-反射机制/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
+      
+
+      
+        
+          <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
 <p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/06/浅谈java-反射机制/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-java中对象的初始化" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/01/java中对象的初始化/" class="article-date">
-  	<time datetime="2016-07-01T09:19:50.000Z" itemprop="datePublished">2016-07-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/06/浅谈java-反射机制/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/01/java中对象的初始化/">java中对象的初始化</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。<br>
       
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
 
+    <div>
       
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/01/java中对象的初始化/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C语言提升代码复用性的一点思考-——-void-和回调函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" class="article-date">
-  	<time datetime="2016-06-24T03:05:53.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
+    <div>
+      
     </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-  <div class="article-inner">
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/01/java中对象的初始化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/">C语言提升代码复用性的一点思考 —— void*和回调函数</a>
-    </h1>
-  
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/01/java中对象的初始化/" itemprop="url">
+                  java中对象的初始化
+                </a>
+              
+            
+          </h2>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-01T17:19:50+08:00">
+                2016-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/01/java中对象的初始化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/01/java中对象的初始化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
-      
     
-    <div class="article-entry" itemprop="articleBody">
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。<br>
+      
+
+      
+        
+          <p>java中对象的操作是通过对象引用来实现的，dog dog1 = new dog() 这句语句的背后究竟发生了什么，初始化工作是怎样进行的呢？dog1就是作为对象引用存放在栈中，与C++中的指针类似，不过省去了操作指针带来的各种头疼的问题，new dog()首先会在堆中申请内存空间，并将其置空，接下来执行无参构造器中的语句进行初始化工作。在java中初始化过程通常在类的构造器中进行，当然你也可以自己写一个init函数然后调用，但通常少见。其中初始化中涉及到了一些细节在这里记录下来。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/01/java中对象的初始化/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    
-    <div class="article-info article-info-index">
+
+    <div>
       
+    </div>
+
+    <div>
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
-	</div>
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
 
       
 
       
-        <p class="article-more-link">
-          <a  href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/#more">more >></a>
-        </p>
+
       
-      <div class="clearfix"></div>
-    </div>
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" itemprop="url">
+                  C语言提升代码复用性的一点思考 —— void*和回调函数
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-24T11:05:53+08:00">
+                2016-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>函数指针在本质上与其他基本类型的指针其实是一样的，只不过长得更加复杂，让初学者望而生畏，下面我来分析讲解下函数指针和回调函数。如果你能耐心看完，相信对你理解它们一定大有帮助。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg"
+               alt="惠友" />
+          <p class="site-author-name" itemprop="name">惠友</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jianghuiyou" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/%E6%83%A0%E5%8F%8B-%E5%A7%9C-3b3631105?trk=nav_responsive_tab_profile_pic" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  Linkedin
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">惠友</span>
 </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2017 惠友
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
-    </div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
+  </div>
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
 
 
 
 
 
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
 
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
+  MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 </script>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+
+    
+
+  
 
 
-  </div>
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
