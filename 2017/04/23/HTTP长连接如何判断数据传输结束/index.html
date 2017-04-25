@@ -139,7 +139,12 @@ KeepAlive属于HTTP头部Connection字段，即Connection:">
 
 
 
-  <title>HTTP长连接如何判断数据传输结束 | 惠友</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>HTTP长连接如何判断数据传输结束 | 惠友</title>
+  <script type="text/javascript">
+    var host = "jianghuiyou.com";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -746,7 +751,7 @@ KeepAlive属于HTTP头部Connection字段，即Connection:">
   
 
     
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+      <script id="dsq-count-scr" src="https://huiyou.disqus.com/count.js" async></script>
     
 
     
@@ -757,27 +762,10 @@ KeepAlive属于HTTP头部Connection字段，即Connection:">
           this.page.title = 'HTTP长连接如何判断数据传输结束';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
+        s.src = 'https://huiyou.disqus.com/embed.js';
         s.setAttribute('data-timestamp', '' + +new Date());
         (d.head || d.body).appendChild(s);
-      </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+      </script>
     
 
   
@@ -803,10 +791,6 @@ KeepAlive属于HTTP头部Connection字段，即Connection:">
 
 
 
-  
-
-
-
 
 
 
@@ -819,8 +803,42 @@ KeepAlive属于HTTP头部Connection字段，即Connection:">
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
 
   
+  
+
 
   
 
