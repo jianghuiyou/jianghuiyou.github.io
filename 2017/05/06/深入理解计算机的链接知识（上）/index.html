@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,28 +90,21 @@
 
 
 
-<meta name="description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
-Joiner 字符串拼接工具
-可以设置跳过null选项，否则抛出异常。
-接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
-链式语法，Joiner对">
+<meta name="description" content="本篇文章是在阅读CSAPP（深入理解计算机系统）这本经典著作第七章链接之后的概要记录，大家有空的话还是建议去阅读原书链接这章，如果想做到真正地深入理解计算机链接，还需要去阅读《编译原理》原书，并尝试去实现自己的编译器、链接器。
+链接其实像是拼图，将各个子图拼凑在一起，最终生成一个完整清晰的大图，也就是可执行目标文件，最终这个文件可以被加载器加载到内存中，从而其中的代码可以得到执行来实现想要的功能。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Guava库学习记录（一）———String">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/index.html">
+<meta property="og:title" content="深入理解计算机的链接知识（上）">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/05/06/深入理解计算机的链接知识（上）/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
-Joiner 字符串拼接工具
-可以设置跳过null选项，否则抛出异常。
-接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
-链式语法，Joiner对">
-<meta property="og:updated_time" content="2017-04-24T11:55:18.000Z">
+<meta property="og:description" content="本篇文章是在阅读CSAPP（深入理解计算机系统）这本经典著作第七章链接之后的概要记录，大家有空的话还是建议去阅读原书链接这章，如果想做到真正地深入理解计算机链接，还需要去阅读《编译原理》原书，并尝试去实现自己的编译器、链接器。
+链接其实像是拼图，将各个子图拼凑在一起，最终生成一个完整清晰的大图，也就是可执行目标文件，最终这个文件可以被加载器加载到内存中，从而其中的代码可以得到执行来实现想要的功能。">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E7%BC%96%E8%AF%91.jpeg">
+<meta property="og:updated_time" content="2017-05-06T13:33:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Guava库学习记录（一）———String">
-<meta name="twitter:description" content="Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。
-Joiner 字符串拼接工具
-可以设置跳过null选项，否则抛出异常。
-接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。
-链式语法，Joiner对">
+<meta name="twitter:title" content="深入理解计算机的链接知识（上）">
+<meta name="twitter:description" content="本篇文章是在阅读CSAPP（深入理解计算机系统）这本经典著作第七章链接之后的概要记录，大家有空的话还是建议去阅读原书链接这章，如果想做到真正地深入理解计算机链接，还需要去阅读《编译原理》原书，并尝试去实现自己的编译器、链接器。
+链接其实像是拼图，将各个子图拼凑在一起，最终生成一个完整清晰的大图，也就是可执行目标文件，最终这个文件可以被加载器加载到内存中，从而其中的代码可以得到执行来实现想要的功能。">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E7%BC%96%E8%AF%91.jpeg">
 
 
 
@@ -139,13 +132,13 @@ Joiner 字符串拼接工具
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/05/06/深入理解计算机的链接知识（上）/"/>
 
 
 
 
 
-  <title>Guava库学习记录（一）———String | 惠友</title>
+  <title>深入理解计算机的链接知识（上） | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -299,7 +292,7 @@ Joiner 字符串拼接工具
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/05/06/深入理解计算机的链接知识（上）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -320,7 +313,7 @@ Joiner 字符串拼接工具
             
             
               
-                Guava库学习记录（一）———String
+                深入理解计算机的链接知识（上）
               
             
           </h2>
@@ -335,8 +328,8 @@ Joiner 字符串拼接工具
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-06T10:50:18+08:00">
-                2016-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T21:29:17+08:00">
+                2017-05-06
               </time>
             
 
@@ -376,9 +369,9 @@ Joiner 字符串拼接工具
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/09/06/Guava库学习记录（一）———String/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/06/深入理解计算机的链接知识（上）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/06/Guava库学习记录（一）———String/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/06/深入理解计算机的链接知识（上）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -403,26 +396,20 @@ Joiner 字符串拼接工具
       
 
       
-        <p>Guava是谷歌基于原生JDK进行封装而成的工具库，为了让java开发变得更加优雅高效，而Apache的commons库也是类似的工具库，不过在接口规范度和社区活跃度都略逊一筹。废话不多说，先从开发中最常用的String方向着手。</p>
-<h4 id="Joiner-字符串拼接工具"><a href="#Joiner-字符串拼接工具" class="headerlink" title="Joiner 字符串拼接工具"></a>Joiner 字符串拼接工具</h4><ul>
-<li>可以设置跳过null选项，否则抛出异常。</li>
-<li>接收的参数可以是字符串数组，多个可变数量的字符串，迭代器接口的字符串。</li>
-<li>链式语法，Joiner对象是不可变的。</li>
+        <p>本篇文章是在阅读CSAPP（深入理解计算机系统）这本经典著作第七章链接之后的概要记录，大家有空的话还是建议去阅读原书链接这章，如果想做到真正地深入理解计算机链接，还需要去阅读《编译原理》原书，并尝试去实现自己的编译器、链接器。</p>
+<p>链接其实像是拼图，将各个子图拼凑在一起，最终生成一个完整清晰的大图，也就是可执行目标文件，最终这个文件可以被加载器加载到内存中，从而其中的代码可以得到执行来实现想要的功能。那么一个源代码文本文件是最终如何变成一个可执行目标文件的呢？这里我们以GNU编译系统，也就是我们常用的gcc操作c语言，具体的过程如下图。<br><img src="http://oa576fej8.bkt.clouddn.com/%E7%BC%96%E8%AF%91.jpeg" alt="过程详情"><br><a id="more"></a></p>
+<ul>
+<li>预编译：这个过程主要是对头文件以及各种宏的处理，比如头文件引入了<code>stdio.h</code>，便会将这个.h文件全部替换到<code>#include&lt;stdio.h&gt;</code>位置上，所以.i文件通常要更大一些。</li>
+<li>编译： 这个过程是将.i文件变成汇编代码，汇编就是最接近计算机指令的编程语言</li>
+<li>汇编： 汇编代码经过汇编转换成可重定位目标文件,以.o为后缀的，这些就是拼图中的各个子图。注意这个时候文件就开始变成了人类无法阅读的二进制文件，而在上面过程中的文件都是ASCII文本文件。</li>
+<li>链接： 链接器将各个可重定位目标文件组装成最后的可执行目标文件,这个过程也较为复杂，包括符号解析和重定位的过程，这里举得例子也只是静态链接的过程。</li>
 </ul>
-<a id="more"></a>
-<p>代码示例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Joiner joiner = Joiner.on(<span class="string">"; "</span>).skipNulls();</div><div class="line">String joinRes = joiner.join(<span class="string">"Marry"</span>, <span class="string">"Sam"</span>, <span class="keyword">null</span>, <span class="string">"John"</span>);</div><div class="line">System.out.println(joinRes);<span class="comment">//输出 Marry; Sam; John</span></div></pre></td></tr></table></figure></p>
-<h4 id="Splitter-字符串分割工具"><a href="#Splitter-字符串分割工具" class="headerlink" title="Splitter 字符串分割工具"></a>Splitter 字符串分割工具</h4><ul>
-<li>灵活配置，功能强大。on方法调用可以按照单个字符、字符模式CharMatcher(后面会讲到)，正则表达式、字符串、固定长度进行分割，还可以对分割结果进行针对性的trim，例如裁剪掉空格、裁剪某类字符等等。</li>
-<li>返回结果可以是List<string>（调用方法splitToList），也可以是Iterable<string>（调用方法split）</string></string></li>
-<li>可以忽略结果集中的空选项（调用omitEmptyStrings方法）<br>代码示例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Iterable&lt;String&gt; iterable = Splitter.on(<span class="string">","</span>).omitEmptyStrings().trimResults().split(<span class="string">"foo,bar,,   qux"</span>);</div><div class="line"><span class="comment">//Iterable&lt;String&gt; iterable = Splitter.on(",").omitEmptyStrings().trimResults(CharMatcher.is('_')).split("foo_,bar_,,_qux");与上结果相同</span></div><div class="line">Iterator&lt;String&gt; it = iterable.iterator();</div><div class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">    String s = it.next();</div><div class="line">    System.out.println(s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="CharMatcher-选定某种特种的字符集，并可进行操作"><a href="#CharMatcher-选定某种特种的字符集，并可进行操作" class="headerlink" title="CharMatcher 选定某种特种的字符集，并可进行操作"></a>CharMatcher 选定某种特种的字符集，并可进行操作</h4><ul>
-<li>CharMatcher代表某类字符，比如空白字符、大写字符、数字字符、或者字符串中的任意一种（anyof(“aeiou”)代表元音字符）、某一种固定字符(is方法)。这是选定特征字符过程</li>
-<li>在选定之后通常要进行某些操作，例如上面提到的按此特征分割字符串（Splitter）、替换replaceFrom、保留retainFrom、裁边trimFrom、移除removeFrom等等。<br>代码示例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String string = <span class="string">"  231f+12`43d31"</span>;</div><div class="line">String theDigits = CharMatcher.DIGIT.retainFrom(string); <span class="comment">//仅仅保留数字</span></div><div class="line">String spaced = CharMatcher.WHITESPACE.trimFrom(string);<span class="comment">// 裁掉首尾空格</span></div><div class="line">String noDigits = CharMatcher.JAVA_DIGIT.replaceFrom(string, <span class="string">"*"</span>); <span class="comment">// 把所有数字替换成*</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>此外，还有<strong>Charsets</strong>类内部有常见的编码格式，<strong>CaseFormat</strong>类可以变换不同的代码命名风格。由于并不常用此处不赘述。</p>
+<p>在Unix/Linux系统中除了上面以及提到可重定位目标文件和可执行目标文件，还有一种可共享目标文件，这个是用在动态链接中，后面会再介绍。而这三种目标文件都是使用ELF（Executeble and Linkable Format）形式存在，通常包括ELF头部, .data, .text, .symtab, .bss等字段构成的，有兴趣可以通过<code>readelf</code>指令对目标文件进行详细分析。</p>
+<h3 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h3><p>符号解析的过程就是将符号的定义与引用关联起来，比如定义一个全局变量<code>int a = 1</code>，在此目标文件中引用a的符号需要与其定义关联上才能以数值1进行操作，如果在其他目标文件中需要引入这个全局变量，则需要在那个目标文件引用a执行进行外部声明<code>extern int a;</code>，这时候链接器依然会将这两个目标文件中的a符号的定义和引用关联起来。</p>
+<p>每一个目标文件都有一个属于自己的符号表，也就是上面提到的ELF格式中的.symtab段，可以用命令<code>readelf -s object_file</code>来查阅。其中既包括全局变量、全局函数，也包括静态的全局变量、全局函数，还有静态的局部变量，而那些非静态的局部变量是要存放到栈中。这里的静态就是指用static关键字进行修饰过的，C语言中的static主要作用是对访问权限的控制，比如经过static修饰过的全局变量只能在此目标文件中被引用，而再也不能被其他目标文件引用，这也增强了安全性。</p>
+<p>如果在符号解析过程中，一个符号的引用在所有的目标文件中都没有找到其定义，就会输出一条常见的错误信息并终止链接过程。<code>undefined reference to variable</code></p>
+<h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h3><p>因为程序最后是要被加载到内存中执行的，所以所有的代码以及数据都需要有一个内存地址，这里的地址通常指的是该程序的虚拟地址，而不是真正在物理内存中的地址，最终还会有一个操作系统层面的虚拟地址到物理地址的映射。而每一个符号，每一段代码找到自己在整个进程地址空间中的位置，将所有相同符号的引用到指向特定的内存地址，这就是重定位过程要进行的事情。</p>
+<p>这篇文章先总结到这里，下次我们会对静态库以及动态库进行介绍。</p>
 
       
     </div>
@@ -452,7 +439,7 @@ Joiner 字符串拼接工具
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
           
         </div>
       
@@ -465,8 +452,8 @@ Joiner 字符串拼接工具
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/28/认知观念决定我们的成长速度/" rel="next" title="认知观念决定我们的成长速度">
-                <i class="fa fa-chevron-left"></i> 认知观念决定我们的成长速度
+              <a href="/2017/04/23/HTTP长连接如何判断数据传输结束/" rel="next" title="HTTP长连接如何判断数据传输结束">
+                <i class="fa fa-chevron-left"></i> HTTP长连接如何判断数据传输结束
               </a>
             
           </div>
@@ -474,10 +461,6 @@ Joiner 字符串拼接工具
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/28/前端技术以及工具总结/" rel="prev" title="前端技术以及工具总结">
-                前端技术以及工具总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -633,7 +616,7 @@ Joiner 字符串拼接工具
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Joiner-字符串拼接工具"><span class="nav-number">1.</span> <span class="nav-text">Joiner 字符串拼接工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Splitter-字符串分割工具"><span class="nav-number">2.</span> <span class="nav-text">Splitter 字符串分割工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CharMatcher-选定某种特种的字符集，并可进行操作"><span class="nav-number">3.</span> <span class="nav-text">CharMatcher 选定某种特种的字符集，并可进行操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号解析"><span class="nav-number">1.</span> <span class="nav-text">符号解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定位"><span class="nav-number">2.</span> <span class="nav-text">重定位</span></a></li></ol></div>
             
 
           </div>
@@ -772,9 +755,9 @@ Joiner 字符串拼接工具
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2016/09/06/Guava库学习记录（一）———String/';
-          this.page.identifier = '2016/09/06/Guava库学习记录（一）———String/';
-          this.page.title = 'Guava库学习记录（一）———String';
+          this.page.url = 'http://www.jianghuiyou.com/2017/05/06/深入理解计算机的链接知识（上）/';
+          this.page.identifier = '2017/05/06/深入理解计算机的链接知识（上）/';
+          this.page.title = '深入理解计算机的链接知识（上）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';
