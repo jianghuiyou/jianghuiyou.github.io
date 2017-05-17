@@ -288,6 +288,167 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/15/深入理解计算机的链接知识（下）/" itemprop="url">
+                  深入浅出计算机链接（下）
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T14:56:36+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/15/深入理解计算机的链接知识（下）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/15/深入理解计算机的链接知识（下）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。</p>
+<h3 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h3><p>如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？</p>
+<p>第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个<code>.o</code>文件含有大量的目标函数，自然也会比较占用空间。因为一旦引用一个函数，便会将还有该函数的<code>.o</code>文件合并到可执行文件中进而存放到磁盘上，这必然带来磁盘空间的浪费；更为致命的是，一旦同样或带有同样功能模块的程序加载到内存中，每一个程序都含有该<code>.o</code>文件的副本，这也大大浪费内存空间；此外，对于模块函数稍稍的改变，需要开发人员重新编译整个源文件，维护起来也十分不方便。</p>
+<p>第二种做法就是每一个函数都单独存放在一个<code>.o</code>可执行目标文件里，而用文件路径进行这些函数功能的组织，比如<code>a1.o</code>和<code>a2.o</code>都放在<code>~/project/a/</code>目录下。这样磁盘和内存的浪费可以避免，但是在编译链接整个库函数的时候却十分冗杂，因为你需要手动将整个项目所有引用的库函数一个一个引进来，想想简直是噩梦。<br><code>$ gcc main.c ~/project/a/a1.o ~/project/a/a2.o ~/project/b/b1.o ......</code></p>
+<p>结合上面两种做法同时为了解决上面出现的问题，静态库这种技术自然就诞生了～模块函数可以单独编译汇编成独立的可重定位目标文件<code>.o</code>，然后根据大类将大量的’.o’打包封装成为一个单独的静态库文件<code>.a</code>，而在链接的时候linker仅仅将程序引用的目标模版合并到最终的可执行文件中。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/15/深入理解计算机的链接知识（下）/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/05/06/深入理解计算机的链接知识（上）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -311,7 +472,7 @@
               
                 
                 <a class="post-title-link" href="/2017/05/06/深入理解计算机的链接知识（上）/" itemprop="url">
-                  深入理解计算机的链接知识（上）
+                  深入浅出计算机链接（上）
                 </a>
               
             
@@ -1029,7 +1190,7 @@
 
       
         
-          <h2 id="回顾2016"><a href="#回顾2016" class="headerlink" title="回顾2016"></a><strong>回顾2016</strong></h2><h4 id="1-学习工作方面"><a href="#1-学习工作方面" class="headerlink" title="1. 学习工作方面"></a><strong>1. 学习工作方面</strong></h4><p>2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了坚定目标的人是多么可怕啊，哈哈！2016自己也来到一个叫做编程猫的温馨团队学习技术，从前端到后端对整个技术体系有了更为全面的了解。<br>
+          <h2 id="回顾2016"><a href="#回顾2016" class="headerlink" title="回顾2016"></a><strong>回顾2016</strong></h2><h4 id="1-学习工作方面"><a href="#1-学习工作方面" class="headerlink" title="1. 学习工作方面"></a><strong>1. 学习工作方面</strong></h4><p>2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了目标和执行的人是多么可怕啊!<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/12/31/回看2016，展望2017/#post.more" rel="contents">
@@ -1711,164 +1872,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/08/28/认知观念决定我们的成长速度/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/28/认知观念决定我们的成长速度/" itemprop="url">
-                  认知观念决定我们的成长速度
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-28T20:35:21+08:00">
-                2016-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/28/认知观念决定我们的成长速度/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/28/认知观念决定我们的成长速度/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>先说点题外话。这几天刚刚来到南国清华报道便开始准备筹备自己的实习计划，先后面了两三家公司。特别幸运面试当中遇到都是特别nice的前辈。今天更加神奇的是，公司的创始人也是北邮的直系学长，孙悦大师兄直接邀请我过去和他聊聊天认识一下，真的是收获颇多！</p>
-<p>谈谈最近几天一个最大的感受吧！这个来源于和几位前辈的聊天和听《逻辑思维》节目得到的启迪，认知观念决定我们的成长速度！<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/28/认知观念决定我们的成长速度/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1918,7 +1921,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
