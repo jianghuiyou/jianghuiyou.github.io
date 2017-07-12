@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法," />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,16 +90,18 @@
 
 
 
-<meta name="description" content="首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。">
+<meta name="description" content="该文章为阅读CSAPP系统级IO篇章之后的总结，记录下一些基础概念和理解，但并不会逐一介绍每一个系统级IO函数的使用方法。I/O即input/output在计算机中通常表示从IO设备读数据到内存以及从内存写数据到IO设备，这里的IO设备既可以是磁盘、网卡，也可以是打印机、显示屏、键盘等。那系统级IO又是Unix操作系统位用户态应用程序提供的系统调用API，但我们通常用C语言编程使用的是在系统IO上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典排序算法分析">
-<meta property="og:url" content="http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/index.html">
+<meta property="og:title" content="深入浅出Unix系统级IO（上）">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/06/12/深入浅出Unix系统级IO（上）/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。">
-<meta property="og:updated_time" content="2017-04-24T11:54:50.000Z">
+<meta property="og:description" content="该文章为阅读CSAPP系统级IO篇章之后的总结，记录下一些基础概念和理解，但并不会逐一介绍每一个系统级IO函数的使用方法。I/O即input/output在计算机中通常表示从IO设备读数据到内存以及从内存写数据到IO设备，这里的IO设备既可以是磁盘、网卡，也可以是打印机、显示屏、键盘等。那系统级IO又是Unix操作系统位用户态应用程序提供的系统调用API，但我们通常用C语言编程使用的是在系统IO上">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E7%B3%BB%E7%BB%9F%E7%BA%A7IO.jpeg">
+<meta property="og:updated_time" content="2017-07-12T15:30:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典排序算法分析">
-<meta name="twitter:description" content="首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。">
+<meta name="twitter:title" content="深入浅出Unix系统级IO（上）">
+<meta name="twitter:description" content="该文章为阅读CSAPP系统级IO篇章之后的总结，记录下一些基础概念和理解，但并不会逐一介绍每一个系统级IO函数的使用方法。I/O即input/output在计算机中通常表示从IO设备读数据到内存以及从内存写数据到IO设备，这里的IO设备既可以是磁盘、网卡，也可以是打印机、显示屏、键盘等。那系统级IO又是Unix操作系统位用户态应用程序提供的系统调用API，但我们通常用C语言编程使用的是在系统IO上">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E7%B3%BB%E7%BB%9F%E7%BA%A7IO.jpeg">
 
 
 
@@ -127,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/06/12/深入浅出Unix系统级IO（上）/"/>
 
 
 
 
 
-  <title>经典排序算法分析 | 惠友</title>
+  <title>深入浅出Unix系统级IO（上） | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -287,7 +289,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/06/12/深入浅出Unix系统级IO（上）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -308,7 +310,7 @@
             
             
               
-                经典排序算法分析
+                深入浅出Unix系统级IO（上）
               
             
           </h2>
@@ -323,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:00:21+08:00">
-                2017-03-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-12T23:28:59+08:00">
+                2017-06-12
               </time>
             
 
@@ -364,9 +366,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/26/经典排序算法分析/#comments" itemprop="discussionUrl">
+                <a href="/2017/06/12/深入浅出Unix系统级IO（上）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/26/经典排序算法分析/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/06/12/深入浅出Unix系统级IO（上）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,20 +393,13 @@
       
 
       
-        <p>首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。<br>这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。这类排序算法的渐进下确界是 \(\Omega(nlgn)\)，可以使用决策树模型来进行证明，决策树是一个完全二叉树，\(n\)个数共有\(n!\)个排列方式，对应的叶子结点也至少要有\(n!\)个，而最坏的比较次数对应这个决策树的高度 \(l\) ，由此可得 \(n!\le l<br>\le 2^h\)。两边取对数之后可得\(h \ge log(n!) = \Omega(nlgn)\)。更加详细的证明过程以及各种渐进界的介绍请参考算法导论。</p>
+        <p>该文章为阅读CSAPP系统级IO篇章之后的总结，记录下一些基础概念和理解，但并不会逐一介绍每一个系统级IO函数的使用方法。I/O即input/output在计算机中通常表示从IO设备读数据到内存以及从内存写数据到IO设备，这里的IO设备既可以是磁盘、网卡，也可以是打印机、显示屏、键盘等。那系统级IO又是Unix操作系统位用户态应用程序提供的<strong>系统调用API</strong>，但我们通常用C语言编程使用的是在系统IO上封装的更加高级的<strong>标准IO库</strong>以及在网络编程中使用的为了防止漏读漏写问题更加健壮的<strong>RIO自定义接口</strong>。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/%E7%B3%BB%E7%BB%9F%E7%BA%A7IO.jpeg" alt="此处输入图片的描述"></p>
 <a id="more"></a>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序时间复杂度\(O(n^2)\)，也是稳定排序。这些大家可能已经耳朵都听出茧了，但是扪心自问一下真的会推导时间复杂度嘛？真的理解一个排序如何去判断稳定性嘛？复杂度的推导参考算法导论自己尝试去推导一下，稳定性也是指代码实现中对于相同大小元素是否会被打乱原有的前后顺序。<br>插入排序的具体实现和代码就不在此赘述，可能大家会想这个时间复杂度最差劲的算法肯定没有什么用，其实不然。每一种算法在特定的场景下都会发挥出其独特的优势，比如对于插入排序，如果待排序的序列是相对有序的以及序列的数目相对较小，那么它的时间复杂度就会非常好接近线性的。所以在STL的sort算法设计中，当我们使用其他更加高级的快速排序和堆排序之后保证序列已经接近有序的时候，再次使用插入排序会达到更佳通用更加快速的内省式排序算法，这也是插入排序一个很重要的用法，在此推荐一篇对STL中排序算法分析的文章。<a href="http://feihu.me/blog/2014/sgi-std-sort/" target="_blank" rel="external">http://feihu.me/blog/2014/sgi-std-sort/</a></p>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序应该是所有排序里最经典、应用最广泛、也是面试笔试最容易碰到的排序算法.那么排序算法究竟快在哪里，是什么优点让它在平均时间复杂度上优于其他的排序算法呢？</p>
-<ol>
-<li><strong>原址排序</strong> 也就是快速排序空间复杂度是常系数，并不像归并排序需要辅助空间来完成排序过程，原址的优势让它在数据集较大规模的时候节省更多的内存。</li>
-<li><strong>局部性引用</strong> 这个名字很晦涩难懂，这是相比于堆排序来讲快排所具有的优势。在计算机系统结构的存储模型中，CPU读取内存中的数据时候，通常内存中的一段连续的数据会被缓存到CPU的cache中，这种缓存存在于各种有较大访问速度差距的存储模型之间，而相对连续的随机内存访问会直接从cache中访问得到，而堆排序的实现中常常出现较大距离的随机访问，例如出现交换<code>a[0]</code>和<code>a[length-1]</code>或者<code>a[i/2]</code>这类的访问，这拖慢了访问数据的效率。</li>
-<li><strong>较好的平均时间复杂度</strong> 同样为\(O(nlgn)\)，但是快排前面的常系数通常会更小，这是因为快排划分的方式将划分点通过一次划分移动到最终排序的位置，并且也同时缩小了其他元素移动的范围，而平均复杂度前面的常系数就是取决于比较元素和移动元素的总次数。</li>
-<li><strong>最坏情况可以尽量避免</strong> 这里也是快速排序如何进行<strong>优化</strong>的关键切入点。我们知道快排在输入序列非常接近有序的时候，时间复杂度会退化成\(O(n^2)\)，主要是因为划分时候出现\(T(1)和T(n-1)\)的极度不平衡。这通常可以使用随机化划分点位置的方法或者取<code>a[p]</code>、<code>a[r]</code>和<code>a[(r - p) / 2]</code>的中位数来当作划分key来避免每次取到极值。除此之外的优化思路呢，既然插入排序擅长排序相对有序的序列，那么我们可以改变快排的递归终止条件从<code>if(p &lt; q)</code>到<code>if(p &lt; q - threshold)</code>，这个阈值通常是一个较小的常数（STL里取的是16），这样经过快排之后的序列变成了一段一段的相对有序序列，段之间是有序的，段内并不有序。此时，再将序列经过插入排序便可以实现更加优化的快速排序。至于更加深度的优化，大家感兴趣的依然可以参考<a href="http://feihu.me/blog/2014/sgi-std-sort/" target="_blank" rel="external">STL中sort的实现</a>，可以看到STL各种细节上的优化，真是无所不用其极！</li>
-</ol>
-<p>此外，快速排序代码实现上的精髓也就在partition函数这部分，如何实现划分实际上是有两种方法。一个叫做Hoare划分，也就是我们在严蔚敏教材中看到的从两端到中间进行扫描的方法，伪代码如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Hoare-Partition(A, p, r)</div><div class="line">x = A[p]</div><div class="line">i = p - <span class="number">1</span></div><div class="line">j = r + <span class="number">1</span></div><div class="line"><span class="keyword">while</span> <span class="literal">true</span></div><div class="line">    repeat</div><div class="line">        j = j - <span class="number">1</span></div><div class="line">    until A[j] &lt;= x</div><div class="line">    repeat</div><div class="line">        i = i + <span class="number">1</span></div><div class="line">    until A[i] &gt;= x</div><div class="line">    <span class="keyword">if</span> i &lt; j</div><div class="line">        swap(A[i], A[j])</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> j</div></pre></td></tr></table></figure></p>
-<p>而另外一种是从开始进行扫描同样是two pointer，这种方式被称作Lomuto划分，算法导论中采用的是这种方法，伪代码如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Lomuto-Partition(A, p, r)</div><div class="line">x = A[r]</div><div class="line">i = p - <span class="number">1</span></div><div class="line"><span class="keyword">for</span> j = p to r - <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> A[j] &lt;= x</div><div class="line">        i = i + <span class="number">1</span></div><div class="line">        swap(A[i], A[j])</div><div class="line">swap(A[i+<span class="number">1</span>], A[r])</div><div class="line"><span class="keyword">return</span> i + <span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>Lomuto实现起来更加简单方便，但是标准库中的实现通常采用Hoare方法，即两端向中间扫描，因为它具有更少的比较次数，也就是具有更好地效率，在此不予推导证明。</p>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<p>Unix系统的重要哲学之一就是一切皆文件，其中包括普通的文件、目录、网络编程中的socket、进程间通信的有名管道FIFO、类似window快捷方式的符号链接（也叫软链接），各种硬件IO设备等等。操作系统是通过虚拟文件系统抽象层来实现对这些事物的统一管理并且可以管理不同的文件系统，例如ext2、ext3、ntfs等。</p>
+<p>在read和write系统调用中，如果实际读写的数据量小于输入参数的<code>size_t len</code>，就会直接返回已经读写的数据量大小，或者遇到文件结束EOF返回0。这在网络通信中很可能因为网络延迟或缓冲区大小的限制造成读写数据的不完整，所以通常在这类读写文件情况下（包括从终端读文本行、网络编程读写、linux管道的读写等）反复调用read或write将len大小的数据全部读写完成或者直到遇到EOF才结束，这在《Unix网络编程卷1》中存在着同样的实现。在此仅以读为例，首先实现无缓冲的更加健壮的rio_readn函数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> rio_readn(<span class="keyword">int</span> fd, <span class="keyword">void</span> *usrbuf, <span class="keyword">size_t</span> n) </div><div class="line">&#123;</div><div class="line">    <span class="keyword">size_t</span> nleft = n;</div><div class="line">    <span class="keyword">ssize_t</span> nread;</div><div class="line">    <span class="keyword">char</span> *bufp = usrbuf;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (nleft &gt; <span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">if</span> ((nread = read(fd, bufp, nleft)) &lt; <span class="number">0</span>) &#123;</div><div class="line">	    <span class="keyword">if</span> (errno == EINTR) <span class="comment">/* 如果被其他信号中断读写，依然可以返回重新read */</span></div><div class="line">		nread = <span class="number">0</span>;</div><div class="line">	    <span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;      <span class="comment">/* read发生错误 */</span> </div><div class="line">	&#125; </div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (nread == <span class="number">0</span>)</div><div class="line">	    <span class="keyword">break</span>;              <span class="comment">/* 遇到EOF读结束，并跳出循环返回0 */</span></div><div class="line">	nleft -= nread;</div><div class="line">	bufp += nread;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> (n - nleft);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里有个细节<code>ssize_t</code>和<code>size_t</code>结构体的区别是前者是一个long类型，因为可以返回-1代表出错；而<code>size_t</code>是一个无符号整形，因为数据大小一定是一个非负整数。</p>
+<p>read、write一旦调用既需要陷入内核进行上下文切换又需要进行相对耗时的磁盘IO读写，所以从磁盘读取相同大小的数据尽可能更少次地调用read系统调用就显得尤为关键，比如通过判断字符’\n’来统计一个文本文件中文本行的行数，不可能一次只读取一个字符吧，这太耗时了吧。这时候就需要一个带有缓冲区的rio_read，先自定义一个结构体rio_t来存放读取相关信息，而其中的rio_buf字符数组就作为一个缓冲区。一旦缓冲区空，则调用read()来读取尽可能多的数据到缓冲区；缓冲区有数据则优先从缓冲区中拷贝数据到用户的buffer中。代码如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RIO_BUFSIZE 8192</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">int</span> rio_fd;    <span class="comment">//读文件的描述符</span></div><div class="line">    <span class="keyword">int</span> rio_cnt;    <span class="comment">//未被读取的个数</span></div><div class="line">    <span class="keyword">char</span> *rio_bufptr;    <span class="comment">//指向下一个未被读取的字符</span></div><div class="line">    <span class="keyword">char</span> rio_buf[RIO_BUFSIZE];    <span class="comment">//缓冲区数据</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">rio_read</span><span class="params">(<span class="keyword">rio_t</span> *rp, <span class="keyword">char</span> *usrbuf, <span class="keyword">size_t</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> cnt;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (rp-&gt;rio_cnt &lt;= <span class="number">0</span>) &#123;  <span class="comment">//代表缓冲区为空</span></div><div class="line">	rp-&gt;rio_cnt = read(rp-&gt;rio_fd, rp-&gt;rio_buf, </div><div class="line">			   <span class="keyword">sizeof</span>(rp-&gt;rio_buf));</div><div class="line">	<span class="keyword">if</span> (rp-&gt;rio_cnt &lt; <span class="number">0</span>) &#123;</div><div class="line">	    <span class="keyword">if</span> (errno != EINTR) <span class="comment">/* Interrupted by sig handler return */</span></div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (rp-&gt;rio_cnt == <span class="number">0</span>)  <span class="comment">/* EOF读取完成 */</span></div><div class="line">	    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> </div><div class="line">	    rp-&gt;rio_bufptr = rp-&gt;rio_buf; <span class="comment">/* Reset buffer ptr */</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/* 拷贝min(n, rp-&gt;rio_cnt)bytes的数据到用户buffer中 */</span></div><div class="line">    cnt = n;          </div><div class="line">    <span class="keyword">if</span> (rp-&gt;rio_cnt &lt; n)   </div><div class="line">	cnt = rp-&gt;rio_cnt;</div><div class="line">    <span class="built_in">memcpy</span>(usrbuf, rp-&gt;rio_bufptr, cnt);</div><div class="line">    rp-&gt;rio_bufptr += cnt;</div><div class="line">    rp-&gt;rio_cnt -= cnt;</div><div class="line">    <span class="keyword">return</span> cnt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -434,7 +429,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
           
         </div>
       
@@ -447,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/16/nDPI源码解析/" rel="next" title="nDPI源码解析">
-                <i class="fa fa-chevron-left"></i> nDPI源码解析
+              <a href="/2017/05/17/投资之道讲座记录————陈小红、王强/" rel="next" title="投资之道讲座记录————陈小红、王强">
+                <i class="fa fa-chevron-left"></i> 投资之道讲座记录————陈小红、王强
               </a>
             
           </div>
@@ -456,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/23/HTTP长连接如何判断数据传输结束/" rel="prev" title="HTTP长连接如何判断数据传输结束">
-                HTTP长连接如何判断数据传输结束 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -513,17 +504,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg"
@@ -605,22 +587,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">2.</span> <span class="nav-text">快速排序</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -754,9 +720,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/';
-          this.page.identifier = '2017/03/26/经典排序算法分析/';
-          this.page.title = '经典排序算法分析';
+          this.page.url = 'http://www.jianghuiyou.com/2017/06/12/深入浅出Unix系统级IO（上）/';
+          this.page.identifier = '2017/06/12/深入浅出Unix系统级IO（上）/';
+          this.page.title = '深入浅出Unix系统级IO（上）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';
