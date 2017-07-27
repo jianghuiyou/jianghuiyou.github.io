@@ -288,6 +288,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/10/30/JavaScript中this用法解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/30/JavaScript中this用法解析/" itemprop="url">
+                  JavaScript中this用法解析
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-30T17:22:15+08:00">
+                2016-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/30/JavaScript中this用法解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/30/JavaScript中this用法解析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>this在其他面向对象语言（java、c#）中经常见到，但在js里有些不同。this通常是出现在函数中，当一个函数被调用的时候，该函数的执行环境中会自动产生一个this变量～注意：<strong>this是运行时根据函数调用模式的不同而动态绑定的</strong>，而非编译期静态定义的。this有以下四种不同的函数调用模式。</p>
+<h4 id="1-方法调用模式"><a href="#1-方法调用模式" class="headerlink" title="1.方法调用模式"></a>1.方法调用模式</h4><p>当函数作为一个对象的属性而存在时，也可称之为方法。当此方法被调用的时候，this绑定的就是拥有该方法的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> object = &#123;</div><div class="line">    x: <span class="number">1</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">let</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line">object.m = func;</div><div class="line">object.m(); <span class="comment">//函数func作为object对象的一个方法</span></div></pre></td></tr></table></figure></p>
+<h4 id="2-函数调用模式（重点-）"><a href="#2-函数调用模式（重点-）" class="headerlink" title="2.函数调用模式（重点!）"></a>2.函数调用模式（重点!）</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/30/JavaScript中this用法解析/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/09/28/前端技术以及工具总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1715,164 +1874,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/06/浅谈java-反射机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/06/浅谈java-反射机制/" itemprop="url">
-                  浅谈java反射机制
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-06T15:08:32+08:00">
-                2016-07-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/06/浅谈java-反射机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/06/浅谈java-反射机制/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在介绍反射机制之前，先说下class对象，每一个JDK类或者自定义的类都有属于自己这个类的class对象，这个对象同时也是java.lang.class这个类的对象，而这些class对象的作用是用来构造该类的对象。</p>
-<p>有点绕吧，举个例子吧，我自定义一个Dog类，在创建Dog类对象的时候类加载器会先检查Dog类的class对象是否已经加载到内存上，如果已经加载，并使用这个class对象来创建Dog类对象，如果未加载就去搜寻Dog.class文件去加载属于Dog类的class对象，而该class对象同时也是java.lang.class这个类的实例化对象，如下图所示。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/06/浅谈java-反射机制/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1922,7 +1923,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
