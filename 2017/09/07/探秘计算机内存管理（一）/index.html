@@ -90,22 +90,21 @@
 
 
 
-<meta name="description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
+<meta name="description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出计算机链接（下）">
-<meta property="og:url" content="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/index.html">
+<meta property="og:title" content="探秘计算机内存管理（一）">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/09/07/探秘计算机内存管理（一）/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
-<meta property="og:updated_time" content="2017-05-17T06:54:12.000Z">
+<meta property="og:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg">
+<meta property="og:updated_time" content="2017-10-07T14:21:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出计算机链接（下）">
-<meta name="twitter:description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
+<meta name="twitter:title" content="探秘计算机内存管理（一）">
+<meta name="twitter:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg">
 
 
 
@@ -133,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/09/07/探秘计算机内存管理（一）/"/>
 
 
 
 
 
-  <title>深入浅出计算机链接（下） | 惠友</title>
+  <title>探秘计算机内存管理（一） | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -293,7 +292,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/09/07/探秘计算机内存管理（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -314,7 +313,7 @@
             
             
               
-                深入浅出计算机链接（下）
+                探秘计算机内存管理（一）
               
             
           </h2>
@@ -329,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T14:56:36+08:00">
-                2017-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T22:18:13+08:00">
+                2017-09-07
               </time>
             
 
@@ -370,9 +369,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/15/深入理解计算机的链接知识（下）/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/07/探秘计算机内存管理（一）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/15/深入理解计算机的链接知识（下）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/07/探秘计算机内存管理（一）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,16 +396,65 @@
       
 
       
-        <p>上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。</p>
-<h3 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h3><p>如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？</p>
-<p>第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个<code>.o</code>文件含有大量的目标函数，自然也会比较占用空间。因为一旦引用一个函数，便会将还有该函数的<code>.o</code>文件合并到可执行文件中进而存放到磁盘上，这必然带来磁盘空间的浪费；更为致命的是，一旦同样或带有同样功能模块的程序加载到内存中，每一个程序都含有该<code>.o</code>文件的副本，这也大大浪费内存空间；此外，对于模块函数稍稍的改变，需要开发人员重新编译整个源文件，维护起来也十分不方便。</p>
-<p>第二种做法就是每一个函数都单独存放在一个<code>.o</code>可执行目标文件里，而用文件路径进行这些函数功能的组织，比如<code>a1.o</code>和<code>a2.o</code>都放在<code>~/project/a/</code>目录下。这样磁盘和内存的浪费可以避免，但是在编译链接整个库函数的时候却十分冗杂，因为你需要手动将整个项目所有引用的库函数一个一个引进来，想想简直是噩梦。<br><code>$ gcc main.c ~/project/a/a1.o ~/project/a/a2.o ~/project/b/b1.o ......</code></p>
-<p>结合上面两种做法同时为了解决上面出现的问题，静态库这种技术自然就诞生了～模块函数可以单独编译汇编成独立的可重定位目标文件<code>.o</code>，然后根据大类将大量的’.o’打包封装成为一个单独的静态库文件<code>.a</code>，而在链接的时候linker仅仅将程序引用的目标模版合并到最终的可执行文件中。<br><a id="more"></a><br>这样我们就可以通过以下的命令将项目重新编译链接<br><code>$ gcc main.c -L. -la -lb</code><br>-L. 代表linker在当前目录查找静态库，而b.a静态库就是通过<code>-lb</code>表示</p>
-<p>此外根据链接器对静态库进行符号解析的规则，通过将库放在命令行的结尾，并且如果库之间存在着依赖关系，则被依赖的库放在依赖库之后，举个例子如果libx.a中的函数有调用liby.a中的函数，即libx.a依赖liby.a，则需要在命令行中将libx.a放在liby.a之前。</p>
-<h3 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h3><p>打包之后的静态库虽然可以各取所需，但对于应用开发常用的库函数（比如<code>printf</code>这类），每一个应用程序都会将该库函数代码拷贝到自己的进程空间中，这无疑造成了较大的内存的浪费。动态链接库就是为了解决这个关键问题提出来的，它是一种更加灵活的可以在<strong>加载或运行</strong>的时候进行动态链接，这分别对应两种动态链接方式。在linux/unix系统中以so文件形式存在，也就是所谓的最后一种目标文件——共享目标文件(shared object file)，而在windows系统中就是DDL文件。</p>
-<p>加载时进行动态链接的过程具体是调用加载器将该程序的可执行文件加载到内存的时候，先运行一个动态链接器，然后通过动态链接器将动态链接库（例如<code>libc.so</code>）链接到该程序的地址空间。</p>
-<p>此外程序运行中也可以进行动态链接，这就需要在程序编写的时候调用<code>&lt;dlfcn.h&gt;</code>这个头文件中的函数接口，比如<code>dlopen</code>是打开动态链接库的接口，<code>dlsym</code>是调用动态库中某个函数的接口。</p>
-<p>动态链接库与静态库的最大区别就是静态库是将库函数拷贝到可执行文件当中，而动态链接库的可执行文件中仅仅需要维护动态库接口函数的重定位以及符号表信息，以便后来在加载或者运行的时候进行动态链接。这样显而易见动态链接技术的优点就是为系统节省内存资源。</p>
+        <p>对于软件开发中一个常见的<code>i++</code>代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。</p>
+<h4 id="1-虚拟内存"><a href="#1-虚拟内存" class="headerlink" title="1. 虚拟内存"></a>1. 虚拟内存</h4><p>虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚拟地址，操作系统会通过MMU将虚拟地址翻译成物理地址，并保证程序访问和操作物理地址的安全性，当然真实地址翻译的过程更加复杂。此外，作为当物理内存不够用或者发生缺页异常的时候，虚拟内存还需要执行相应的换入换出以便让应用程序顺利、透明地访问想要的数据。</p>
+<h4 id="2-虚拟地址空间"><a href="#2-虚拟地址空间" class="headerlink" title="2. 虚拟地址空间"></a>2. 虚拟地址空间</h4><p>所有的程序在运行的时都拥有一个私有的虚拟地址空间，其中包括代码段、数据段、堆、共享库、栈以及内核虚拟空间。x86_64 Linux虚拟地址空间结构图如下（来自《深入理解计算机系统》）<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg" alt="此处输入图片的描述"><br>这个虚拟空间并不真实存在于物理内存中，只按需才映射到真实的物理内存中。我们可以通过<code>ulimit -a</code>命令来查看用户态进程占用资源的限制。看到stack size代表用户栈的大小上限，address space代表虚拟地址空间的大小上限。</p>
+<h4 id="3-存储层次结构"><a href="#3-存储层次结构" class="headerlink" title="3. 存储层次结构"></a>3. 存储层次结构</h4><p>现代存储系统已经发展出复杂的存储结构，本文提及的存储系统如下表。CPU寄存器是最快最昂贵的存储介质，针对32位或64位的数据进行处理，TLB（Translation Lookaside Buffer）是为了加快地址翻译产生的，从它可以直接获取得到真实的物理地址，而不需要访问内存中的页表进行地址翻译。至于L1、L2、L3这三层cache都是为了加快DRAM物理内存访问而产生的SRAM存储介质，64B是cache管理的最小存储单位，通常被叫做<code>cache line</code>，在Intel Core i7中三者的大小分别是32KB、256KB、8MB，并且L3是所有核心共享的。虚拟内存就是通过页表（通常4KB）为单位来管理内存,然后通过地址翻译来拿到真实物理地址。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">存储类型</th>
+<th style="text-align:center">缓存内容</th>
+<th style="text-align:center">平均延迟（周期）</th>
+<th style="text-align:center">管理者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CPU寄存器</td>
+<td style="text-align:center">4字节/8字节</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">编译器</td>
+</tr>
+<tr>
+<td style="text-align:center">TLB</td>
+<td style="text-align:center">地址翻译</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">CPU中MMU</td>
+</tr>
+<tr>
+<td style="text-align:center">L1高速缓存</td>
+<td style="text-align:center">64字节</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">单核</td>
+</tr>
+<tr>
+<td style="text-align:center">L2高速缓存</td>
+<td style="text-align:center">64字节</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">单核</td>
+</tr>
+<tr>
+<td style="text-align:center">L3高速缓存</td>
+<td style="text-align:center">64字节</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">所有核</td>
+</tr>
+<tr>
+<td style="text-align:center">虚拟内存</td>
+<td style="text-align:center">通常4KB</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">硬件+OS</td>
+</tr>
+</tbody>
+</table>
+<p>介绍完这些概念，我们再来看看程序运行背后内存管理的秘密？</p>
+<a id="more"></a>
+<p>我们运行一个程序之前，会将文本代码编译链接成可执行文件，在链接的重定位这个过程就会为相应符号产生虚拟（逻辑）地址。（<a href="http://www.jianghuiyou.com/2017/05/06/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E9%93%BE%E6%8E%A5%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89/">详见之前关于链接的文章</a>）接下来就是如何将虚拟地址翻译成真实物理地址？</p>
+<p>为了进行访问操作的安全控制，MMU必须根据一个PTE地址块来构造对应物理地址，这个PTE的前几个标志位通常用来进行用户态/内核态、读写权限等安全控制，并且PTE在不同的计算机硬件系统中实现形式会有所不同，比如在Intel Core i7中就是以四级页表形式来构造物理地址和进行安全控制。而PTE如果存放在DRAM中，就会多一次访问内存的时间。高速缓存和TLB的引入都是为了加快地址翻译过程，L1、L2、L3高速缓存是SRAM存储结构，而TLB就是位于CPU芯片MMU模块中。</p>
+<p>CPU拿到虚拟地址之后，首先去TLB查找相应的PTE，如果TLB不命中，则去L1 cache中查找PTE，若L1命中根据换入换出算法将L1中的PTE缓存到TLB中，以便加速下次同样的地址翻译过程。而如果L1 cache也不命中，则继续查找L2 cache，并执行类似的操作，直到拿到虚拟地址相应的PTE，并在相应存储结构中缓存该PTE。</p>
+<p>操作系统会首先根据PTE的标志位对访问权限和安全进行测试，如果测试通过，则会根据虚拟地址的基址和偏移以及PTE来构造物理地址的基址和偏移，最终产生真实物理地址，这样就会从真实物理内存中拿到该物理地址的指令或数据，当然这些指令或数据也可以缓存在更高级的cache中以加速其访问。</p>
+<p>这样一个真实的指令或数据就最终到达CPU的寄存器中，并用来进行逻辑运算，程序就在取指令（数据），执行指令的循环往复中顺利地执行下去。</p>
 
       
     </div>
@@ -449,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/06/深入理解计算机的链接知识（上）/" rel="next" title="深入浅出计算机链接（上）">
-                <i class="fa fa-chevron-left"></i> 深入浅出计算机链接（上）
+              <a href="/2017/08/06/tcpcopy优化实战记录/" rel="next" title="tcpcopy优化实战记录">
+                <i class="fa fa-chevron-left"></i> tcpcopy优化实战记录
               </a>
             
           </div>
@@ -458,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/17/投资之道讲座记录————陈小红、王强/" rel="prev" title="投资之道讲座记录————陈小红、王强">
-                投资之道讲座记录————陈小红、王强 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -617,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态链接库"><span class="nav-number">1.</span> <span class="nav-text">静态链接库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接库"><span class="nav-number">2.</span> <span class="nav-text">动态链接库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-虚拟内存"><span class="nav-number">1.</span> <span class="nav-text">1. 虚拟内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-虚拟地址空间"><span class="nav-number">2.</span> <span class="nav-text">2. 虚拟地址空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-存储层次结构"><span class="nav-number">3.</span> <span class="nav-text">3. 存储层次结构</span></a></li></ol></div>
             
 
           </div>
@@ -756,9 +800,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/';
-          this.page.identifier = '2017/05/15/深入理解计算机的链接知识（下）/';
-          this.page.title = '深入浅出计算机链接（下）';
+          this.page.url = 'http://www.jianghuiyou.com/2017/09/07/探秘计算机内存管理（一）/';
+          this.page.identifier = '2017/09/07/探秘计算机内存管理（一）/';
+          this.page.title = '探秘计算机内存管理（一）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';

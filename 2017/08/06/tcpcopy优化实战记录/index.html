@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="计算机功底," />
+  <meta name="keywords" content="计算机网络," />
 
 
 
@@ -90,22 +90,16 @@
 
 
 
-<meta name="description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
+<meta name="description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出计算机链接（下）">
-<meta property="og:url" content="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/index.html">
+<meta property="og:title" content="tcpcopy优化实战记录">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
-<meta property="og:updated_time" content="2017-05-17T06:54:12.000Z">
+<meta property="og:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
+<meta property="og:updated_time" content="2017-08-07T12:29:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出计算机链接（下）">
-<meta name="twitter:description" content="上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。
-静态链接库如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？
-第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个.o文件含有大量的目标函数，自然也会比较占用">
+<meta name="twitter:title" content="tcpcopy优化实战记录">
+<meta name="twitter:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
 
 
 
@@ -133,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/"/>
 
 
 
 
 
-  <title>深入浅出计算机链接（下） | 惠友</title>
+  <title>tcpcopy优化实战记录 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -293,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -314,7 +308,7 @@
             
             
               
-                深入浅出计算机链接（下）
+                tcpcopy优化实战记录
               
             
           </h2>
@@ -329,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T14:56:36+08:00">
-                2017-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T09:33:03+08:00">
+                2017-08-06
               </time>
             
 
@@ -370,9 +364,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/15/深入理解计算机的链接知识（下）/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/06/tcpcopy优化实战记录/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/15/深入理解计算机的链接知识（下）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/06/tcpcopy优化实战记录/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,16 +391,46 @@
       
 
       
-        <p>上一次我们已经说过在linux/unix系统中整个编译、链接以及链接过程中的符号解析和重定位，这一次将重点介绍静态链接库和动态链接库，以及这两种技术出现的原因和各自的优缺点。</p>
-<h3 id="静态链接库"><a href="#静态链接库" class="headerlink" title="静态链接库"></a>静态链接库</h3><p>如果现在手头的大型项目里有非常多的模块函数，该如何将他们合理地链接入最后的可执行文件呢？</p>
-<p>第一种常见的做法就是将功能类似的函数全部都放到一个可重定位目标文件中，这样每一个<code>.o</code>文件含有大量的目标函数，自然也会比较占用空间。因为一旦引用一个函数，便会将还有该函数的<code>.o</code>文件合并到可执行文件中进而存放到磁盘上，这必然带来磁盘空间的浪费；更为致命的是，一旦同样或带有同样功能模块的程序加载到内存中，每一个程序都含有该<code>.o</code>文件的副本，这也大大浪费内存空间；此外，对于模块函数稍稍的改变，需要开发人员重新编译整个源文件，维护起来也十分不方便。</p>
-<p>第二种做法就是每一个函数都单独存放在一个<code>.o</code>可执行目标文件里，而用文件路径进行这些函数功能的组织，比如<code>a1.o</code>和<code>a2.o</code>都放在<code>~/project/a/</code>目录下。这样磁盘和内存的浪费可以避免，但是在编译链接整个库函数的时候却十分冗杂，因为你需要手动将整个项目所有引用的库函数一个一个引进来，想想简直是噩梦。<br><code>$ gcc main.c ~/project/a/a1.o ~/project/a/a2.o ~/project/b/b1.o ......</code></p>
-<p>结合上面两种做法同时为了解决上面出现的问题，静态库这种技术自然就诞生了～模块函数可以单独编译汇编成独立的可重定位目标文件<code>.o</code>，然后根据大类将大量的’.o’打包封装成为一个单独的静态库文件<code>.a</code>，而在链接的时候linker仅仅将程序引用的目标模版合并到最终的可执行文件中。<br><a id="more"></a><br>这样我们就可以通过以下的命令将项目重新编译链接<br><code>$ gcc main.c -L. -la -lb</code><br>-L. 代表linker在当前目录查找静态库，而b.a静态库就是通过<code>-lb</code>表示</p>
-<p>此外根据链接器对静态库进行符号解析的规则，通过将库放在命令行的结尾，并且如果库之间存在着依赖关系，则被依赖的库放在依赖库之后，举个例子如果libx.a中的函数有调用liby.a中的函数，即libx.a依赖liby.a，则需要在命令行中将libx.a放在liby.a之前。</p>
-<h3 id="动态链接库"><a href="#动态链接库" class="headerlink" title="动态链接库"></a>动态链接库</h3><p>打包之后的静态库虽然可以各取所需，但对于应用开发常用的库函数（比如<code>printf</code>这类），每一个应用程序都会将该库函数代码拷贝到自己的进程空间中，这无疑造成了较大的内存的浪费。动态链接库就是为了解决这个关键问题提出来的，它是一种更加灵活的可以在<strong>加载或运行</strong>的时候进行动态链接，这分别对应两种动态链接方式。在linux/unix系统中以so文件形式存在，也就是所谓的最后一种目标文件——共享目标文件(shared object file)，而在windows系统中就是DDL文件。</p>
-<p>加载时进行动态链接的过程具体是调用加载器将该程序的可执行文件加载到内存的时候，先运行一个动态链接器，然后通过动态链接器将动态链接库（例如<code>libc.so</code>）链接到该程序的地址空间。</p>
-<p>此外程序运行中也可以进行动态链接，这就需要在程序编写的时候调用<code>&lt;dlfcn.h&gt;</code>这个头文件中的函数接口，比如<code>dlopen</code>是打开动态链接库的接口，<code>dlsym</code>是调用动态库中某个函数的接口。</p>
-<p>动态链接库与静态库的最大区别就是静态库是将库函数拷贝到可执行文件当中，而动态链接库的可执行文件中仅仅需要维护动态库接口函数的重定位以及符号表信息，以便后来在加载或者运行的时候进行动态链接。这样显而易见动态链接技术的优点就是为系统节省内存资源。</p>
+        <p>tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍<a href="https://github.com/session-replay-tools/tcpcopy" target="_blank" rel="external">https://github.com/session-replay-tools/tcpcopy</a> ，不喜欢英文的可以看看这个教程<a href="https://xnow.me/ops/simple-tcpcopy-use.html" target="_blank" rel="external">https://xnow.me/ops/simple-tcpcopy-use.html</a> 。在此就不在赘述基础的部署流程～</p>
+<p>可是因为tcpcopy依赖raw socket以及pcap进行抓包，一旦流量比较大就会出现大量的丢包情况，所以这篇文章主要是针对丢包问题进行优化。</p>
+<h3 id="开启pcap模式并结合PF-RING"><a href="#开启pcap模式并结合PF-RING" class="headerlink" title="开启pcap模式并结合PF_RING"></a>开启pcap模式并结合PF_RING</h3><p>单独开启pcap模式很多场景下并不能获得更好的抓包能力，需要结合PF_RING效果才好～tcpcopy的官网对此一句带过，在此介绍详细配置过程。</p>
+<ol>
+<li>安装PF_RING内核模块,官方指明内核版本必须2.6.18以上<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ntop/PF_RING.git</div><div class="line">cd PF_RING/kernel</div><div class="line">make</div><div class="line">sudo insmod ./pf_ring.ko</div><div class="line">cd ../userland</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li>修改tcpcopy路径下configure文件，防止后续make的时候遇到如下错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pfring_utils.c:(.text+0x191d): undefined reference to `dlopen&apos;</div><div class="line">pfring_utils.c:(.text+0x1964): undefined reference to `dlsym&apos;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>configure文件中第79行的 CORE_LIBS=”$CORE_LIBS -lrt -lpthread -lnuma”，添加-ldl 选项。</p>
+<ol>
+<li><p>如果没有装libpcap和numactl的开发库需要进行安装，centos下执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -y install libpcap-devel libpcap</div><div class="line">yum install  numactl-devel</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行configure、make等操作,若不装到系统中可以不必make install</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">configure --with-pfring=/root/PF_RING --pcap-capture</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>–with-pfring的路径要修改成你自己的PF_RING目录所在路径。</p>
+<ol>
+<li><p>intercept同样开启pfring模块，过程类似。</p>
+</li>
+<li><p>tcpcopy执行命令示例如下</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./tcpcopy -C 11 -x 192.168.122.190:8000@52:54:00:d0:73:b0-192.168.122.234:8000@52:54:00:76:7d:da -s 192.168.122.130  -c 192.168.2.x -F &apos;tcp port 8000&apos; -i eth0 -l /root/tcpcopy.log -d</div></pre></td></tr></table></figure>
+<ul>
+<li>-C 代表tcpcopy与intercept进行通信时开启的并发数，默认是2，这里调整到最大的11。</li>
+<li>-x 与官方的不同在于需要在端口号后面加上该机器的mac地址</li>
+<li>-F 这是pcap的filter格式，与tcpdump的过滤写法一样</li>
+<li>-i 这个必须指明是哪个收包device</li>
+<li>-l 这主要是debug时候通过查看log分析问题，configure的时候需要加入–with-debug才能开启debug模式</li>
+<li>-d 后台模式运行</li>
+</ul>
+<h3 id="将tcpcopy进程的优先级调高"><a href="#将tcpcopy进程的优先级调高" class="headerlink" title="将tcpcopy进程的优先级调高"></a>将tcpcopy进程的优先级调高</h3><p>因为tcpcopy的抓包原理本质上也是通过中断，需要操作系统调度CPU来完成响应，在流量比较大的时候调高其优先级进过实测确实会降低丢包率。不过这么做可能会对线上服务器其他程序产生影响，所以需要根据实际情况进行修改。使用renice命令将tcpcopy的进程优先级调高，比如执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">renice -20 32123(tcpcopy的进程号)</div></pre></td></tr></table></figure>
+<p>经过以上的优化，丢包率确实较为明显地降低。当然tcpcopy所在机器的硬件环境也是影响丢包率的重要因素，在此非常感谢原作者网易公司的王斌同志在github上对自己的指点～</p>
 
       
     </div>
@@ -436,7 +460,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
           
         </div>
       
@@ -449,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/06/深入理解计算机的链接知识（上）/" rel="next" title="深入浅出计算机链接（上）">
-                <i class="fa fa-chevron-left"></i> 深入浅出计算机链接（上）
+              <a href="/2017/07/27/读《穷查理宝典》有感/" rel="next" title="读《穷查理宝典》有感">
+                <i class="fa fa-chevron-left"></i> 读《穷查理宝典》有感
               </a>
             
           </div>
@@ -459,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/17/投资之道讲座记录————陈小红、王强/" rel="prev" title="投资之道讲座记录————陈小红、王强">
-                投资之道讲座记录————陈小红、王强 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/07/探秘计算机内存管理（一）/" rel="prev" title="探秘计算机内存管理（一）">
+                探秘计算机内存管理（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -617,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态链接库"><span class="nav-number">1.</span> <span class="nav-text">静态链接库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接库"><span class="nav-number">2.</span> <span class="nav-text">动态链接库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启pcap模式并结合PF-RING"><span class="nav-number">1.</span> <span class="nav-text">开启pcap模式并结合PF_RING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将tcpcopy进程的优先级调高"><span class="nav-number">2.</span> <span class="nav-text">将tcpcopy进程的优先级调高</span></a></li></ol></div>
             
 
           </div>
@@ -756,9 +780,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2017/05/15/深入理解计算机的链接知识（下）/';
-          this.page.identifier = '2017/05/15/深入理解计算机的链接知识（下）/';
-          this.page.title = '深入浅出计算机链接（下）';
+          this.page.url = 'http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/';
+          this.page.identifier = '2017/08/06/tcpcopy优化实战记录/';
+          this.page.title = 'tcpcopy优化实战记录';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';
