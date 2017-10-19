@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,15 +90,21 @@
 
 
 
-<meta name="description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
-<meta property="og:type" content="website">
-<meta property="og:title" content="惠友">
-<meta property="og:url" content="http://www.jianghuiyou.com/archives/2016/page/2/index.html">
+<meta name="description" content="刚开始接触C/C++编程时候总会遇到segmentation fault段错误，虽然现在看来这是一个相对容易调试的问题，但一直只知道是访问非法地址造成的，如今在拜读《深入理解计算机系统》虚拟内存那章，才明白其中的本质原理。
+上节我们提到所有的计算机程序内存首先映射到虚拟地址空间，然后通过TLB或者页表机制来进行从虚拟地址到物理地址的翻译，整个虚拟地址空间分成多个区域，包括代码段.text、数据段.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探秘计算机内存管理（二）———segmentation fault">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
+<meta property="og:description" content="刚开始接触C/C++编程时候总会遇到segmentation fault段错误，虽然现在看来这是一个相对容易调试的问题，但一直只知道是访问非法地址造成的，如今在拜读《深入理解计算机系统》虚拟内存那章，才明白其中的本质原理。
+上节我们提到所有的计算机程序内存首先映射到虚拟地址空间，然后通过TLB或者页表机制来进行从虚拟地址到物理地址的翻译，整个虚拟地址空间分成多个区域，包括代码段.text、数据段.">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.jpeg">
+<meta property="og:updated_time" content="2017-10-19T11:50:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="惠友">
-<meta name="twitter:description" content="本科毕业于北邮，如今在清华计算机系苦念研究生，喜欢技术，热爱生活、运动、音乐，永远奋斗着的fighter">
+<meta name="twitter:title" content="探秘计算机内存管理（二）———segmentation fault">
+<meta name="twitter:description" content="刚开始接触C/C++编程时候总会遇到segmentation fault段错误，虽然现在看来这是一个相对容易调试的问题，但一直只知道是访问非法地址造成的，如今在拜读《深入理解计算机系统》虚拟内存那章，才明白其中的本质原理。
+上节我们提到所有的计算机程序内存首先映射到虚拟地址空间，然后通过TLB或者页表机制来进行从虚拟地址到物理地址的翻译，整个虚拟地址空间分成多个区域，包括代码段.text、数据段.">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.jpeg">
 
 
 
@@ -126,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/archives/2016/page/2/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/"/>
 
 
 
 
 
-  <title>title.archive | 惠友</title>
+  <title>探秘计算机内存管理（二）———segmentation fault | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -162,7 +168,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left  page-archive  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -276,211 +282,191 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/20/设计模式系列（一）——-观察者模式/" itemprop="url">
-              
-                <span itemprop="name">设计模式系列（一）—— 观察者模式</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-20T17:23:08+08:00"
-              content="2016-07-20" >
-          07-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/12/Java-IO设计原理——装饰者模式/" itemprop="url">
-              
-                <span itemprop="name">Java IO设计原理——装饰者模式</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-12T22:32:11+08:00"
-              content="2016-07-12" >
-          07-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/06/浅谈java-反射机制/" itemprop="url">
-              
-                <span itemprop="name">浅谈java反射机制</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-06T15:08:32+08:00"
-              content="2016-07-06" >
-          07-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/01/java中对象的初始化/" itemprop="url">
-              
-                <span itemprop="name">java中对象的初始化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-01T17:19:50+08:00"
-              content="2016-07-01" >
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/24/C语言提升代码复用性的一点思考-——-void-和回调函数/" itemprop="url">
-              
-                <span itemprop="name">C语言提升代码复用性的一点思考 —— void*和回调函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-24T11:05:53+08:00"
-              content="2016-06-24" >
-          06-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2016/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span>
-  </nav>
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                探秘计算机内存管理（二）———segmentation fault
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T19:49:21+08:00">
+                2017-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/19/探秘计算机内存管理（二）———segmentation-fault/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>刚开始接触C/C++编程时候总会遇到segmentation fault段错误，虽然现在看来这是一个相对容易调试的问题，但一直只知道是访问非法地址造成的，如今在拜读《深入理解计算机系统》虚拟内存那章，才明白其中的本质原理。</p>
+<p>上节我们提到所有的计算机程序内存首先映射到虚拟地址空间，然后通过TLB或者页表机制来进行从虚拟地址到物理地址的翻译，整个虚拟地址空间分成多个区域，包括代码段.text、数据段.data .bss、堆、共享库、栈等等，而操作系统内核为每个进程维护一个<code>task_struct</code>,这其中的一个结构<code>mm_struct</code>记录了当前虚拟内存的状态，其中的<code>pgd</code>为一级页表的基址，<code>mmap</code>指向这些区域信息的结构体组成的链表，其中的每一个结构体<code>vm_area_struct</code>表示的就是某个区域的起止地址等信息，见下图所示。<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.jpeg" alt="此处输入图片的描述"><br>当进程在第一次访问某虚拟地址时，因其并未存在于真实物理内存当中，所以会触发一个缺页中断，然后控制流转移到内核的缺页中断处理程序，在进行地址翻译那些过程之前首先要做的就是验证该虚拟地址的合法性。简单来讲，就是将该虚拟地址与链表中的每一个<code>vm_area_struct</code>的<code>vm_end</code>和<code>vm_start</code>作比较，如果不在这些合法区域之中，就会触发我们常见的segmentation fault段错误，当然实际linux系统中为了加快链表遍历速度会结合使用树等高级数据结构。</p>
+<p>这就更深入地解释了程序进行非法地址访问的时候会产生段错误的原因，比如下面这小段代码通常会引发段错误<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</div><div class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, i);</div></pre></td></tr></table></figure></p>
+<p>这是因为<code>scanf</code>函数第二个参数传入理应是一个地址，这里将100这个整数当成一个地址值传入函数中，通常这个地址是不在<code>vm_area_struct</code>合法区域中从而引发段错误；可如果这个地址恰恰是合法区域的虚拟地址，那就可能产生莫名其妙的运行错误，将一个scanf输入的整数值覆盖到进程某个地址上，这调试起来才更加困难。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/07/探秘计算机内存管理（一）/" rel="next" title="探秘计算机内存管理（一）">
+                <i class="fa fa-chevron-left"></i> 探秘计算机内存管理（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -488,6 +474,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -699,11 +696,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -722,6 +717,18 @@
       <script id="dsq-count-scr" src="https://huiyou.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/';
+          this.page.identifier = '2017/09/19/探秘计算机内存管理（二）———segmentation-fault/';
+          this.page.title = '探秘计算机内存管理（二）———segmentation fault';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://huiyou.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
@@ -772,30 +779,7 @@
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script>
-
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -813,6 +797,9 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
+  
   
 
 
