@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="计算机网络," />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,16 +90,19 @@
 
 
 
-<meta name="description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
+<meta name="description" content="读写锁本质上是任意时刻只允许一个写者或者多个读者操作的自旋锁，C++17之后出现std::shared_mutex就是读写锁的实现，不过为了加强对并发技术的理解，自己基于C++11中的互斥量和条件变量来实现一个读写锁，并且通过简单修改就可以实现读者或者写者优先以及随机优先级等变形。
+条件变量主要应用在当某条件满足时候，就进行wait或者notify。比如在此读写锁中，对于写者上锁操作，当有其他读者">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tcpcopy优化实战记录">
-<meta property="og:url" content="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/index.html">
+<meta property="og:title" content="并发世界探索（二）—— 读写锁">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/11/06/并发世界探索（二）——-读写锁/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
-<meta property="og:updated_time" content="2017-08-07T12:29:16.000Z">
+<meta property="og:description" content="读写锁本质上是任意时刻只允许一个写者或者多个读者操作的自旋锁，C++17之后出现std::shared_mutex就是读写锁的实现，不过为了加强对并发技术的理解，自己基于C++11中的互斥量和条件变量来实现一个读写锁，并且通过简单修改就可以实现读者或者写者优先以及随机优先级等变形。
+条件变量主要应用在当某条件满足时候，就进行wait或者notify。比如在此读写锁中，对于写者上锁操作，当有其他读者">
+<meta property="og:updated_time" content="2017-11-06T11:48:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tcpcopy优化实战记录">
-<meta name="twitter:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
+<meta name="twitter:title" content="并发世界探索（二）—— 读写锁">
+<meta name="twitter:description" content="读写锁本质上是任意时刻只允许一个写者或者多个读者操作的自旋锁，C++17之后出现std::shared_mutex就是读写锁的实现，不过为了加强对并发技术的理解，自己基于C++11中的互斥量和条件变量来实现一个读写锁，并且通过简单修改就可以实现读者或者写者优先以及随机优先级等变形。
+条件变量主要应用在当某条件满足时候，就进行wait或者notify。比如在此读写锁中，对于写者上锁操作，当有其他读者">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/11/06/并发世界探索（二）——-读写锁/"/>
 
 
 
 
 
-  <title>tcpcopy优化实战记录 | 惠友</title>
+  <title>并发世界探索（二）—— 读写锁 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -287,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/11/06/并发世界探索（二）——-读写锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -308,7 +311,7 @@
             
             
               
-                tcpcopy优化实战记录
+                并发世界探索（二）—— 读写锁
               
             
           </h2>
@@ -323,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T09:33:03+08:00">
-                2017-08-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T19:47:13+08:00">
+                2017-11-06
               </time>
             
 
@@ -364,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/06/tcpcopy优化实战记录/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/06/并发世界探索（二）——-读写锁/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/06/tcpcopy优化实战记录/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/06/并发世界探索（二）——-读写锁/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,46 +394,11 @@
       
 
       
-        <p>tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍<a href="https://github.com/session-replay-tools/tcpcopy" target="_blank" rel="external">https://github.com/session-replay-tools/tcpcopy</a> ，不喜欢英文的可以看看这个教程<a href="https://xnow.me/ops/simple-tcpcopy-use.html" target="_blank" rel="external">https://xnow.me/ops/simple-tcpcopy-use.html</a> 。在此就不在赘述基础的部署流程～</p>
-<p>可是因为tcpcopy依赖raw socket以及pcap进行抓包，一旦流量比较大就会出现大量的丢包情况，所以这篇文章主要是针对丢包问题进行优化。</p>
-<h3 id="开启pcap模式并结合PF-RING"><a href="#开启pcap模式并结合PF-RING" class="headerlink" title="开启pcap模式并结合PF_RING"></a>开启pcap模式并结合PF_RING</h3><p>单独开启pcap模式很多场景下并不能获得更好的抓包能力，需要结合PF_RING效果才好～tcpcopy的官网对此一句带过，在此介绍详细配置过程。</p>
-<ol>
-<li>安装PF_RING内核模块,官方指明内核版本必须2.6.18以上<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ntop/PF_RING.git</div><div class="line">cd PF_RING/kernel</div><div class="line">make</div><div class="line">sudo insmod ./pf_ring.ko</div><div class="line">cd ../userland</div><div class="line">make</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li>修改tcpcopy路径下configure文件，防止后续make的时候遇到如下错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pfring_utils.c:(.text+0x191d): undefined reference to `dlopen&apos;</div><div class="line">pfring_utils.c:(.text+0x1964): undefined reference to `dlsym&apos;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>configure文件中第79行的 CORE_LIBS=”$CORE_LIBS -lrt -lpthread -lnuma”，添加-ldl 选项。</p>
-<ol>
-<li><p>如果没有装libpcap和numactl的开发库需要进行安装，centos下执行如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -y install libpcap-devel libpcap</div><div class="line">yum install  numactl-devel</div></pre></td></tr></table></figure>
-</li>
-<li><p>执行configure、make等操作,若不装到系统中可以不必make install</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">configure --with-pfring=/root/PF_RING --pcap-capture</div><div class="line">make</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>–with-pfring的路径要修改成你自己的PF_RING目录所在路径。</p>
-<ol>
-<li><p>intercept同样开启pfring模块，过程类似。</p>
-</li>
-<li><p>tcpcopy执行命令示例如下</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./tcpcopy -C 11 -x 192.168.122.190:8000@52:54:00:d0:73:b0-192.168.122.234:8000@52:54:00:76:7d:da -s 192.168.122.130  -c 192.168.2.x -F &apos;tcp port 8000&apos; -i eth0 -l /root/tcpcopy.log -d</div></pre></td></tr></table></figure>
-<ul>
-<li>-C 代表tcpcopy与intercept进行通信时开启的并发数，默认是2，这里调整到最大的11。</li>
-<li>-x 与官方的不同在于需要在端口号后面加上该机器的mac地址</li>
-<li>-F 这是pcap的filter格式，与tcpdump的过滤写法一样</li>
-<li>-i 这个必须指明是哪个收包device</li>
-<li>-l 这主要是debug时候通过查看log分析问题，configure的时候需要加入–with-debug才能开启debug模式</li>
-<li>-d 后台模式运行</li>
-</ul>
-<h3 id="将tcpcopy进程的优先级调高"><a href="#将tcpcopy进程的优先级调高" class="headerlink" title="将tcpcopy进程的优先级调高"></a>将tcpcopy进程的优先级调高</h3><p>因为tcpcopy的抓包原理本质上也是通过中断，需要操作系统调度CPU来完成响应，在流量比较大的时候调高其优先级进过实测确实会降低丢包率。不过这么做可能会对线上服务器其他程序产生影响，所以需要根据实际情况进行修改。使用renice命令将tcpcopy的进程优先级调高，比如执行如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">renice -20 32123(tcpcopy的进程号)</div></pre></td></tr></table></figure>
-<p>经过以上的优化，丢包率确实较为明显地降低。当然tcpcopy所在机器的硬件环境也是影响丢包率的重要因素，在此非常感谢原作者网易公司的王斌同志在github上对自己的指点～</p>
+        <p>读写锁本质上是任意时刻只允许一个写者或者多个读者操作的自旋锁，C++17之后出现<code>std::shared_mutex</code>就是读写锁的实现，不过为了加强对并发技术的理解，自己基于C++11中的互斥量和条件变量来实现一个读写锁，并且通过简单修改就可以实现读者或者写者优先以及随机优先级等变形。</p>
+<p>条件变量主要应用在当某条件满足时候，就进行wait或者notify。比如在此读写锁中，对于写者上锁操作，当有其他读者或写者存在时候，则需要该写者进行wait等待；而当写者释放锁的时候就会通知其他读写者可能满足它们的持锁条件。而条件变量常常又结合互斥锁来使用，互斥锁产生的临界区使得对变量操作可以是线程安全的。废话不多说，先上代码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> RWLock</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    RWLock() = <span class="keyword">default</span>;</div><div class="line">    RWLock(<span class="keyword">const</span> RWLock&amp;) = <span class="keyword">delete</span>;</div><div class="line">    RWLock&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> RWLock&amp;) = <span class="keyword">delete</span>;</div><div class="line">    ~RWLock() = <span class="keyword">default</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read_lock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        <span class="keyword">if</span> (writer) &#123;</div><div class="line">            read_waiter++;</div><div class="line">            <span class="keyword">while</span> (writer) &#123;</div><div class="line">                read_cv.wait(lock);</div><div class="line">            &#125;</div><div class="line">            read_waiter--;</div><div class="line">        &#125;</div><div class="line">        readers++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read_unlock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        readers--;</div><div class="line">        <span class="keyword">if</span> (readers == <span class="number">0</span>) &#123;</div><div class="line">            write_cv.notify_one();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write_lock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        <span class="keyword">if</span> (readers &gt; <span class="number">0</span> || writer) &#123;</div><div class="line">            write_waiter++;</div><div class="line">            <span class="keyword">while</span> (readers &gt; <span class="number">0</span> || writer) &#123;</div><div class="line">                write_cv.wait(lock);</div><div class="line">            &#125;</div><div class="line">            write_waiter--;</div><div class="line">        &#125;</div><div class="line">        writer = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write_unlock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        writer = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span> (write_waiter &gt; <span class="number">0</span>) &#123;</div><div class="line">            write_cv.notify_one();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (read_waiter &gt; <span class="number">0</span>) &#123;</div><div class="line">            read_cv.notify_all();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="built_in">std</span>::mutex mtx;</div><div class="line">    <span class="built_in">std</span>::condition_variable read_cv, write_cv;</div><div class="line">    <span class="keyword">volatile</span> <span class="keyword">u_int32_t</span> readers = <span class="number">0</span>, read_waiter = <span class="number">0</span>, write_waiter = <span class="number">0</span>;</div><div class="line">    <span class="keyword">volatile</span> <span class="keyword">bool</span> writer = <span class="literal">false</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>整数变量readers和布尔变量writer分别代表当前正在执行的读写者，而<code>reader_waiter</code>和<code>writer_waiter</code>则是记录着当前等待的读写者个数。这里将它们设置为<code>volatile</code>是为了防止编译器或硬件系统将这些变量优化到cache或寄存器中，导致多核系统中操作这些变量时候的不一致性，这样所有的操作都是从物理内存中进行存取。</p>
+<p>上面读写锁是一个写者优先的情况，对<code>write_unlock</code>中读写者条件变量的顺序颠倒就可以变成读者优先，或者添加随机数来实现较为公平的随机化优先级形式。</p>
 
       
     </div>
@@ -460,7 +428,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
           
         </div>
       
@@ -473,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/27/读《穷查理宝典》有感/" rel="next" title="读《穷查理宝典》有感">
-                <i class="fa fa-chevron-left"></i> 读《穷查理宝典》有感
+              <a href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" rel="next" title="并发世界的探索（一）————互斥锁、自旋锁、条件变量">
+                <i class="fa fa-chevron-left"></i> 并发世界的探索（一）————互斥锁、自旋锁、条件变量
               </a>
             
           </div>
@@ -482,10 +450,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/07/探秘计算机内存管理（一）/" rel="prev" title="探秘计算机内存管理（一）">
-                探秘计算机内存管理（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -539,17 +503,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg"
@@ -631,22 +586,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启pcap模式并结合PF-RING"><span class="nav-number">1.</span> <span class="nav-text">开启pcap模式并结合PF_RING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将tcpcopy进程的优先级调高"><span class="nav-number">2.</span> <span class="nav-text">将tcpcopy进程的优先级调高</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -780,9 +719,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/';
-          this.page.identifier = '2017/08/06/tcpcopy优化实战记录/';
-          this.page.title = 'tcpcopy优化实战记录';
+          this.page.url = 'http://www.jianghuiyou.com/2017/11/06/并发世界探索（二）——-读写锁/';
+          this.page.identifier = '2017/11/06/并发世界探索（二）——-读写锁/';
+          this.page.title = '并发世界探索（二）—— 读写锁';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';

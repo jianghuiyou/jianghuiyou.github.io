@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="计算机网络," />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,16 +90,19 @@
 
 
 
-<meta name="description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
+<meta name="description" content="计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。
+互斥锁在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量i++在汇编层">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tcpcopy优化实战记录">
-<meta property="og:url" content="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/index.html">
+<meta property="og:title" content="并发世界的探索（一）————互斥锁、自旋锁、条件变量">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
-<meta property="og:updated_time" content="2017-08-07T12:29:16.000Z">
+<meta property="og:description" content="计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。
+互斥锁在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量i++在汇编层">
+<meta property="og:updated_time" content="2017-11-06T11:48:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tcpcopy优化实战记录">
-<meta name="twitter:description" content="tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍https://github.com/session-replay-tools/tcpcopy ，不喜欢英文的可以看看这个教程https://xnow.me/ops/simple-tcpcopy-use.html">
+<meta name="twitter:title" content="并发世界的探索（一）————互斥锁、自旋锁、条件变量">
+<meta name="twitter:description" content="计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。
+互斥锁在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量i++在汇编层">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/"/>
 
 
 
 
 
-  <title>tcpcopy优化实战记录 | 惠友</title>
+  <title>并发世界的探索（一）————互斥锁、自旋锁、条件变量 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -287,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -308,7 +311,7 @@
             
             
               
-                tcpcopy优化实战记录
+                并发世界的探索（一）————互斥锁、自旋锁、条件变量
               
             
           </h2>
@@ -323,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T09:33:03+08:00">
-                2017-08-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T16:51:22+08:00">
+                2017-10-21
               </time>
             
 
@@ -364,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/06/tcpcopy优化实战记录/#comments" itemprop="discussionUrl">
+                <a href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/06/tcpcopy优化实战记录/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,46 +394,18 @@
       
 
       
-        <p>tcpcopy是网易开发并开源的一款tcp流量复制工具，可以在尽量不影响线上服务器的基础上，对其tcp流量进行复制或者放大用来进行线上仿真测试、压测等实验。github上有对其部署的介绍<a href="https://github.com/session-replay-tools/tcpcopy" target="_blank" rel="external">https://github.com/session-replay-tools/tcpcopy</a> ，不喜欢英文的可以看看这个教程<a href="https://xnow.me/ops/simple-tcpcopy-use.html" target="_blank" rel="external">https://xnow.me/ops/simple-tcpcopy-use.html</a> 。在此就不在赘述基础的部署流程～</p>
-<p>可是因为tcpcopy依赖raw socket以及pcap进行抓包，一旦流量比较大就会出现大量的丢包情况，所以这篇文章主要是针对丢包问题进行优化。</p>
-<h3 id="开启pcap模式并结合PF-RING"><a href="#开启pcap模式并结合PF-RING" class="headerlink" title="开启pcap模式并结合PF_RING"></a>开启pcap模式并结合PF_RING</h3><p>单独开启pcap模式很多场景下并不能获得更好的抓包能力，需要结合PF_RING效果才好～tcpcopy的官网对此一句带过，在此介绍详细配置过程。</p>
-<ol>
-<li>安装PF_RING内核模块,官方指明内核版本必须2.6.18以上<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/ntop/PF_RING.git</div><div class="line">cd PF_RING/kernel</div><div class="line">make</div><div class="line">sudo insmod ./pf_ring.ko</div><div class="line">cd ../userland</div><div class="line">make</div></pre></td></tr></table></figure>
-</li>
-</ol>
+        <p>计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。</p>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量<code>i++</code>在汇编层面并不是原子操作，若一个线程在其中某一步被其他线程打断之后就会存在变量操作异常。这个时候就需要对这个共享资源进行加锁，C++中的std::mutex就是最常见的互斥锁，unlock和lock操作必须由同一线程来完成，也就是解铃还须系铃人，这样在lock与unlock之间就形成了临界区（同一时刻只能由一个线程进入）。可有时候某个线程万一在lock之后发生异常退出就会导致其他线程饿死，所以更加安全管理mutex的方式是通过运用RAII思想的<code>std::lock_guard</code>和<code>std::unique_lock</code>来进行管理，上锁之后在该作用域生命周期结束后会自动解锁，如下使用方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">std::mutex mtx;</div><div class="line">try &#123;</div><div class="line">    std::unique_lock&lt;std::mutex&gt; lock(mtx);</div><div class="line">    // do something may have exception</div><div class="line">&#125; catch() &#123;</div><div class="line">    std::cerr &lt;&lt; &quot;oops! exception!&quot; &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<ol>
-<li>修改tcpcopy路径下configure文件，防止后续make的时候遇到如下错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pfring_utils.c:(.text+0x191d): undefined reference to `dlopen&apos;</div><div class="line">pfring_utils.c:(.text+0x1964): undefined reference to `dlsym&apos;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>configure文件中第79行的 CORE_LIBS=”$CORE_LIBS -lrt -lpthread -lnuma”，添加-ldl 选项。</p>
-<ol>
-<li><p>如果没有装libpcap和numactl的开发库需要进行安装，centos下执行如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum -y install libpcap-devel libpcap</div><div class="line">yum install  numactl-devel</div></pre></td></tr></table></figure>
-</li>
-<li><p>执行configure、make等操作,若不装到系统中可以不必make install</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">configure --with-pfring=/root/PF_RING --pcap-capture</div><div class="line">make</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>–with-pfring的路径要修改成你自己的PF_RING目录所在路径。</p>
-<ol>
-<li><p>intercept同样开启pfring模块，过程类似。</p>
-</li>
-<li><p>tcpcopy执行命令示例如下</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./tcpcopy -C 11 -x 192.168.122.190:8000@52:54:00:d0:73:b0-192.168.122.234:8000@52:54:00:76:7d:da -s 192.168.122.130  -c 192.168.2.x -F &apos;tcp port 8000&apos; -i eth0 -l /root/tcpcopy.log -d</div></pre></td></tr></table></figure>
-<ul>
-<li>-C 代表tcpcopy与intercept进行通信时开启的并发数，默认是2，这里调整到最大的11。</li>
-<li>-x 与官方的不同在于需要在端口号后面加上该机器的mac地址</li>
-<li>-F 这是pcap的filter格式，与tcpdump的过滤写法一样</li>
-<li>-i 这个必须指明是哪个收包device</li>
-<li>-l 这主要是debug时候通过查看log分析问题，configure的时候需要加入–with-debug才能开启debug模式</li>
-<li>-d 后台模式运行</li>
-</ul>
-<h3 id="将tcpcopy进程的优先级调高"><a href="#将tcpcopy进程的优先级调高" class="headerlink" title="将tcpcopy进程的优先级调高"></a>将tcpcopy进程的优先级调高</h3><p>因为tcpcopy的抓包原理本质上也是通过中断，需要操作系统调度CPU来完成响应，在流量比较大的时候调高其优先级进过实测确实会降低丢包率。不过这么做可能会对线上服务器其他程序产生影响，所以需要根据实际情况进行修改。使用renice命令将tcpcopy的进程优先级调高，比如执行如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">renice -20 32123(tcpcopy的进程号)</div></pre></td></tr></table></figure>
-<p>经过以上的优化，丢包率确实较为明显地降低。当然tcpcopy所在机器的硬件环境也是影响丢包率的重要因素，在此非常感谢原作者网易公司的王斌同志在github上对自己的指点～</p>
+<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><p>自旋锁也是对共享资源的同步方式，它与互斥锁最大的区别在于使用自旋锁的线程在无法获得锁的时候并不会阻塞休眠，而是不停地占用CPU轮询锁是否可用，这样的好处在于如果多线程临界区很小执行很快的话，与互斥锁相比避免了线程来回切换上下文的开销，可如果线程在临界区执行较慢甚至存在IO操作的时候，就可能导致其他线程饥饿并且非常浪费CPU资源。C++中并没有现成的自旋锁API来使用，不过可以使用原子系列中的<code>std::atomic_flag</code>非常简便地实现一个自旋锁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class SpinLock</div><div class="line">&#123;</div><div class="line">private:</div><div class="line">    std::atomic_flag spin_lock;</div><div class="line">public:</div><div class="line">    SpinLock() : atomic_flag( ATOMIC_FLAG_INIT ) &#123;&#125;</div><div class="line"></div><div class="line">    void lock()</div><div class="line">    &#123;</div><div class="line">        while( spin_lock.test_and_set(std::memory_order_acquire));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    void unlock()</div><div class="line">    &#123;</div><div class="line">        lock.clear(std::memory_order_release);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>至于<code>std::memory_order_acquire</code>属于更为复杂高级但使用不多的C++内存模型知识，想要了解可以阅读师兄的一篇博客。<a href="https://www.qcloud.com/community/article/163162" target="_blank" rel="external">C++内存模型</a></p>
+<h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><p>多线程编程经常存在以下场景，某一线程执行到B必须发生在其他线程执行A之前，即存在不同执行流的依赖关系，这时候常常需要条件变量出马。条件变量的意思就是，当某一个条件满足时才能使得另外一执行流顺利执行下去，而它也通常需要结合互斥锁来使用。线程A在条件不满足的时候会调用wait相关函数来实现休眠，以达到节省CPU资源的目的，一旦线程B执行完某操作之后有可能重新让条件满足的时候，线程B就会调用notify相关函数来让休眠的线程A来重新唤醒。C++中条件变量是由<code>std::condition_variable</code>API来提供，下面例子是10个线程在主线程发号施令之后去争先恐后地输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;thread&gt;</div><div class="line">#include &lt;condition_variable&gt;</div><div class="line"></div><div class="line">std::mutex mtx;</div><div class="line">std::condition_variable cv;</div><div class="line">bool ready = false;</div><div class="line"></div><div class="line">void do_print_id(int id)</div><div class="line">&#123;</div><div class="line">  std::unique_lock &lt;std::mutex&gt; lck(mtx);</div><div class="line">  while (!ready) &#123;</div><div class="line">    cv.wait(lck);</div><div class="line">  &#125;</div><div class="line">  std::cout &lt;&lt; &quot;thread &quot; &lt;&lt; id &lt;&lt; &apos;\n&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void go()</div><div class="line">&#123;</div><div class="line">  std::unique_lock &lt;std::mutex&gt; lck(mtx);</div><div class="line">  ready = true;</div><div class="line">  cv.notify_all();</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">  std::thread threads[10];</div><div class="line">  for (int i = 0; i &lt; 10; ++i)</div><div class="line">    threads[i] = std::thread(do_print_id, i);</div><div class="line">  std::cout &lt;&lt; &quot;ready!\n&quot;;</div><div class="line">  sleep(1);</div><div class="line">  std::cout &lt;&lt; &quot;go!\n&quot;;</div><div class="line">  go();</div><div class="line">  for (auto &amp; th:threads)</div><div class="line">    th.join();</div><div class="line">  return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="乐观锁、悲观锁"><a href="#乐观锁、悲观锁" class="headerlink" title="乐观锁、悲观锁"></a>乐观锁、悲观锁</h2><p>实际上，这两个概念应该算是数据库系统事务并发控制的方式，与上面提到的并发技术有着本质差别。不过因为听起来像是同胞，也记录并学习一下。</p>
+<p>悲观锁指的是对系统当前的其他事务的修改操作持悲观保守态度。在整个数据处理过程中，将数据处于锁定状态，这可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。悲观锁的实现往往依靠数据库提供的锁机制，先取锁后操作。它主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p>
+<p>乐观锁则假设数据发生冲突的情况较少，而只有在数据进行提交更新的时候才会正式对数据的冲突与否进行检测。乐观锁的实现通常通过为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则返回错误信息给用户。</p>
 
       
     </div>
@@ -460,7 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
           
         </div>
       
@@ -473,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/27/读《穷查理宝典》有感/" rel="next" title="读《穷查理宝典》有感">
-                <i class="fa fa-chevron-left"></i> 读《穷查理宝典》有感
+              <a href="/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/" rel="next" title="探秘计算机内存管理（二）———segmentation fault">
+                <i class="fa fa-chevron-left"></i> 探秘计算机内存管理（二）———segmentation fault
               </a>
             
           </div>
@@ -483,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/07/探秘计算机内存管理（一）/" rel="prev" title="探秘计算机内存管理（一）">
-                探秘计算机内存管理（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/06/并发世界探索（二）——-读写锁/" rel="prev" title="并发世界探索（二）—— 读写锁">
+                并发世界探索（二）—— 读写锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -641,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启pcap模式并结合PF-RING"><span class="nav-number">1.</span> <span class="nav-text">开启pcap模式并结合PF_RING</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将tcpcopy进程的优先级调高"><span class="nav-number">2.</span> <span class="nav-text">将tcpcopy进程的优先级调高</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#互斥锁"><span class="nav-number">1.</span> <span class="nav-text">互斥锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自旋锁"><span class="nav-number">2.</span> <span class="nav-text">自旋锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件变量"><span class="nav-number">3.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁、悲观锁"><span class="nav-number">4.</span> <span class="nav-text">乐观锁、悲观锁</span></a></li></ol></div>
             
 
           </div>
@@ -780,9 +755,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2017/08/06/tcpcopy优化实战记录/';
-          this.page.identifier = '2017/08/06/tcpcopy优化实战记录/';
-          this.page.title = 'tcpcopy优化实战记录';
+          this.page.url = 'http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/';
+          this.page.identifier = '2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/';
+          this.page.title = '并发世界的探索（一）————互斥锁、自旋锁、条件变量';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';

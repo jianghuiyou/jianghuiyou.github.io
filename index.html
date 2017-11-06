@@ -288,6 +288,322 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/11/06/并发世界探索（二）——-读写锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/06/并发世界探索（二）——-读写锁/" itemprop="url">
+                  并发世界探索（二）—— 读写锁
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T19:47:13+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/06/并发世界探索（二）——-读写锁/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/06/并发世界探索（二）——-读写锁/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>读写锁本质上是任意时刻只允许一个写者或者多个读者操作的自旋锁，C++17之后出现<code>std::shared_mutex</code>就是读写锁的实现，不过为了加强对并发技术的理解，自己基于C++11中的互斥量和条件变量来实现一个读写锁，并且通过简单修改就可以实现读者或者写者优先以及随机优先级等变形。</p>
+<p>条件变量主要应用在当某条件满足时候，就进行wait或者notify。比如在此读写锁中，对于写者上锁操作，当有其他读者或写者存在时候，则需要该写者进行wait等待；而当写者释放锁的时候就会通知其他读写者可能满足它们的持锁条件。而条件变量常常又结合互斥锁来使用，互斥锁产生的临界区使得对变量操作可以是线程安全的。废话不多说，先上代码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> RWLock</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    RWLock() = <span class="keyword">default</span>;</div><div class="line">    RWLock(<span class="keyword">const</span> RWLock&amp;) = <span class="keyword">delete</span>;</div><div class="line">    RWLock&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> RWLock&amp;) = <span class="keyword">delete</span>;</div><div class="line">    ~RWLock() = <span class="keyword">default</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read_lock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        <span class="keyword">if</span> (writer) &#123;</div><div class="line">            read_waiter++;</div><div class="line">            <span class="keyword">while</span> (writer) &#123;</div><div class="line">                read_cv.wait(lock);</div><div class="line">            &#125;</div><div class="line">            read_waiter--;</div><div class="line">        &#125;</div><div class="line">        readers++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read_unlock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        readers--;</div><div class="line">        <span class="keyword">if</span> (readers == <span class="number">0</span>) &#123;</div><div class="line">            write_cv.notify_one();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write_lock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        <span class="keyword">if</span> (readers &gt; <span class="number">0</span> || writer) &#123;</div><div class="line">            write_waiter++;</div><div class="line">            <span class="keyword">while</span> (readers &gt; <span class="number">0</span> || writer) &#123;</div><div class="line">                write_cv.wait(lock);</div><div class="line">            &#125;</div><div class="line">            write_waiter--;</div><div class="line">        &#125;</div><div class="line">        writer = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write_unlock</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lock(mtx);</div><div class="line">        writer = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span> (write_waiter &gt; <span class="number">0</span>) &#123;</div><div class="line">            write_cv.notify_one();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (read_waiter &gt; <span class="number">0</span>) &#123;</div><div class="line">            read_cv.notify_all();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="built_in">std</span>::mutex mtx;</div><div class="line">    <span class="built_in">std</span>::condition_variable read_cv, write_cv;</div><div class="line">    <span class="keyword">volatile</span> <span class="keyword">u_int32_t</span> readers = <span class="number">0</span>, read_waiter = <span class="number">0</span>, write_waiter = <span class="number">0</span>;</div><div class="line">    <span class="keyword">volatile</span> <span class="keyword">bool</span> writer = <span class="literal">false</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>整数变量readers和布尔变量writer分别代表当前正在执行的读写者，而<code>reader_waiter</code>和<code>writer_waiter</code>则是记录着当前等待的读写者个数。这里将它们设置为<code>volatile</code>是为了防止编译器或硬件系统将这些变量优化到cache或寄存器中，导致多核系统中操作这些变量时候的不一致性，这样所有的操作都是从物理内存中进行存取。</p>
+<p>上面读写锁是一个写者优先的情况，对<code>write_unlock</code>中读写者条件变量的顺序颠倒就可以变成读者优先，或者添加随机数来实现较为公平的随机化优先级形式。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="url">
+                  并发世界的探索（一）————互斥锁、自旋锁、条件变量
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T16:51:22+08:00">
+                2017-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。</p>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量<code>i++</code>在汇编层面并不是原子操作，若一个线程在其中某一步被其他线程打断之后就会存在变量操作异常。这个时候就需要对这个共享资源进行加锁，C++中的std::mutex就是最常见的互斥锁，unlock和lock操作必须由同一线程来完成，也就是解铃还须系铃人，这样在lock与unlock之间就形成了临界区（同一时刻只能由一个线程进入）。可有时候某个线程万一在lock之后发生异常退出就会导致其他线程饿死，所以更加安全管理mutex的方式是通过运用RAII思想的<code>std::lock_guard</code>和<code>std::unique_lock</code>来进行管理，上锁之后在该作用域生命周期结束后会自动解锁，如下使用方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">std::mutex mtx;</div><div class="line">try &#123;</div><div class="line">    std::unique_lock&lt;std::mutex&gt; lock(mtx);</div><div class="line">    // do something may have exception</div><div class="line">&#125; catch() &#123;</div><div class="line">    std::cerr &lt;&lt; &quot;oops! exception!&quot; &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1604,323 +1920,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/04/23/HTTP长连接如何判断数据传输结束/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/23/HTTP长连接如何判断数据传输结束/" itemprop="url">
-                  HTTP长连接如何判断数据传输结束
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-23T23:36:30+08:00">
-                2017-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/23/HTTP长连接如何判断数据传输结束/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/23/HTTP长连接如何判断数据传输结束/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近在流量分析项目中，针对http数据由于keepalive的存在，如果根据TCP状态机进入CLOSE才判断数据结束，会存在着较大的延迟，在linux系统中抓包实测大概会有60秒左右TCP的持续延迟，这就大大妨碍系统分析数据的时效性。为了解决这个问题，自己对HTTP长连接进行研究并实现了数据提前抽取的实时性功能。</p>
-<p>KeepAlive属于HTTP头部Connection字段，即<code>Connection: KeepAlive</code>。它是在HTTP1.0版本中引入，并在HTTP1.1中默认配置的属性，现在大多主流的浏览器都已经是HTTP1.1，引入KeepAlive的主要目的就是<strong>降低web应用中http传输延迟和带宽</strong>。</p>
-<p>传统的HTTP0.9版本（已废弃）和没有进行keepalive设置的1.0版本，当进行一次HTTP的请求响应的数据等信息的传输都需要建立一个TCP Connection，也就是要走三次握手、四次挥手并严格遵从TCP拥塞控制机制，一旦数据输出完TCP会立即关闭，而如果再次进行数据传输还需要再次建立TCP Connection，这样引入KeepAlive机制的优势就不言而喻。KeepAlive确实很棒，但在项目实时性需求下又成了麻烦之处，还好HTTP丰富的头部信息为我们解决这个问题带来了帮助。</p>
-<p>HTTP数据传输主要分成两种模式，一种是通过Content-Length，另外一种是通过Transfer-Encoding: chunked，这两种各有千秋。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/23/HTTP长连接如何判断数据传输结束/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/26/经典排序算法分析/" itemprop="url">
-                  经典排序算法分析
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:00:21+08:00">
-                2017-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/26/经典排序算法分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/26/经典排序算法分析/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。<br>这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。这类排序算法的渐进下确界是 \(\Omega(nlgn)\)，可以使用决策树模型来进行证明，决策树是一个完全二叉树，\(n\)个数共有\(n!\)个排列方式，对应的叶子结点也至少要有\(n!\)个，而最坏的比较次数对应这个决策树的高度 \(l\) ，由此可得 \(n!\le l<br>\le 2^h\)。两边取对数之后可得\(h \ge log(n!) = \Omega(nlgn)\)。更加详细的证明过程以及各种渐进界的介绍请参考算法导论。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/26/经典排序算法分析/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1970,7 +1969,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
