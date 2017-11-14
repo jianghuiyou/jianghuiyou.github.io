@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,设计模式," />
+  <meta name="keywords" content="生活感悟," />
 
 
 
@@ -90,22 +90,18 @@
 
 
 
-<meta name="description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
-装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
+<meta name="description" content="前两天下载了这款日活早在今年4月份已破8000万的王者荣耀，疯狂地沉浸其中体验了两天。作为一个对游戏并没有太多追求的玩家，自己能被这款游戏吸引得当天饮食不规律，并且它成为一款火爆的全民手游，想必其一定有着不少的成功原因。王者荣耀是一款MOBA（多人在线战斗竞技场游戏），通常一个玩家可以控制一个游戏人物，通过团队协作配合完成摧毁地方建筑物为目标的游戏。下面自己谈一谈这款游戏能如此火爆的缘由。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java IO设计原理——装饰者模式">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/index.html">
+<meta property="og:title" content="《王者荣耀》手游体验分析">
+<meta property="og:url" content="http://www.jianghuiyou.com/2017/11/14/《王者荣耀》手游体验分析/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
-装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
-<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png">
-<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/java%E8%A3%85%E9%A5%B0.png">
-<meta property="og:updated_time" content="2017-04-24T11:55:26.000Z">
+<meta property="og:description" content="前两天下载了这款日活早在今年4月份已破8000万的王者荣耀，疯狂地沉浸其中体验了两天。作为一个对游戏并没有太多追求的玩家，自己能被这款游戏吸引得当天饮食不规律，并且它成为一款火爆的全民手游，想必其一定有着不少的成功原因。王者荣耀是一款MOBA（多人在线战斗竞技场游戏），通常一个玩家可以控制一个游戏人物，通过团队协作配合完成摧毁地方建筑物为目标的游戏。下面自己谈一谈这款游戏能如此火爆的缘由。">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80.png">
+<meta property="og:updated_time" content="2017-11-14T02:47:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java IO设计原理——装饰者模式">
-<meta name="twitter:description" content="第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。
-装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思">
-<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png">
+<meta name="twitter:title" content="《王者荣耀》手游体验分析">
+<meta name="twitter:description" content="前两天下载了这款日活早在今年4月份已破8000万的王者荣耀，疯狂地沉浸其中体验了两天。作为一个对游戏并没有太多追求的玩家，自己能被这款游戏吸引得当天饮食不规律，并且它成为一款火爆的全民手游，想必其一定有着不少的成功原因。王者荣耀是一款MOBA（多人在线战斗竞技场游戏），通常一个玩家可以控制一个游戏人物，通过团队协作配合完成摧毁地方建筑物为目标的游戏。下面自己谈一谈这款游戏能如此火爆的缘由。">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80.png">
 
 
 
@@ -133,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2017/11/14/《王者荣耀》手游体验分析/"/>
 
 
 
 
 
-  <title>Java IO设计原理——装饰者模式 | 惠友</title>
+  <title>《王者荣耀》手游体验分析 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -303,7 +299,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/11/14/《王者荣耀》手游体验分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -324,7 +320,7 @@
             
             
               
-                Java IO设计原理——装饰者模式
+                《王者荣耀》手游体验分析
               
             
           </h2>
@@ -339,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T22:32:11+08:00">
-                2016-07-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T10:40:45+08:00">
+                2017-11-14
               </time>
             
 
@@ -362,8 +358,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="/categories/产品/" itemprop="url" rel="index">
+                    <span itemprop="name">产品</span>
                   </a>
                 </span>
 
@@ -380,9 +376,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/07/12/Java-IO设计原理——装饰者模式/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/14/《王者荣耀》手游体验分析/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/12/Java-IO设计原理——装饰者模式/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/14/《王者荣耀》手游体验分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,18 +403,14 @@
       
 
       
-        <p>第一次看Java IO相关讲解的时候，几乎每个人都会被那么多各种各样的输入输出流的类搞蒙，做一个IO传输需要创建很多个类的实例，让人难以接受。其实JAVA先驱者应用的就是装饰者模式这种设计模式。此文就是为大家解答JAVA IO这么设计背后的原理，并非讲解IO类的使用方法。</p>
-<p>装饰者模式的功能和继承类似，都是为了扩展类的功能。继承通过子类继承超类的功能，并添加或覆盖自己特有的功能，这也符合面向对象的思想。但是，简单粗暴地继承会带来最直观的问题就是类爆炸，产生太多太多的类。而装饰者模式，是将需要扩展的这些功能封装成多个装饰类，这些每一个功能在代码运行时候可以灵活地组合，而不是通过继承超类在编译时候决定类的功能。<br><a id="more"></a><br>装饰者模式经典的类的设计结构如下</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E5%9B%BE.png" alt="类图"></p>
-<p>下面结合JAVA IO来说明，这是面向字节输入流InputStream相关类的层次图。</p>
-<p><img src="http://oa576fej8.bkt.clouddn.com/java%E8%A3%85%E9%A5%B0.png" alt="层次图"></p>
-<p>对比上面装饰者模式经典设计图可以发现，InputStream是所有类的超类，我们暂且把它成为超级父类，FilterInputStream就是抽象装饰类，其子类DataInputStream,BufferedInputStream都是具体装饰类用来实现某项特定功能的，而FileInputStream等都是被装饰的类。</p>
-<p>那么这些类的内部又是如何灵活组合功能的呢？装饰者模式的核心原理在于每个装饰类都有一个超级父类的引用，该装饰类的构造器会将传来某个功能类的对象赋值给超级父类引用，这样该装饰类就可以调用构造器中传来那个类中的方法，叠加其功能。这么说有些抽象，下面结合JAVA IO的部分源码说明。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">volatile</span> InputStream in; <span class="comment">//重要！！！超级父类的引用</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">FilterInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.in = in;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(in, DEFAULT_BUFFER_SIZE);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BufferedInputStream</span><span class="params">(InputStream in, <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Buffer size &lt;= 0"</span>);</div><div class="line">        &#125;</div><div class="line">        buf = <span class="keyword">new</span> <span class="keyword">byte</span>[size];</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//BufferedInputStream特有缓冲功能的实现方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataInputStream</span> <span class="keyword">extends</span> <span class="title">FilterInputStream</span> <span class="keyword">implements</span> <span class="title">DataInput</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DataInputStream</span><span class="params">(InputStream in)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(in);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[])</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, <span class="number">0</span>, b.length);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">byte</span> b[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">return</span> in.read(b, off, len);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//格式化数据输入方法的实现</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileInputStream</span> <span class="keyword">extends</span> <span class="title">InputStream</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</div><div class="line">        <span class="keyword">this</span>(name != <span class="keyword">null</span> ? <span class="keyword">new</span> File(name) : <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//从文件输入流相关方法实现</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过上面几个类，我们就可以实现带有缓冲功能和格式化输入功能的文件流输入，我们通常的做法就是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DataInputStream in = <span class="keyword">new</span> DataInputStream(</div><div class="line">    <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"temp.txt"</span>))</div><div class="line">);<span class="comment">//层层装饰</span></div><div class="line">in.readChar();<span class="comment">//调用的是DataInputStream本身实例的方法</span></div><div class="line">in.read(); <span class="comment">//其实调用的是BufferedInputStream实例的read方法</span></div></pre></td></tr></table></figure>
-<p>代码第一句用BufferedInputStream装饰FileInputStream，而DataInputStream又装饰了BufferedInputStream，位于最外层DataInputStream的对象既可以调用属于本身的方法，也可以调用BufferedInputStream和FileInputStream的方法，就是通过FilterInputStream中超级父类的引用来找到被装饰类的对象。</p>
-<p>这样JAVA IO可以通过带有不同装饰类的组合，来构造出带有不同功能组合的IO对象，大大增加了灵活性。希望我的讲解会对大家理解Java IO有一定帮助！</p>
+        <p>前两天下载了这款日活早在今年4月份已破8000万的王者荣耀，疯狂地沉浸其中体验了两天。作为一个对游戏并没有太多追求的玩家，自己能被这款游戏吸引得当天饮食不规律，并且它成为一款火爆的全民手游，想必其一定有着不少的成功原因。王者荣耀是一款MOBA（多人在线战斗竞技场游戏），通常一个玩家可以控制一个游戏人物，通过团队协作配合完成摧毁地方建筑物为目标的游戏。下面自己谈一谈这款游戏能如此火爆的缘由。<br><img src="http://oa576fej8.bkt.clouddn.com/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80.png" alt="此处输入图片的描述"></p>
+<a id="more"></a>
+<h3 id="简单性"><a href="#简单性" class="headerlink" title="简单性"></a>简单性</h3><p>一个用户量过2亿并拥有超过半数女性玩家的游戏，它的游戏上手难度一定不能高。双轮盘的操控方式，智能化普通攻击，完善的新手导引教程，智能购买装备，取消补兵等等这些设计大大降低了一个新手上手门槛，使得即使是游戏小白也能尽快与朋友一起开黑。现在愈发觉得拥有庞大用户量的应用一定在设计上尽可能简单精美，并能抓住用户最核心的需求。当然上手简单并不是设计上粗糙，各种英雄人物技能、形象的设定又具备大型游戏英雄联盟那般的丰富有趣。</p>
+<h3 id="快节奏"><a href="#快节奏" class="headerlink" title="快节奏"></a>快节奏</h3><p>现在社会碎片化时间的增多促使手游有了巨大的市场，而王者荣耀花上20分钟左右的时间就可以体验一把酣畅淋漓的在线团队作战，吃饭间歇、坐车通勤、排队等待甚至上厕所这些时间都可以用来打“农药”。游戏设计与英雄联盟相比，有很多细节都大大加快了游戏进度，比如游戏地图的缩小、商品购买不需回城、攻城车和主宰buff对防御塔强大的伤害、野怪刷新间隔的缩短。</p>
+<h3 id="社交属性"><a href="#社交属性" class="headerlink" title="社交属性"></a>社交属性</h3><p>王者荣耀设计之处的设定就是基于微信和QQ社交平台的在线团战游戏，背靠腾讯爸爸强大的用户平台基础，自然会让一款本身足够优秀的产品像病毒一样在朋友圈中疯狂传播。匹配微信好友并没有英雄联盟服务器隔离的不方便，火爆程度让其俨然成为一种社交工具，仿佛不会玩就无法和好多朋友愉快地玩耍一样。</p>
+<p>以上三个原因是很多人都能看到的，此外还有一些更隐藏的原因。根据极光大数据显示，王者荣耀用户手机中最热门的应用除了微信、QQ之外，快手排在第三位，并且王者荣耀的用户有90%左右是来自三线即三线以下城市。智能机前两年在农村乡下的大幅推广，让王者荣耀和快手都凭借自己产品本身的吸引力享受智能机在农村增长的人口红利，也占据了这些人群大部分的空闲时间。追随王者的潮流也成为了他们生活中的一种时尚。</p>
+<p>曾经阅读过《游戏改变世界》这本书，印象最深的一个词就是“心流”，意思就是人全神贯注于某一事情的心理体验。游戏设计其中有一个很重要的理念，及时反馈系统，就是能引发人产生心流的重要原因，攻击地方英雄的语音反馈，还有double kill…penta kill的激动时刻，小兵野怪掉落的金币，唯美或炫酷的英雄皮肤特效，这些真的会让人沉浸其中。这种理念在教育、军事以及其他各种优秀互联网产品中都开始逐渐借鉴。</p>
+<p>游戏能否改变世界我不得而知，但是它确实影响着一代又一代人，留下无数美好的回忆，学习其中优秀的产品思维和设计理念对以后的产品分析有着重要的意义。</p>
 
       
     </div>
@@ -448,9 +440,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/生活感悟/" rel="tag"># 生活感悟</a>
           
         </div>
       
@@ -463,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/06/浅谈java-反射机制/" rel="next" title="浅谈java反射机制">
-                <i class="fa fa-chevron-left"></i> 浅谈java反射机制
+              <a href="/2017/11/06/并发世界探索（二）——-读写锁/" rel="next" title="并发世界探索（二）—— 读写锁">
+                <i class="fa fa-chevron-left"></i> 并发世界探索（二）—— 读写锁
               </a>
             
           </div>
@@ -472,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/20/设计模式系列（一）——-观察者模式/" rel="prev" title="设计模式系列（一）—— 观察者模式">
-                设计模式系列（一）—— 观察者模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg"
@@ -612,6 +607,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单性"><span class="nav-number">1.</span> <span class="nav-text">简单性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快节奏"><span class="nav-number">2.</span> <span class="nav-text">快节奏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交属性"><span class="nav-number">3.</span> <span class="nav-text">社交属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -745,9 +756,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2016/07/12/Java-IO设计原理——装饰者模式/';
-          this.page.identifier = '2016/07/12/Java-IO设计原理——装饰者模式/';
-          this.page.title = 'Java IO设计原理——装饰者模式';
+          this.page.url = 'http://www.jianghuiyou.com/2017/11/14/《王者荣耀》手游体验分析/';
+          this.page.identifier = '2017/11/14/《王者荣耀》手游体验分析/';
+          this.page.title = '《王者荣耀》手游体验分析';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';
