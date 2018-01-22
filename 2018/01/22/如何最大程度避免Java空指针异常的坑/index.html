@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活感悟," />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -90,16 +90,19 @@
 
 
 
-<meta name="description" content="回顾20161. 学习工作方面2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了目标和执行的人">
+<meta name="description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
+1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
 <meta property="og:type" content="article">
-<meta property="og:title" content="回看2016，展望2017">
-<meta property="og:url" content="http://www.jianghuiyou.com/2016/12/31/回看2016，展望2017/index.html">
+<meta property="og:title" content="如何最大程度避免Java空指针异常的坑">
+<meta property="og:url" content="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="回顾20161. 学习工作方面2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了目标和执行的人">
-<meta property="og:updated_time" content="2017-11-13T13:47:20.000Z">
+<meta property="og:description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
+1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
+<meta property="og:updated_time" content="2018-01-22T13:52:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="回看2016，展望2017">
-<meta name="twitter:description" content="回顾20161. 学习工作方面2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了目标和执行的人">
+<meta name="twitter:title" content="如何最大程度避免Java空指针异常的坑">
+<meta name="twitter:description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
+1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2016/12/31/回看2016，展望2017/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/"/>
 
 
 
 
 
-  <title>回看2016，展望2017 | 惠友</title>
+  <title>如何最大程度避免Java空指针异常的坑 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -297,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2016/12/31/回看2016，展望2017/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -318,7 +321,7 @@
             
             
               
-                回看2016，展望2017
+                如何最大程度避免Java空指针异常的坑
               
             
           </h2>
@@ -333,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-31T10:33:04+08:00">
-                2016-12-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T21:52:02+08:00">
+                2018-01-22
               </time>
             
 
@@ -356,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -374,9 +377,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/12/31/回看2016，展望2017/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/22/如何最大程度避免Java空指针异常的坑/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/12/31/回看2016，展望2017/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/22/如何最大程度避免Java空指针异常的坑/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,12 +404,16 @@
       
 
       
-        <h2 id="回顾2016"><a href="#回顾2016" class="headerlink" title="回顾2016"></a><strong>回顾2016</strong></h2><h4 id="1-学习工作方面"><a href="#1-学习工作方面" class="headerlink" title="1. 学习工作方面"></a><strong>1. 学习工作方面</strong></h4><p>2016自己从本科学校北邮顺利毕业，在宏福校区和本部拍毕业照的情景依然历历在目，当年大家一起吐槽的小破邮如今回忆起来也满满的怀念，感谢北邮，也感谢在北邮四年生活中出现的所有同学、老师。2016也同时圆了自己儿时的梦想，真正成为一名清华人，想想真的有点恍如梦境，四年前刚上北邮的时候信誓旦旦地豪言要与清华再续前缘，细细一想本科很多的规划都是为了这个目标，有了目标和执行的人是多么可怕啊!<br><a id="more"></a></p>
-<h4 id="2-情感生活方面"><a href="#2-情感生活方面" class="headerlink" title="2. 情感生活方面"></a><strong>2. 情感生活方面</strong></h4><p>2016一个纯正的北方人第一次来到南方，特别难忘的是能和自己亲爱的父母完成一次在三亚的家庭旅行，住着高档小区的家庭海景房，在亚龙湾热带雨林里冒着大雨欣赏风景，在蜈支洲岛潜水，在海边驾驶摩托艇，一切的一切真的太美好啊～2016也是和女朋友已经走进了第三年，完成了一次山东半岛、大连的毕业旅行以及在厦门深圳的相会，不过再也不想跟旅行团一起，太坑！还好有自己爱的人一路陪伴，这一年也和妹纸顺利度过了接近半年的异地恋，享受着个人自由但也折磨在异地的相思。曾经高中的洗澡小分队，哲哥、楠哥、聪哥都再一次相会到北京，真是人生无处不相逢！珍惜这些没有的缘分，珍惜这些人生中最宝贵的财富。</p>
-<h4 id="3-健身运动方面"><a href="#3-健身运动方面" class="headerlink" title="3. 健身运动方面"></a><strong>3. 健身运动方面</strong></h4><p>2016年自己这个曾经的北方旱鸭子终于学会了游泳，又深深地喜欢上这项运动，阳光投射在泳池里，自由自在地遨游，仿佛体会到鸟儿在天空中飞翔地感觉。锻炼健身已经是自己生活中必不可少的部分，天天对着电脑学习的自己也不断受颈椎、眼睛过度疲劳的困扰，这也迫使着自己加强身体锻炼。</p>
-<h2 id="展望2017"><a href="#展望2017" class="headerlink" title="展望2017"></a><strong>展望2017</strong></h2><h4 id="学习工作方面"><a href="#学习工作方面" class="headerlink" title="学习工作方面"></a><strong>学习工作方面</strong></h4><p>目标一：在2017年自己在实验室工作中要认真完成一个有技术含量、在未来找工作中真正有亮点的专业项目。<br>目标二：弥补自己计算机基础知识上的短板，算法和操作系统知识，完成leetcode中各个专题中的大部分练习题（50%为最低底线），认真学习高级操作系统和算法理论课。<br>目标三：在北京至少参加5场互联网相关或技术相关峰会，拓宽自己的视野并尽量了解工业界技术的动态。<br>目标四：继续完善自己的个人博客，保证每个月至少一篇高质量的博客。</p>
-<h4 id="情感生活方面"><a href="#情感生活方面" class="headerlink" title="情感生活方面"></a><strong>情感生活方面</strong></h4><p>目标一：每周保证和父母至少通话一次，并且每两个月和家里的老人通话一次，保持和亲人的沟通。<br>目标二：2017年计划和女朋友完成两次较远途的旅行，一次目的地可以选择自己东北老家那嘎达，另一次待定哈～生活中不断为她带来小惊喜～哈哈<br>目标三：保持和自己那些死党的联系，每两个月至少聚一次，不方便见面的也要通话或者微信联系。<br>目标四：回到本部以后要适当拓宽人脉，积极结交非本专业的优秀同学，保证每个月都能认识一个新的朋友。</p>
-<h4 id="运动健身方面"><a href="#运动健身方面" class="headerlink" title="运动健身方面"></a><strong>运动健身方面</strong></h4><p>目标一：学会自由泳和仰泳两种泳姿，要不然一直蛙泳蛙泳也太单调～<br>目标二：健身增肌，先让目标体重到达130。<br>目标三：对颈椎进行一次检查，并根据医生建议好好保养，避免工作学习中长时间久坐。</p>
+        <p>NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。</p>
+<h3 id="1-对所有返回自存在null隐患方法的对象引用进行非空检测"><a href="#1-对所有返回自存在null隐患方法的对象引用进行非空检测" class="headerlink" title="1. 对所有返回自存在null隐患方法的对象引用进行非空检测"></a>1. 对所有返回自存在null隐患方法的对象引用进行非空检测</h3><p>不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之人修改成存在返回null的情况。null安全类典型的就是apache commons库的StringUtils，它的很多方法比如isEmpty、isNumeric等都是null安全的，在字符串String引用处理之前可以多多使用。对象引用用前记得检测null，损失这一点点的性能开销远比代码存在安全隐患更划算。当然你也可以使用断言类型的方式来检测空指针的问题，这属于个人偏好。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Object obj = danger.getObject();</div><div class="line"><span class="keyword">if</span> (obj != <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="comment">// obj.dosomething(); </span></div><div class="line">    <span class="comment">// dosomething(obj);</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-使用常量字符串来调用equals-或equalsIgnoreCase"><a href="#2-使用常量字符串来调用equals-或equalsIgnoreCase" class="headerlink" title="2. 使用常量字符串来调用equals()或equalsIgnoreCase()"></a>2. 使用常量字符串来调用equals()或equalsIgnoreCase()</h3><p>equal方法本身的自反性让我们常常忽略<code>a.equal(b)</code>和<code>b.equal(a)</code>之间微妙的区别，但在如下情况我们往往会恍然大悟。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="keyword">null</span>;</div><div class="line">a.equal(<span class="string">"b"</span>);   <span class="comment">// 会产生空指针异常</span></div><div class="line"><span class="string">"b"</span>.equal(a);   <span class="comment">// 推荐的写法</span></div></pre></td></tr></table></figure></p>
+<p>在判断一个字符串是否与已知常量字符串相等时候，将其放入equal方法的参数往往可以避免不必要的空指针异常。</p>
+<h3 id="3-尽量避免在函数中返回null"><a href="#3-尽量避免在函数中返回null" class="headerlink" title="3. 尽量避免在函数中返回null"></a>3. 尽量避免在函数中返回null</h3><p>除非不得已，尽量返回一个空的对象也不要返回null，这于人于己都是有益的。对于返回类型是集合的函数，在没有有效结果返回的时候也返回一个size为0的集合或者Collections.EMPTY_LIST等专门用来表示空集合的类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">getList</span><span class="params">()</span> </span>&#123;</div><div class="line">    List&lt;E&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;(); <span class="comment">// 尽量放在最前面</span></div><div class="line">    <span class="comment">// do something</span></div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-自动装箱需谨慎"><a href="#4-自动装箱需谨慎" class="headerlink" title="4. 自动装箱需谨慎"></a>4. 自动装箱需谨慎</h3><p>自动装箱在Java 5引入后确实为编写程序带来很多方便，但我们在编程时候也不能滥用自动装箱。比如下面这个程序依然存在空指针异常隐患。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Person jack = <span class="keyword">new</span> Person(<span class="string">"jack"</span>);</div><div class="line"><span class="keyword">int</span> weight = jack.getWeight();</div></pre></td></tr></table></figure></p>
+<p>加入jack这个对象还暂未录入体重值就会导致null赋值给基本类型int从而引发空指针异常。这种异常在我们使用一些ORM框架中会碰到，如果数据库对应的对象并不存在该值，而我们又在类中使用了一个基本类型与之对应，依然就会抛出空指针异常。在这种情况下就尽量使用包装类来对应，并且在使用该值时候先判断是否为空。</p>
+<h3 id="5-for-each遍历集合谨防集合为空"><a href="#5-for-each遍历集合谨防集合为空" class="headerlink" title="5. for each遍历集合谨防集合为空"></a>5. for each遍历集合谨防集合为空</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> num : list) &#123;</div><div class="line">    <span class="comment">// for each num in list</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>list为空的情况下依然会产生空指针异常，所以在不确定list是否为空的情况下，先判断是否为null。</p>
+<h3 id="6-更为优雅的实践：-使用-NotNull或-Nullable注解"><a href="#6-更为优雅的实践：-使用-NotNull或-Nullable注解" class="headerlink" title="6. 更为优雅的实践： 使用@NotNull或@Nullable注解"></a>6. 更为优雅的实践： 使用@NotNull或@Nullable注解</h3><p>在业务参数众多的情况如果每个均进行非空的检验确实会让代码看起来不美观，有很多第三方库都实现了自己的非空注解来确保该对象引用为非空，感兴趣可以自行google之。在eclipse或idea中也可以使用一些静态代码检测插件，比如FindBugs来检测Java代码中是否存在空指针异常安全隐患。</p>
 
       
     </div>
@@ -436,7 +443,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活感悟/" rel="tag"># 生活感悟</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -449,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/22/对nodejs异步IO、事件轮询的理解/" rel="next" title="对nodejs异步IO、事件轮询的理解">
-                <i class="fa fa-chevron-left"></i> 对nodejs异步IO、事件轮询的理解
+              <a href="/2017/12/31/回看2017，展望2018/" rel="next" title="回看2017，展望2018">
+                <i class="fa fa-chevron-left"></i> 回看2017，展望2018
               </a>
             
           </div>
@@ -458,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/16/nDPI源码解析/" rel="prev" title="nDPI源码解析">
-                nDPI源码解析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -617,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾2016"><span class="nav-number">1.</span> <span class="nav-text">回顾2016</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-学习工作方面"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 学习工作方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-情感生活方面"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 情感生活方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-健身运动方面"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 健身运动方面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展望2017"><span class="nav-number">2.</span> <span class="nav-text">展望2017</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学习工作方面"><span class="nav-number">2.0.1.</span> <span class="nav-text">学习工作方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情感生活方面"><span class="nav-number">2.0.2.</span> <span class="nav-text">情感生活方面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运动健身方面"><span class="nav-number">2.0.3.</span> <span class="nav-text">运动健身方面</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对所有返回自存在null隐患方法的对象引用进行非空检测"><span class="nav-number">1.</span> <span class="nav-text">1. 对所有返回自存在null隐患方法的对象引用进行非空检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用常量字符串来调用equals-或equalsIgnoreCase"><span class="nav-number">2.</span> <span class="nav-text">2. 使用常量字符串来调用equals()或equalsIgnoreCase()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-尽量避免在函数中返回null"><span class="nav-number">3.</span> <span class="nav-text">3. 尽量避免在函数中返回null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-自动装箱需谨慎"><span class="nav-number">4.</span> <span class="nav-text">4. 自动装箱需谨慎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-for-each遍历集合谨防集合为空"><span class="nav-number">5.</span> <span class="nav-text">5. for each遍历集合谨防集合为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-更为优雅的实践：-使用-NotNull或-Nullable注解"><span class="nav-number">6.</span> <span class="nav-text">6. 更为优雅的实践： 使用@NotNull或@Nullable注解</span></a></li></ol></div>
             
 
           </div>
@@ -756,9 +759,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2016/12/31/回看2016，展望2017/';
-          this.page.identifier = '2016/12/31/回看2016，展望2017/';
-          this.page.title = '回看2016，展望2017';
+          this.page.url = 'http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/';
+          this.page.identifier = '2018/01/22/如何最大程度避免Java空指针异常的坑/';
+          this.page.title = '如何最大程度避免Java空指针异常的坑';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';
