@@ -298,6 +298,167 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2018/02/22/探秘计算机系统中的文件描述符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/02/22/探秘计算机系统中的文件描述符/" itemprop="url">
+                  探秘计算机系统中的文件描述符
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T16:11:24+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/22/探秘计算机系统中的文件描述符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/22/探秘计算机系统中的文件描述符/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一切皆为文件是Unix系统中重要理念之一，无论是打开的磁盘文件、网络socket还是管道、共享内存、消息队列等这些IPC（进程间通信）通通被抽象为文件，这是通过虚拟文件系统VFS来实现，而我们编写用户程序的时候看到的通常只是一个整形数字代表了文件描述符，那么计算机系统内部是如何表示一个被打开的文件的呢？<br>我们先理解一下三个重要的概念：</p>
+<h5 id="描述符表"><a href="#描述符表" class="headerlink" title="描述符表"></a><strong>描述符表</strong></h5><p>每个进程独立占用的资源，也就是用户程序员看到文件描述符的集合，例如标准输入0、标准输出1、标准错误2，每个描述符表项指向打开文件表中的一项。</p>
+<h5 id="打开文件表"><a href="#打开文件表" class="headerlink" title="打开文件表"></a><strong>打开文件表</strong></h5><p>所有进程共享的当前计算机系统打开的所有文件表项的集合，每一个打开文件表的表项包括当前文件位置、引用计数、以及一个指向inode表项的指针，其代表一个文件被打开后的操作状态集合，多次调用open函数会产生多核文件表项（文件访问的位置、访问权限等等）。而在调用close(fd)关闭描述符为fd的文件时，仅会将其指向的文件表表项的引用计数减一，直到为0才将该表项删除。</p>
+<h5 id="inode表"><a href="#inode表" class="headerlink" title="inode表"></a><strong>inode表</strong></h5><p>如果说打开文件表项代表一个文件被打开后操作状态，那么inode表项（linux系统中inode在unix系统中被作为vnode）就是这个真实文件元数据状态的集合，包括文件大小、文件各种访问时间、文件类型等多种元数据信息，通过调用stat函数通常可以查看。所以多次调用open函数打开同一个文件时候，就会是多个打开文件表项指向同一个inode表项，如下图所示（参考自CSAPP）。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/22/探秘计算机系统中的文件描述符/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1724,165 +1885,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="url">
-                  并发世界的探索（一）————互斥锁、自旋锁、条件变量
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T16:51:22+08:00">
-                2017-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。</p>
-<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量<code>i++</code>在汇编层面并不是原子操作，若一个线程在其中某一步被其他线程打断之后就会存在变量操作异常。这个时候就需要对这个共享资源进行加锁，C++中的std::mutex就是最常见的互斥锁，unlock和lock操作必须由同一线程来完成，也就是解铃还须系铃人，这样在lock与unlock之间就形成了临界区（同一时刻只能由一个线程进入）。可有时候某个线程万一在lock之后发生异常退出就会导致其他线程饿死，所以更加安全管理mutex的方式是通过运用RAII思想的<code>std::lock_guard</code>和<code>std::unique_lock</code>来进行管理，上锁之后在该作用域生命周期结束后会自动解锁，如下使用方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">std::mutex mtx;</div><div class="line">try &#123;</div><div class="line">    std::unique_lock&lt;std::mutex&gt; lock(mtx);</div><div class="line">    // do something may have exception</div><div class="line">&#125; catch() &#123;</div><div class="line">    std::cerr &lt;&lt; &quot;oops! exception!&quot; &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1932,7 +1934,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

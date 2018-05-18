@@ -90,19 +90,19 @@
 
 
 
-<meta name="description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+<meta name="description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的数据MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
 1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探秘计算机内存管理（一）">
 <meta property="og:url" content="http://www.jianghuiyou.com/2017/09/07/探秘计算机内存管理（一）/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+<meta property="og:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的数据MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
 1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
 <meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg">
-<meta property="og:updated_time" content="2017-10-19T11:03:32.000Z">
+<meta property="og:updated_time" content="2018-02-16T02:07:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探秘计算机内存管理（一）">
-<meta name="twitter:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
+<meta name="twitter:description" content="对于软件开发中一个常见的i++代码，也许我们知道编译成汇编指令是先将内存中的数据MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。
 1. 虚拟内存虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚">
 <meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg">
 
@@ -406,7 +406,7 @@
       
 
       
-        <p>对于软件开发中一个常见的<code>i++</code>代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。</p>
+        <p>对于软件开发中一个常见的<code>i++</code>代码，也许我们知道编译成汇编指令是先将内存中的数据MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。</p>
 <h4 id="1-虚拟内存"><a href="#1-虚拟内存" class="headerlink" title="1. 虚拟内存"></a>1. 虚拟内存</h4><p>虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚拟地址，操作系统会通过MMU将虚拟地址翻译成物理地址，并保证程序访问和操作物理地址的安全性，当然真实地址翻译的过程更加复杂。此外，作为当物理内存不够用或者发生缺页异常的时候，虚拟内存还需要执行相应的换入换出以便让应用程序顺利、透明地访问想要的数据。</p>
 <h4 id="2-虚拟地址空间"><a href="#2-虚拟地址空间" class="headerlink" title="2. 虚拟地址空间"></a>2. 虚拟地址空间</h4><p>所有的程序在运行的时都拥有一个私有的虚拟地址空间，其中包括代码段、数据段、堆、共享库、栈以及内核虚拟空间。x86_64 Linux虚拟地址空间结构图如下（来自《深入理解计算机系统》）<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg" alt="此处输入图片的描述"><br>这个虚拟空间并不真实存在于物理内存中，只按需才映射到真实的物理内存中。我们可以通过<code>ulimit -a</code>命令来查看用户态进程占用资源的限制。看到stack size代表用户栈的大小上限，address space代表虚拟地址空间的大小上限。</p>
 <h4 id="3-存储层次结构"><a href="#3-存储层次结构" class="headerlink" title="3. 存储层次结构"></a>3. 存储层次结构</h4><p>现代存储系统已经发展出复杂的存储结构，本文提及的存储系统如下表。CPU寄存器是最快最昂贵的存储介质，针对32位或64位的数据进行处理，TLB（Translation Lookaside Buffer）是为了加快地址翻译产生的，从它可以直接获取得到真实的物理地址，而不需要访问内存中的页表进行地址翻译。至于L1、L2、L3这三层cache都是为了加快DRAM物理内存访问而产生的SRAM存储介质，64B是cache管理的最小存储单位，通常被叫做<code>cache line</code>，在Intel Core i7中三者的大小分别是32KB、256KB、8MB，并且L3是所有核心共享的。虚拟内存就是通过页表（通常4KB）为单位来管理内存,然后通过地址翻译来拿到真实物理地址。</p>
@@ -598,7 +598,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

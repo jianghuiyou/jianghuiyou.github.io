@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="计算机功底," />
 
 
 
@@ -90,19 +90,23 @@
 
 
 
-<meta name="description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
-1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
+<meta name="description" content="一切皆为文件是Unix系统中重要理念之一，无论是打开的磁盘文件、网络socket还是管道、共享内存、消息队列等这些IPC（进程间通信）通通被抽象为文件，这是通过虚拟文件系统VFS来实现，而我们编写用户程序的时候看到的通常只是一个整形数字代表了文件描述符，那么计算机系统内部是如何表示一个被打开的文件的呢？我们先理解一下三个重要的概念：
+描述符表每个进程独立占用的资源，也就是用户程序员看到文件描述符的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何最大程度避免Java空指针异常的坑">
-<meta property="og:url" content="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/index.html">
+<meta property="og:title" content="探秘计算机系统中的文件描述符">
+<meta property="og:url" content="http://www.jianghuiyou.com/2018/02/22/探秘计算机系统中的文件描述符/index.html">
 <meta property="og:site_name" content="惠友">
-<meta property="og:description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
-1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
-<meta property="og:updated_time" content="2018-01-22T13:55:20.000Z">
+<meta property="og:description" content="一切皆为文件是Unix系统中重要理念之一，无论是打开的磁盘文件、网络socket还是管道、共享内存、消息队列等这些IPC（进程间通信）通通被抽象为文件，这是通过虚拟文件系统VFS来实现，而我们编写用户程序的时候看到的通常只是一个整形数字代表了文件描述符，那么计算机系统内部是如何表示一个被打开的文件的呢？我们先理解一下三个重要的概念：
+描述符表每个进程独立占用的资源，也就是用户程序员看到文件描述符的">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/fork%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg">
+<meta property="og:image" content="http://oa576fej8.bkt.clouddn.com/dup%E6%96%87%E4%BB%B6.jpeg">
+<meta property="og:updated_time" content="2018-05-18T08:16:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何最大程度避免Java空指针异常的坑">
-<meta name="twitter:description" content="NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。
-1. 对所有返回自存在null隐患方法的对象引用进行非空检测不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之">
+<meta name="twitter:title" content="探秘计算机系统中的文件描述符">
+<meta name="twitter:description" content="一切皆为文件是Unix系统中重要理念之一，无论是打开的磁盘文件、网络socket还是管道、共享内存、消息队列等这些IPC（进程间通信）通通被抽象为文件，这是通过虚拟文件系统VFS来实现，而我们编写用户程序的时候看到的通常只是一个整形数字代表了文件描述符，那么计算机系统内部是如何表示一个被打开的文件的呢？我们先理解一下三个重要的概念：
+描述符表每个进程独立占用的资源，也就是用户程序员看到文件描述符的">
+<meta name="twitter:image" content="http://oa576fej8.bkt.clouddn.com/%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg">
 
 
 
@@ -130,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/"/>
+  <link rel="canonical" href="http://www.jianghuiyou.com/2018/02/22/探秘计算机系统中的文件描述符/"/>
 
 
 
 
 
-  <title>如何最大程度避免Java空指针异常的坑 | 惠友</title>
+  <title>探秘计算机系统中的文件描述符 | 惠友</title>
   <script type="text/javascript">
     var host = "jianghuiyou.com";
     if ((host == window.location.host) && (window.location.protocol != "https:"))
@@ -300,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2018/02/22/探秘计算机系统中的文件描述符/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="惠友">
@@ -321,7 +325,7 @@
             
             
               
-                如何最大程度避免Java空指针异常的坑
+                探秘计算机系统中的文件描述符
               
             
           </h2>
@@ -336,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T21:52:02+08:00">
-                2018-01-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T16:11:24+08:00">
+                2018-02-22
               </time>
             
 
@@ -377,9 +381,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/22/如何最大程度避免Java空指针异常的坑/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/22/探秘计算机系统中的文件描述符/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/22/如何最大程度避免Java空指针异常的坑/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/22/探秘计算机系统中的文件描述符/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -404,16 +408,26 @@
       
 
       
-        <p>NullPointerException应该是所有Java程序员都遇到过的最简单却也是最容易忽视的异常，由于自己也被它坑害过，所以查阅不少资料总结下避免Java空指针异常的最佳实践。</p>
-<h3 id="1-对所有返回自存在null隐患方法的对象引用进行非空检测"><a href="#1-对所有返回自存在null隐患方法的对象引用进行非空检测" class="headerlink" title="1. 对所有返回自存在null隐患方法的对象引用进行非空检测"></a>1. 对所有返回自存在null隐患方法的对象引用进行非空检测</h3><p>不可信的方法既指来自非null安全的第三方库，也包括自己或者同事写过其他方法，即使当前版本该方法返回的对象引用不可能是null，你也难以确保未来不会有心大之人修改成存在返回null的情况。null安全类典型的就是apache commons库的StringUtils，它的很多方法比如isEmpty、isNumeric等都是null安全的，在字符串String引用处理之前可以多多使用。对象引用用前记得检测null，损失这一点点的性能开销远比代码存在安全隐患更划算。当然你也可以使用断言类型的方式来检测空指针的问题，这属于个人偏好。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Object obj = danger.getObject();</div><div class="line"><span class="keyword">if</span> (obj != <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="comment">// obj.dosomething(); </span></div><div class="line">    <span class="comment">// dosomething(obj);</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="2-使用常量字符串来调用equals-或equalsIgnoreCase"><a href="#2-使用常量字符串来调用equals-或equalsIgnoreCase" class="headerlink" title="2. 使用常量字符串来调用equals()或equalsIgnoreCase()"></a>2. 使用常量字符串来调用equals()或equalsIgnoreCase()</h3><p>equal方法本身的自反性让我们常常忽略<code>a.equal(b)</code>和<code>b.equal(a)</code>之间微妙的区别，但在如下情况我们往往会恍然大悟。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String a = <span class="keyword">null</span>;</div><div class="line">a.equal(<span class="string">"b"</span>);   <span class="comment">// 会产生空指针异常</span></div><div class="line"><span class="string">"b"</span>.equal(a);   <span class="comment">// 推荐的写法</span></div></pre></td></tr></table></figure></p>
-<p>在判断一个字符串是否与已知常量字符串相等时候，将其放入equal方法的参数往往可以避免不必要的空指针异常。</p>
-<h3 id="3-尽量避免在函数中返回null"><a href="#3-尽量避免在函数中返回null" class="headerlink" title="3. 尽量避免在函数中返回null"></a>3. 尽量避免在函数中返回null</h3><p>除非不得已，尽量返回一个空的对象也不要返回null，这于人于己都是有益的。对于返回类型是集合的函数，在没有有效结果返回的时候也返回一个size为0的集合或者Collections.EMPTY_LIST等专门用来表示空集合的类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">getList</span><span class="params">()</span> </span>&#123;</div><div class="line">    List&lt;E&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;(); <span class="comment">// 尽量放在最前面</span></div><div class="line">    <span class="comment">// do something</span></div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="4-自动装箱需谨慎"><a href="#4-自动装箱需谨慎" class="headerlink" title="4. 自动装箱需谨慎"></a>4. 自动装箱需谨慎</h3><p>自动装箱在Java 5引入后确实为编写程序带来很多方便，但我们在编程时候也不能滥用自动装箱。比如下面这个程序依然存在空指针异常隐患。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Person jack = <span class="keyword">new</span> Person(<span class="string">"jack"</span>);</div><div class="line"><span class="keyword">int</span> weight = jack.getWeight();</div></pre></td></tr></table></figure></p>
-<p>加入jack这个对象还暂未录入体重值就会导致null赋值给基本类型int从而引发空指针异常。这种异常在我们使用一些ORM框架中会碰到，如果数据库对应的对象并不存在该值，而我们又在类中使用了一个基本类型与之对应，依然就会抛出空指针异常。在这种情况下就尽量使用包装类来对应，并且在使用该值时候先判断是否为空。</p>
-<h3 id="5-for-each遍历集合谨防集合为空"><a href="#5-for-each遍历集合谨防集合为空" class="headerlink" title="5. for each遍历集合谨防集合为空"></a>5. for each遍历集合谨防集合为空</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> num : list) &#123;</div><div class="line">    <span class="comment">// for each num in list</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>list为空的情况下依然会产生空指针异常，所以在不确定list是否为空的情况下，先判断是否为null。</p>
-<h3 id="6-更为优雅的实践：-使用-NotNull或-Nullable注解"><a href="#6-更为优雅的实践：-使用-NotNull或-Nullable注解" class="headerlink" title="6. 更为优雅的实践： 使用@NotNull或@Nullable注解"></a>6. 更为优雅的实践： 使用@NotNull或@Nullable注解</h3><p>在业务参数众多的情况如果每个均进行非空的检验确实会让代码看起来不美观，有很多第三方库都实现了自己的非空注解来确保该对象引用为非空，感兴趣可以自行google之。在eclipse或idea中也可以使用一些静态代码检测插件，比如FindBugs来检测Java代码中是否存在空指针异常安全隐患。</p>
+        <p>一切皆为文件是Unix系统中重要理念之一，无论是打开的磁盘文件、网络socket还是管道、共享内存、消息队列等这些IPC（进程间通信）通通被抽象为文件，这是通过虚拟文件系统VFS来实现，而我们编写用户程序的时候看到的通常只是一个整形数字代表了文件描述符，那么计算机系统内部是如何表示一个被打开的文件的呢？<br>我们先理解一下三个重要的概念：</p>
+<h5 id="描述符表"><a href="#描述符表" class="headerlink" title="描述符表"></a><strong>描述符表</strong></h5><p>每个进程独立占用的资源，也就是用户程序员看到文件描述符的集合，例如标准输入0、标准输出1、标准错误2，每个描述符表项指向打开文件表中的一项。</p>
+<h5 id="打开文件表"><a href="#打开文件表" class="headerlink" title="打开文件表"></a><strong>打开文件表</strong></h5><p>所有进程共享的当前计算机系统打开的所有文件表项的集合，每一个打开文件表的表项包括当前文件位置、引用计数、以及一个指向inode表项的指针，其代表一个文件被打开后的操作状态集合，多次调用open函数会产生多核文件表项（文件访问的位置、访问权限等等）。而在调用close(fd)关闭描述符为fd的文件时，仅会将其指向的文件表表项的引用计数减一，直到为0才将该表项删除。</p>
+<h5 id="inode表"><a href="#inode表" class="headerlink" title="inode表"></a><strong>inode表</strong></h5><p>如果说打开文件表项代表一个文件被打开后操作状态，那么inode表项（linux系统中inode在unix系统中被作为vnode）就是这个真实文件元数据状态的集合，包括文件大小、文件各种访问时间、文件类型等多种元数据信息，通过调用stat函数通常可以查看。所以多次调用open函数打开同一个文件时候，就会是多个打开文件表项指向同一个inode表项，如下图所示（参考自CSAPP）。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg" alt=""></p>
+<a id="more"></a>
+<p>当在父进程中调用fork函数之后，子进程其实是父进程地址空间一个副本，其中自然包括打开文件描述符表，这个时候原有已经被父进程fd指向的文件表项引用技术都加1，如下图所示（参考自CSAPP）。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/fork%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6.jpeg" alt=""></p>
+<p>我们在linux命令中常用到IO重定向，比如将某个运行程序的标准输出重定向到一个文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./dosomething 1 &gt; out.txt</div></pre></td></tr></table></figure>
+<p>而IO重定向的一种实现就可以用dup2函数，<code>int dup2(int tofd, int fromfd)</code>,该函数会将关闭该进程已经打开的fromfd（如果fromfd指向的文件表项引用计数为1，则文件表项也会被删除），并将fromfd指向tofd指向文件表项，从而导致tofd指向的文件表项引用计数加1，例如上面shell运行之后，假如open的out.txt文件描述符为4，则重定向会调用dup2(4,1)，具体过程如下图（参考自CSAPP）。</p>
+<p><img src="http://oa576fej8.bkt.clouddn.com/dup%E6%96%87%E4%BB%B6.jpeg" alt="此处输入图片的描述"></p>
+<p>那么描述符表、打开文件表和inode在linux系统源码中具体是怎样的关系呢，下面更深入地针对linux实现进行分析。</p>
+<h5 id="内核中的描述符表"><a href="#内核中的描述符表" class="headerlink" title="内核中的描述符表"></a><strong>内核中的描述符表</strong></h5><p>结构体<code>struct task_struct</code>是内核针对每个进程维护的状态结构体，也叫进程控制块PCB。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct task_struct &#123;</div><div class="line">        volatile long state;</div><div class="line">        pid_t pid;</div><div class="line">        struct files_struct *files;</div><div class="line">        ...</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>files成员就是该进程的打开文件描述符表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct files_struct &#123;</div><div class="line">        struct fdtable fdtab;</div><div class="line">        struct file __rcu * fd_array[NR_OPEN_DEFAULT];</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct fdtable &#123;</div><div class="line">        unsigned int max_fds;</div><div class="line">        struct file __rcu **fd;      /* current fd array */</div><div class="line">        unsigned long *close_on_exec;</div><div class="line">        unsigned long *open_fds;</div><div class="line">        struct rcu_head rcu;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>files_struct中的fd_array字段包含NR_OPEN_DEFAULT个文件对象(就是文件表项)指针。如果进程打开的文件数目多于32，内核就分配一个新的、更大的文件指针数组，并将其地址存放在fdtable中的fd字段，内核同时也更新max_fds字段的值。</p>
+<h5 id="内核中的打开文件表"><a href="#内核中的打开文件表" class="headerlink" title="内核中的打开文件表"></a><strong>内核中的打开文件表</strong></h5><p>上面<code>files_struct</code>中的<code>fd_array</code>数组索引其实就是文件描述符。通常，数组的第一个元素（索引为0）是进程的标准输入文件，数组的第二个元素（索引为1）是进程的标准输出文件，数组的第三个元素（索引为2）是进程的标准错误文件。指向的file结构体就是打开文件表的表项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct file &#123;</div><div class="line">        struct inode *f_inode;  // i节点指针</div><div class="line">        const structfile_operations *f_op;  //文件操作结构体，包括read、write、lseek等</div><div class="line">        loff_t f_pos;  //文件当前偏移量</div><div class="line">        struct path f_path; // 文件路径</div><div class="line">        atomic_t f_count; // 引用计数</div><div class="line">        unsigned int f_flags; // open函数调用传递的flag参数</div><div class="line">        …</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h5 id="内核中的inode结构体"><a href="#内核中的inode结构体" class="headerlink" title="内核中的inode结构体"></a><strong>内核中的inode结构体</strong></h5><p>inode是VFS虚拟文件系统中最关键结构体之一，它完成了对socket、fifo等结构的抽象，在此仅列出inode结构体的冰山一角。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct inode &#123;</div><div class="line">        const struct inode_operations  *i_op;</div><div class="line">        struct super_block  *i_sb;</div><div class="line">        …</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>具体全部源码可以参考<a href="https://elixir.bootlin.com/linux/latest/source/include/linux/fs.h" target="_blank" rel="external">linux源码 bootlin</a></p>
 
       
     </div>
@@ -443,7 +457,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/计算机功底/" rel="tag"># 计算机功底</a>
           
         </div>
       
@@ -456,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/31/回看2017，展望2018/" rel="next" title="回看2017，展望2018">
-                <i class="fa fa-chevron-left"></i> 回看2017，展望2018
+              <a href="/2018/01/22/如何最大程度避免Java空指针异常的坑/" rel="next" title="如何最大程度避免Java空指针异常的坑">
+                <i class="fa fa-chevron-left"></i> 如何最大程度避免Java空指针异常的坑
               </a>
             
           </div>
@@ -465,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/22/探秘计算机系统中的文件描述符/" rel="prev" title="探秘计算机系统中的文件描述符">
-                探秘计算机系统中的文件描述符 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -624,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对所有返回自存在null隐患方法的对象引用进行非空检测"><span class="nav-number">1.</span> <span class="nav-text">1. 对所有返回自存在null隐患方法的对象引用进行非空检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用常量字符串来调用equals-或equalsIgnoreCase"><span class="nav-number">2.</span> <span class="nav-text">2. 使用常量字符串来调用equals()或equalsIgnoreCase()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-尽量避免在函数中返回null"><span class="nav-number">3.</span> <span class="nav-text">3. 尽量避免在函数中返回null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-自动装箱需谨慎"><span class="nav-number">4.</span> <span class="nav-text">4. 自动装箱需谨慎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-for-each遍历集合谨防集合为空"><span class="nav-number">5.</span> <span class="nav-text">5. for each遍历集合谨防集合为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-更为优雅的实践：-使用-NotNull或-Nullable注解"><span class="nav-number">6.</span> <span class="nav-text">6. 更为优雅的实践： 使用@NotNull或@Nullable注解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#描述符表"><span class="nav-number">1.</span> <span class="nav-text">描述符表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开文件表"><span class="nav-number">2.</span> <span class="nav-text">打开文件表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#inode表"><span class="nav-number">3.</span> <span class="nav-text">inode表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内核中的描述符表"><span class="nav-number">4.</span> <span class="nav-text">内核中的描述符表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内核中的打开文件表"><span class="nav-number">5.</span> <span class="nav-text">内核中的打开文件表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内核中的inode结构体"><span class="nav-number">6.</span> <span class="nav-text">内核中的inode结构体</span></a></li></ol></div>
             
 
           </div>
@@ -763,9 +773,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.jianghuiyou.com/2018/01/22/如何最大程度避免Java空指针异常的坑/';
-          this.page.identifier = '2018/01/22/如何最大程度避免Java空指针异常的坑/';
-          this.page.title = '如何最大程度避免Java空指针异常的坑';
+          this.page.url = 'http://www.jianghuiyou.com/2018/02/22/探秘计算机系统中的文件描述符/';
+          this.page.identifier = '2018/02/22/探秘计算机系统中的文件描述符/';
+          this.page.title = '探秘计算机系统中的文件描述符';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://huiyou.disqus.com/embed.js';

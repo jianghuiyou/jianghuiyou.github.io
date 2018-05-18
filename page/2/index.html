@@ -298,6 +298,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="惠友">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惠友">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="url">
+                  并发世界的探索（一）————互斥锁、自旋锁、条件变量
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T16:51:22+08:00">
+                2017-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>计算机通过操作系统对进程调度的管理在单核系统中也能实现并发，而只有多核系统中才存在真正的并行操作，两者的区别可以理解为并发是在一段时间内有多个程序在运行，而并行是在一个时间点上依然有多个程序在运行。下面主要结合C++介绍常用的多线程并发技术以及对其的理解。</p>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>在多线程共享同一资源的情况下，会存在着多线程同时操作共享资源带来的不确定性，也称为同步竞争～比如我们都知道的例子，共享变量<code>i++</code>在汇编层面并不是原子操作，若一个线程在其中某一步被其他线程打断之后就会存在变量操作异常。这个时候就需要对这个共享资源进行加锁，C++中的std::mutex就是最常见的互斥锁，unlock和lock操作必须由同一线程来完成，也就是解铃还须系铃人，这样在lock与unlock之间就形成了临界区（同一时刻只能由一个线程进入）。可有时候某个线程万一在lock之后发生异常退出就会导致其他线程饿死，所以更加安全管理mutex的方式是通过运用RAII思想的<code>std::lock_guard</code>和<code>std::unique_lock</code>来进行管理，上锁之后在该作用域生命周期结束后会自动解锁，如下使用方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">std::mutex mtx;</div><div class="line">try &#123;</div><div class="line">    std::unique_lock&lt;std::mutex&gt; lock(mtx);</div><div class="line">    // do something may have exception</div><div class="line">&#125; catch() &#123;</div><div class="line">    std::cerr &lt;&lt; &quot;oops! exception!&quot; &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/21/并发世界的探索（一）————互斥锁、自旋锁、条件变量/#post.more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/09/19/探秘计算机内存管理（二）———segmentation-fault/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -562,7 +721,7 @@
 
       
         
-          <p>对于软件开发中一个常见的<code>i++</code>代码，也许我们知道编译成汇编指令是先将内存中的代码MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。</p>
+          <p>对于软件开发中一个常见的<code>i++</code>代码，也许我们知道编译成汇编指令是先将内存中的数据MOV到CPU中的某个寄存器，然后再执行自增INC。可是这个程序从加载到内存，并从内存读数据到CPU，这背后操作系统掩盖了非常多的细节与秘密，作为软件开发者还需掌握这隐藏的内存管理原理。首先，需要介绍几个重要的概念。</p>
 <h4 id="1-虚拟内存"><a href="#1-虚拟内存" class="headerlink" title="1. 虚拟内存"></a>1. 虚拟内存</h4><p>虚拟内存VM是操作系统内存管理中最重要的概念，进程运行中以及我们调试代码看到的地址都是虚拟地址，操作系统会通过MMU将虚拟地址翻译成物理地址，并保证程序访问和操作物理地址的安全性，当然真实地址翻译的过程更加复杂。此外，作为当物理内存不够用或者发生缺页异常的时候，虚拟内存还需要执行相应的换入换出以便让应用程序顺利、透明地访问想要的数据。</p>
 <h4 id="2-虚拟地址空间"><a href="#2-虚拟地址空间" class="headerlink" title="2. 虚拟地址空间"></a>2. 虚拟地址空间</h4><p>所有的程序在运行的时都拥有一个私有的虚拟地址空间，其中包括代码段、数据段、堆、共享库、栈以及内核虚拟空间。x86_64 Linux虚拟地址空间结构图如下（来自《深入理解计算机系统》）<br><img src="http://oa576fej8.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4.jpeg" alt="此处输入图片的描述"><br>这个虚拟空间并不真实存在于物理内存中，只按需才映射到真实的物理内存中。我们可以通过<code>ulimit -a</code>命令来查看用户态进程占用资源的限制。看到stack size代表用户栈的大小上限，address space代表虚拟地址空间的大小上限。</p>
 <h4 id="3-存储层次结构"><a href="#3-存储层次结构" class="headerlink" title="3. 存储层次结构"></a>3. 存储层次结构</h4><p>现代存储系统已经发展出复杂的存储结构，本文提及的存储系统如下表。CPU寄存器是最快最昂贵的存储介质，针对32位或64位的数据进行处理，TLB（Translation Lookaside Buffer）是为了加快地址翻译产生的，从它可以直接获取得到真实的物理地址，而不需要访问内存中的页表进行地址翻译。至于L1、L2、L3这三层cache都是为了加快DRAM物理内存访问而产生的SRAM存储介质，64B是cache管理的最小存储单位，通常被叫做<code>cache line</code>，在Intel Core i7中三者的大小分别是32KB、256KB、8MB，并且L3是所有核心共享的。虚拟内存就是通过页表（通常4KB）为单位来管理内存,然后通过地址翻译来拿到真实物理地址。</p>
@@ -1774,163 +1933,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.jianghuiyou.com/2017/03/26/经典排序算法分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="惠友">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oa576fej8.bkt.clouddn.com/%E6%88%91.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惠友">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/26/经典排序算法分析/" itemprop="url">
-                  经典排序算法分析
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T21:00:21+08:00">
-                2017-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/26/经典排序算法分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/26/经典排序算法分析/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>首先这里并不是对某个比较算法的基础性介绍，而是尽可能记录分享一些教科书中不会涉及到的更加深入一些的概念知识，引导大家更加深入思考排序算法，所以阅读这篇文章之前需要你已经对那几个经典的排序算法有了一定的了解并熟悉其实现方式。<br>这篇文章主要介绍基于比较的经典排序算法中的插入排序和快速排序，基于比较的排序需要用 \(a_i\le a_j\)或者\(a_i\ge a_j\)类似的逻辑比较来决定两个数的大小。这类排序算法的渐进下确界是 \(\Omega(nlgn)\)，可以使用决策树模型来进行证明，决策树是一个完全二叉树，\(n\)个数共有\(n!\)个排列方式，对应的叶子结点也至少要有\(n!\)个，而最坏的比较次数对应这个决策树的高度 \(l\) ，由此可得 \(n!\le l<br>\le 2^h\)。两边取对数之后可得\(h \ge log(n!) = \Omega(nlgn)\)。更加详细的证明过程以及各种渐进界的介绍请参考算法导论。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/26/经典排序算法分析/#post.more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1980,7 +1982,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
